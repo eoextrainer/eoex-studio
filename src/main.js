@@ -1744,6 +1744,150 @@ function buildLegacyMisconceptionParagraph(article, index) {
   }
 }
 
+function buildLegacyKeywords(article) {
+  const titleTerms = article.title.en
+    .toLowerCase()
+    .replace(/[^a-z0-9 ]+/g, ' ')
+    .split(/\s+/)
+    .filter((term) => term.length > 2)
+
+  const baseKeywords = [
+    ...titleTerms,
+    article.category.en.toLowerCase(),
+    'brief',
+    'intent',
+    'camera',
+    'timing',
+    'confidence',
+    'professionalism',
+    'set-etiquette',
+    'client-readiness',
+    'execution',
+    'adaptability',
+    'consistency',
+    'feedback-loop',
+    'brand-fit',
+    'portfolio-value',
+    'creative-direction',
+    'discipline',
+    'clarity',
+    'presence',
+  ]
+
+  return Array.from(new Set(baseKeywords)).slice(0, 20).join(', ')
+}
+
+function buildLegacyApplicationsParagraph(article, index) {
+  return {
+    en: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.en.applications}:</strong> ${article.title.en} directly shapes how a model behaves in castings, editorial sets, beauty close-ups, e-commerce pacing, showroom appointments and campaign shoots where every minute of clarity improves the client experience.`,
+        `<strong>${longReadSectionLabels.en.applications}:</strong> Across runway, fittings, backstage preparation, press-facing activations and final image selection, this topic influences how efficiently teams move and how confidently talent can support the intended brand narrative.`,
+        `<strong>${longReadSectionLabels.en.applications}:</strong> In commercial production, this subject affects far more than performance alone. It touches timing, approval rhythm, team trust, wardrobe handling, camera response and the consistency clients need when budgets and expectations are high.`,
+      ],
+      index,
+    ),
+    fr: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.fr.applications}:</strong> ${article.title.fr} influence directement la manière dont un talent se présente en casting, sur un plateau éditorial, en beauty close-up, en e-commerce, en showroom et en campagne où chaque minute de clarté améliore l’expérience client.`,
+        `<strong>${longReadSectionLabels.fr.applications}:</strong> Entre runway, fittings, préparation backstage, activations presse et sélection finale des images, ce sujet détermine la fluidité des équipes et la capacité du talent à servir le récit de marque sans rupture.`,
+        `<strong>${longReadSectionLabels.fr.applications}:</strong> En production commerciale, ce thème dépasse largement la simple performance. Il agit sur le rythme, les validations, la confiance d’équipe, la gestion du vêtement, la réponse caméra et la constance attendue par les clients à fort niveau d’exigence.`,
+      ],
+      index,
+    ),
+    es: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.es.applications}:</strong> ${article.title.es} influye directamente en cómo se presenta un talento en castings, sets editoriales, beauty close-ups, e-commerce, showroom appointments y campañas donde cada minuto de claridad mejora la experiencia del cliente.`,
+        `<strong>${longReadSectionLabels.es.applications}:</strong> Entre runway, fittings, preparación backstage, activaciones de prensa y selección final de imágenes, este tema condiciona la fluidez del equipo y la capacidad del talento para sostener la narrativa de marca sin fricción.`,
+        `<strong>${longReadSectionLabels.es.applications}:</strong> En producción comercial, este asunto va mucho más allá de la performance. Afecta el ritmo, las aprobaciones, la confianza del equipo, el manejo del vestuario, la respuesta ante cámara y la consistencia que exigen los clientes.`,
+      ],
+      index,
+    ),
+    it: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.it.applications}:</strong> ${article.title.it} incide direttamente su come un talento si presenta in casting, set editoriali, beauty close-up, e-commerce, showroom appointment e campagne dove ogni minuto di chiarezza migliora l’esperienza cliente.`,
+        `<strong>${longReadSectionLabels.it.applications}:</strong> Tra runway, fitting, preparazione backstage, attivazioni stampa e selezione finale delle immagini, questo tema condiziona la fluidità del team e la capacità del talento di sostenere il racconto del brand senza fratture.`,
+        `<strong>${longReadSectionLabels.it.applications}:</strong> Nella produzione commerciale, questo argomento va ben oltre la performance. Influenza ritmo, approvazioni, fiducia del team, gestione del capo, risposta alla camera e costanza richiesta dai clienti più esigenti.`,
+      ],
+      index,
+    ),
+  }
+}
+
+function buildLegacyPitfallsParagraph(article, index) {
+  return {
+    en: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.en.pitfalls}:</strong> When this area is neglected, the consequences surface quickly: missed cues, slower approvals, repeated corrections, tension between creative and production teams, and a model who looks increasingly uncertain as the day progresses.`,
+        `<strong>${longReadSectionLabels.en.pitfalls}:</strong> Weak execution here can cost more than a disappointing image. It can produce reshoots, damage first impressions with clients, undermine an agent’s confidence in placement, and make the talent feel exposed instead of supported.`,
+        `<strong>${longReadSectionLabels.en.pitfalls}:</strong> The real risk is cumulative. One misunderstanding becomes another, then another, until timing breaks down, energy drops, trust thins out and the whole shoot begins to lose both creative sharpness and commercial efficiency.`,
+      ],
+      index,
+    ),
+    fr: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.fr.pitfalls}:</strong> Lorsque ce sujet est négligé, les conséquences apparaissent vite: signaux manqués, validations plus lentes, corrections répétées, tension entre création et production, puis un talent qui semble de plus en plus fragile au fil de la journée.`,
+        `<strong>${longReadSectionLabels.fr.pitfalls}:</strong> Une mauvaise maîtrise ici coûte plus qu’une image décevante. Elle peut générer des reshoots, fragiliser la première impression client, réduire la confiance de l’agent et faire sentir au talent qu’il est exposé plutôt qu’accompagné.`,
+        `<strong>${longReadSectionLabels.fr.pitfalls}:</strong> Le risque est surtout cumulatif. Un malentendu en appelle un autre, jusqu’à casser le rythme, réduire l’énergie, affaiblir la confiance et faire perdre au shoot à la fois sa précision créative et son efficacité commerciale.`,
+      ],
+      index,
+    ),
+    es: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.es.pitfalls}:</strong> Cuando este aspecto se descuida, las consecuencias aparecen rápido: señales perdidas, aprobaciones más lentas, correcciones repetidas, tensión entre creación y producción y un talento que empieza a verse menos seguro con el paso de las horas.`,
+        `<strong>${longReadSectionLabels.es.pitfalls}:</strong> Una ejecución débil aquí cuesta más que una imagen floja. Puede provocar reshoots, dañar la primera impresión del cliente, reducir la confianza del agente y hacer que el talento se sienta expuesto en lugar de respaldado.`,
+        `<strong>${longReadSectionLabels.es.pitfalls}:</strong> El riesgo real es acumulativo. Un malentendido lleva a otro hasta romper el ritmo, bajar la energía, erosionar la confianza y hacer que todo el shoot pierda nitidez creativa y eficiencia comercial.`,
+      ],
+      index,
+    ),
+    it: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.it.pitfalls}:</strong> Quando quest’area viene trascurata, le conseguenze emergono subito: segnali mancati, approvazioni più lente, correzioni ripetute, tensione tra creativo e produzione e un talento che appare sempre meno sicuro con il passare della giornata.`,
+        `<strong>${longReadSectionLabels.it.pitfalls}:</strong> Una gestione debole qui costa più di un’immagine mediocre. Può generare reshoot, compromettere la prima impressione del cliente, ridurre la fiducia dell’agente e far sentire il talento esposto invece che sostenuto.`,
+        `<strong>${longReadSectionLabels.it.pitfalls}:</strong> Il rischio reale è cumulativo. Un malinteso ne genera un altro finché il ritmo si rompe, l’energia cala, la fiducia si assottiglia e l’intero shooting perde nitidezza creativa ed efficienza commerciale.`,
+      ],
+      index,
+    ),
+  }
+}
+
+function buildLegacyBenefitsParagraph(article, index) {
+  return {
+    en: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.en.benefits}:</strong> When this capability is trained well, the benefits are visible immediately: clearer communication, calmer decision-making, faster first-take success, stronger rebooking potential and a more persuasive portfolio over time.`,
+        `<strong>${longReadSectionLabels.en.benefits}:</strong> The gains are practical and cumulative: fewer correction rounds, stronger client reassurance, better energy management, more elegant execution under pressure and a talent profile that feels commercially dependable.`,
+        `<strong>${longReadSectionLabels.en.benefits}:</strong> At its best, this topic improves both image quality and working atmosphere. Teams move faster, the talent feels safer, the client trusts sooner and the resulting material carries more authority from the first frame.`,
+      ],
+      index,
+    ),
+    fr: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.fr.benefits}:</strong> Lorsqu’elle est bien entraînée, cette compétence produit des bénéfices immédiatement visibles: communication plus claire, décisions plus calmes, meilleures premières prises, potentiel de rebooking renforcé et portfolio plus convaincant dans le temps.`,
+        `<strong>${longReadSectionLabels.fr.benefits}:</strong> Les gains sont concrets et cumulatifs: moins de corrections, plus de réassurance client, meilleure gestion de l’énergie, exécution plus élégante sous pression et profil talent plus fiable commercialement.`,
+        `<strong>${longReadSectionLabels.fr.benefits}:</strong> À son meilleur niveau, ce sujet améliore à la fois la qualité d’image et l’ambiance de travail. Les équipes avancent plus vite, le talent se sent plus solide, le client fait confiance plus tôt et la matière produite gagne en autorité dès les premières images.`,
+      ],
+      index,
+    ),
+    es: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.es.benefits}:</strong> Cuando esta capacidad se entrena bien, los beneficios se ven enseguida: comunicación más clara, decisiones más serenas, mejores primeras tomas, mayor potencial de rebooking y un portfolio más convincente con el tiempo.`,
+        `<strong>${longReadSectionLabels.es.benefits}:</strong> Las ventajas son prácticas y acumulativas: menos rondas de corrección, mayor tranquilidad para el cliente, mejor gestión de energía, ejecución más elegante bajo presión y un perfil de talento más confiable comercialmente.`,
+        `<strong>${longReadSectionLabels.es.benefits}:</strong> En su mejor versión, este tema mejora tanto la calidad de imagen como la atmósfera de trabajo. Los equipos avanzan más rápido, el talento se siente más seguro, el cliente confía antes y el material final tiene más autoridad desde el primer frame.`,
+      ],
+      index,
+    ),
+    it: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.it.benefits}:</strong> Quando questa capacità viene allenata bene, i benefici sono immediatamente visibili: comunicazione più chiara, decisioni più calme, migliori first take, maggiore potenziale di rebooking e portfolio più convincente nel tempo.`,
+        `<strong>${longReadSectionLabels.it.benefits}:</strong> I vantaggi sono pratici e cumulativi: meno correzioni, maggiore rassicurazione per il cliente, migliore gestione dell’energia, esecuzione più elegante sotto pressione e un profilo talento più affidabile sul piano commerciale.`,
+        `<strong>${longReadSectionLabels.it.benefits}:</strong> Al suo livello migliore, questo tema migliora sia la qualità dell’immagine sia l’atmosfera di lavoro. I team avanzano più velocemente, il talento si sente più saldo, il cliente si fida prima e il materiale finale ha più autorevolezza fin dal primo frame.`,
+      ],
+      index,
+    ),
+  }
+}
+
 function buildLegacyConclusionParagraph(article, index) {
   return {
     en: pickVariant(
@@ -1940,8 +2084,12 @@ const legacyArticleSourceNotes = {
 function enrichLegacyArticles(existingArticles) {
   return existingArticles.map((article, index) => {
     const firstParagraph = article.body.en[0] || ''
+    const keywords = buildLegacyKeywords(article)
+    const applicationsParagraph = buildLegacyApplicationsParagraph(article, index)
     const misconceptionParagraph = buildLegacyMisconceptionParagraph(article, index)
+    const pitfallsParagraph = buildLegacyPitfallsParagraph(article, index)
     const bridgeParagraph = buildLegacyBridgeParagraph(article, index)
+    const benefitsParagraph = buildLegacyBenefitsParagraph(article, index)
     const conclusionParagraph = buildLegacyConclusionParagraph(article, index)
 
     return {
@@ -1949,30 +2097,42 @@ function enrichLegacyArticles(existingArticles) {
       body: {
         en: [
           `<strong>${longReadSectionLabels.en.definition}:</strong> ${firstParagraph}`,
-          `<strong>${longReadSectionLabels.en.applications}:</strong> ${article.title.en} This is applied in casting, set pacing, client communication and post-shoot editing decisions where consistency must survive production pressure.`,
+          applicationsParagraph.en,
+          `<strong>${longReadSectionLabels.en.keywords}:</strong> <strong>${keywords}</strong>.`,
           misconceptionParagraph.en,
+          pitfallsParagraph.en,
           bridgeParagraph.en,
+          benefitsParagraph.en,
           conclusionParagraph.en,
         ],
         fr: [
           `<strong>${longReadSectionLabels.fr.definition}:</strong> ${article.body.fr[0] || ''}`,
-          `<strong>${longReadSectionLabels.fr.applications}:</strong> ${article.title.fr} Cette logique s’applique au casting, au rythme plateau, à la relation client et à la sélection finale des images.`,
+          applicationsParagraph.fr,
+          `<strong>${longReadSectionLabels.fr.keywords}:</strong> <strong>${keywords}</strong>.`,
           misconceptionParagraph.fr,
+          pitfallsParagraph.fr,
           bridgeParagraph.fr,
+          benefitsParagraph.fr,
           conclusionParagraph.fr,
         ],
         es: [
           `<strong>${longReadSectionLabels.es.definition}:</strong> ${article.body.es[0] || ''}`,
-          `<strong>${longReadSectionLabels.es.applications}:</strong> ${article.title.es} Esta lógica se aplica en casting, ritmo de set, comunicación con cliente y curaduría final del material.`,
+          applicationsParagraph.es,
+          `<strong>${longReadSectionLabels.es.keywords}:</strong> <strong>${keywords}</strong>.`,
           misconceptionParagraph.es,
+          pitfallsParagraph.es,
           bridgeParagraph.es,
+          benefitsParagraph.es,
           conclusionParagraph.es,
         ],
         it: [
           `<strong>${longReadSectionLabels.it.definition}:</strong> ${article.body.it[0] || ''}`,
-          `<strong>${longReadSectionLabels.it.applications}:</strong> ${article.title.it} Questo approccio impatta casting, ritmo di set, comunicazione cliente e selezione finale degli asset.`,
+          applicationsParagraph.it,
+          `<strong>${longReadSectionLabels.it.keywords}:</strong> <strong>${keywords}</strong>.`,
           misconceptionParagraph.it,
+          pitfallsParagraph.it,
           bridgeParagraph.it,
+          benefitsParagraph.it,
           conclusionParagraph.it,
         ],
       },
