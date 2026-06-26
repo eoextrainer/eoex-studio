@@ -208,13 +208,13 @@ blockquote {
 
 .hero-shell {
   display: grid;
-  gap: 24px;
+  gap: 20px;
 }
 
 .hero-stage {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.95fr);
-  gap: 22px;
+  grid-template-columns: 1fr;
+  gap: 18px;
 }
 
 .hero-copy,
@@ -350,6 +350,12 @@ blockquote {
   gap: 18px;
 }
 
+.hero-featured-shell,
+.event-overview-card {
+  display: grid;
+  gap: 14px;
+}
+
 .hero-card,
 .image-card,
 .blog-card {
@@ -383,6 +389,16 @@ blockquote {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.42);
 }
 
+.overlay-panel--label-only {
+  min-height: auto;
+  gap: 0;
+}
+
+.overlay-panel--label-only h3,
+.overlay-panel--label-only p {
+  display: none;
+}
+
 .hero-card__caption p,
 .hero-card__caption span {
   margin-bottom: 6px;
@@ -411,59 +427,13 @@ blockquote {
   transform: scale(1.04);
 }
 
-.marquee-band {
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  background: rgba(255, 252, 248, 0.72);
-  box-shadow: var(--shadow);
-}
-
 .band-title {
   display: block;
-  margin-bottom: 14px;
+  margin-bottom: 4px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold-deep);
   font-size: 0.76rem;
-}
-
-.marquee-track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(220px, 280px);
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 6px;
-  scrollbar-width: thin;
-}
-
-.rail-card {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 16 / 10;
-  border-radius: 22px;
-}
-
-.rail-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.rail-card span {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 14px;
-  padding: 10px 12px;
-  border-radius: 999px;
-  background: rgba(21, 14, 11, 0.62);
-  color: #fff8f1;
-  font-size: 0.74rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-align: center;
 }
 
 .section {
@@ -504,9 +474,13 @@ blockquote {
 }
 
 .about-grid,
-.events-layout,
 .press-layout {
   grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+}
+
+.events-layout,
+.events-layout--stacked {
+  grid-template-columns: 1fr;
 }
 
 .statement-card,
@@ -545,8 +519,9 @@ blockquote {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.press-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.press-grid,
+.partner-grid--paired {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .service-card,
@@ -600,6 +575,11 @@ blockquote {
 
 .event-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.event-grid--mirrored,
+.hero-featured--events {
+  align-items: stretch;
 }
 
 .event-card {
@@ -659,7 +639,7 @@ blockquote {
 .partner-card {
   display: grid;
   gap: 14px;
-  min-height: 260px;
+  min-height: 220px;
 }
 
 .partner-mark {
@@ -722,7 +702,7 @@ blockquote {
 }
 
 .overlay-panel--cover h3 {
-  font-size: clamp(1.3rem, 3.2vw, 2rem);
+  font-size: clamp(1rem, 2vw, 1.35rem);
   line-height: 1.02;
 }
 
@@ -743,6 +723,7 @@ blockquote {
   max-width: 9ch;
   margin: 10px 0;
   color: var(--text);
+  font-size: 0.78rem;
 }
 
 .cover-card strong {
@@ -755,8 +736,8 @@ blockquote {
   align-items: start;
 }
 
-.press-grid--single-row {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.press-grid--paired {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .press-kit-card {
@@ -869,6 +850,10 @@ blockquote {
   overflow: hidden;
 }
 
+.blog-card--compact {
+  grid-template-rows: 140px auto;
+}
+
 .blog-controls {
   display: grid;
   gap: 12px;
@@ -967,6 +952,25 @@ blockquote {
   gap: 12px;
   padding: 22px;
   background: var(--panel-strong);
+}
+
+.blog-card__body--compact {
+  gap: 8px;
+  padding: 14px;
+}
+
+.blog-card__body--compact h3 {
+  font-size: 1.24rem;
+  line-height: 1.05;
+}
+
+.blog-grid--mobile-list {
+  grid-template-columns: 1fr;
+}
+
+.blog-grid--compact-mobile {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 16px;
 }
 
 .site-footer {
@@ -1110,17 +1114,11 @@ body[data-form-factor='mobile'] .lang-switch {
 }
 
 body[data-form-factor='mobile'] .hero-stage,
-body[data-form-factor='mobile'] .hero-featured,
 body[data-form-factor='mobile'] .about-grid,
 body[data-form-factor='mobile'] .events-layout,
 body[data-form-factor='mobile'] .press-layout,
 body[data-form-factor='mobile'] .service-grid,
-body[data-form-factor='mobile'] .event-grid,
 body[data-form-factor='mobile'] .directory-grid,
-body[data-form-factor='mobile'] .partner-grid,
-body[data-form-factor='mobile'] .magazine-grid,
-body[data-form-factor='mobile'] .press-grid,
-body[data-form-factor='mobile'] .blog-grid,
 body[data-form-factor='mobile'] .booking-shell,
 body[data-form-factor='mobile'] .booking-times {
   grid-template-columns: 1fr;
@@ -1129,11 +1127,15 @@ body[data-form-factor='mobile'] .booking-times {
 body[data-form-factor='mobile'] .hero-featured,
 body[data-form-factor='mobile'] .event-grid,
 body[data-form-factor='mobile'] .directory-grid,
-body[data-form-factor='mobile'] .partner-grid,
 body[data-form-factor='mobile'] .magazine-grid,
-body[data-form-factor='mobile'] .press-grid,
 body[data-form-factor='mobile'] .blog-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body[data-form-factor='mobile'] .partner-grid,
+body[data-form-factor='mobile'] .press-grid,
+body[data-form-factor='mobile'] .blog-grid--mobile-list {
+  grid-template-columns: 1fr;
 }
 
 body[data-form-factor='mobile'] .hero-copy,
@@ -1151,7 +1153,8 @@ body[data-form-factor='mobile'] .blog-card__body {
 
 body[data-form-factor='mobile'] .hero-copy {
   min-height: auto;
-  padding-top: 78px;
+  padding-top: 54px;
+  gap: 12px;
 }
 
 body[data-form-factor='mobile'] .hero-copy h1 {
@@ -1166,6 +1169,13 @@ body[data-form-factor='mobile'] .landscape-card {
   min-height: 210px;
 }
 
+body[data-form-factor='mobile'] .event-card,
+body[data-form-factor='mobile'] .hero-card,
+body[data-form-factor='mobile'] .portrait-card,
+body[data-form-factor='mobile'] .landscape-card--press {
+  border-radius: 20px;
+}
+
 body[data-form-factor='mobile'] .section {
   margin-top: 18px;
   padding: 20px 0 8px;
@@ -1175,6 +1185,10 @@ body[data-form-factor='mobile'] .section-heading {
   grid-template-columns: 1fr;
   gap: 10px;
   margin-bottom: 14px;
+}
+
+body[data-form-factor='mobile'] .section-heading h2 {
+  font-size: clamp(1.7rem, 8vw, 2.2rem);
 }
 
 body[data-form-factor='mobile'] .booking-days {
@@ -1191,12 +1205,65 @@ body[data-form-factor='mobile'] .day-pill {
   border-radius: 16px;
 }
 
+body[data-form-factor='mobile'] .booking-shell {
+  gap: 14px;
+  padding: 16px;
+  border-radius: 22px;
+}
+
+body[data-form-factor='mobile'] .booking-form {
+  gap: 10px;
+}
+
+body[data-form-factor='mobile'] .booking-form select,
+body[data-form-factor='mobile'] .booking-form input,
+body[data-form-factor='mobile'] .booking-form textarea {
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+body[data-form-factor='mobile'] .booking-form textarea {
+  min-height: 88px;
+}
+
 body[data-form-factor='mobile'] .blog-card {
-  grid-template-rows: 220px auto;
+  grid-template-rows: 200px auto;
 }
 
 body[data-form-factor='mobile'] .blog-controls {
   padding: 12px;
+}
+
+body[data-form-factor='mobile'] .blog-grid--compact-mobile .blog-card {
+  grid-template-rows: 112px auto;
+}
+
+body[data-form-factor='mobile'] .blog-grid--compact-mobile .blog-card__body {
+  padding: 12px;
+}
+
+body[data-form-factor='mobile'] .blog-grid--compact-mobile .button {
+  min-height: 38px;
+  padding: 0 12px;
+  font-size: 0.72rem;
+}
+
+body[data-form-factor='mobile'] .overlay-panel {
+  padding: 12px;
+}
+
+body[data-form-factor='mobile'] .overlay-panel span {
+  font-size: 0.64rem;
+}
+
+body[data-form-factor='mobile'] .partner-card,
+body[data-form-factor='mobile'] .press-grid .image-card {
+  min-height: 180px;
+}
+
+body[data-form-factor='mobile'] .cover-card p,
+body[data-form-factor='mobile'] .overlay-panel--cover h3 {
+  font-size: 0.86rem;
 }
 
 body[data-form-factor='mobile'] .article-modal {
@@ -1284,7 +1351,8 @@ body[data-form-factor='mobile'] .article-modal img {
   .booking-times,
   .blog-grid,
   .directory-grid,
-  .press-grid {
+  .press-grid,
+  .partner-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -1323,35 +1391,10 @@ body[data-form-factor='mobile'] .article-modal img {
 
   .hero-featured,
   .event-grid,
-  .partner-grid,
   .magazine-grid,
   .booking-days,
   .booking-times,
-  .blog-grid,
-  .directory-grid,
-  .press-grid {
+  .directory-grid {
     grid-template-columns: 1fr;
   }
-
-  .cover-card {
-    min-height: 240px;
-  }
-
-  .blog-card {
-    grid-template-rows: 220px auto;
-  }
-
-  .blog-controls {
-    padding: 12px;
-  }
-}
-
-body[data-form-factor='mobile'] .hero-featured,
-body[data-form-factor='mobile'] .event-grid,
-body[data-form-factor='mobile'] .directory-grid,
-body[data-form-factor='mobile'] .partner-grid,
-body[data-form-factor='mobile'] .magazine-grid,
-body[data-form-factor='mobile'] .press-grid,
-body[data-form-factor='mobile'] .blog-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 }

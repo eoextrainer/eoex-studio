@@ -82,7 +82,7 @@ const copy = {
     heroQuote: 'To be a bridge between clients and talents.',
     heroPrimary: 'Book a private consultation',
     heroSecondary: 'Explore the 2026 calendar',
-    marqueeLabel: 'Featured destinations',
+    marqueeLabel: 'Featured events',
     aboutTitle: 'About · Services',
     aboutLead:
       'We teach the realities of modelling beyond the runway: contracts, wellbeing, image strategy, set etiquette, personal branding and the business decisions that shape a long-term career.',
@@ -150,7 +150,7 @@ const copy = {
     heroQuote: 'Être un pont entre les clients et les talents.',
     heroPrimary: 'Réserver une consultation privée',
     heroSecondary: 'Explorer le calendrier 2026',
-    marqueeLabel: 'Destinations en lumière',
+    marqueeLabel: 'Événements en lumière',
     aboutTitle: 'À propos · Services',
     aboutLead:
       'Nous enseignons les réalités du mannequinat au-delà du podium : contrats, bien-être, stratégie d’image, comportement sur plateau, personal branding et décisions d’affaires.',
@@ -218,7 +218,7 @@ const copy = {
     heroQuote: 'Ser un puente entre clientes y talentos.',
     heroPrimary: 'Reservar una consulta privada',
     heroSecondary: 'Explorar el calendario 2026',
-    marqueeLabel: 'Destinos destacados',
+    marqueeLabel: 'Eventos destacados',
     aboutTitle: 'Acerca · Servicios',
     aboutLead:
       'Enseñamos la realidad del modelaje más allá de la pasarela: contratos, bienestar, estrategia de imagen, etiqueta en set, marca personal y decisiones de negocio.',
@@ -286,7 +286,7 @@ const copy = {
     heroQuote: 'Essere un ponte tra clienti e talenti.',
     heroPrimary: 'Prenota una consulenza privata',
     heroSecondary: 'Esplora il calendario 2026',
-    marqueeLabel: 'Destinazioni in evidenza',
+    marqueeLabel: 'Eventi in evidenza',
     aboutTitle: 'Chi siamo · Servizi',
     aboutLead:
       'Insegniamo la realtà del modelling oltre la passerella: contratti, benessere, strategia d’immagine, etichetta sul set, personal branding e scelte di business.',
@@ -754,6 +754,83 @@ const partners = [
       it: 'Partner hospitality per fitting privati, cene clienti e hosting executive.',
     },
   },
+  {
+    mark: 'NO',
+    name: 'Noblesse Optics',
+    tier: 'Tier II',
+    description: {
+      en: 'Eyewear and optics partner for premium accessories styling and campaign detail shots.',
+      fr: 'Partenaire eyewear pour le stylisme accessoires premium et les détails de campagne.',
+      es: 'Partner eyewear para estilismo de accesorios premium y detalles de campaña.',
+      it: 'Partner eyewear per styling accessori premium e dettagli di campagna.',
+    },
+  },
+  {
+    mark: 'AL',
+    name: 'Atelier Luma',
+    tier: 'Tier I',
+    description: {
+      en: 'Creative production studio supporting set design, fittings and editorial staging.',
+      fr: 'Studio de production créative soutenant scénographie, fittings et mise en scène éditoriale.',
+      es: 'Estudio de producción creativa para escenografía, fittings y puesta en escena editorial.',
+      it: 'Studio di produzione creativa per set design, fitting e staging editoriale.',
+    },
+  },
+  {
+    mark: 'OR',
+    name: 'Orée Residence',
+    tier: 'Tier III',
+    description: {
+      en: 'Boutique residence partner for visiting talent, discreet hosting and executive stays.',
+      fr: 'Résidence partenaire pour talents invités, accueil discret et séjours exécutifs.',
+      es: 'Residencia partner para talento invitado, hosting discreto y estancias ejecutivas.',
+      it: 'Residenza partner per talenti ospiti, hosting discreto e soggiorni executive.',
+    },
+  },
+  {
+    mark: 'SE',
+    name: 'Serein Beauty',
+    tier: 'Tier II',
+    description: {
+      en: 'Beauty partner focused on prep rituals, backstage finishing and complexion maintenance.',
+      fr: 'Partenaire beauté axé sur les rituels de préparation, la finition backstage et l’éclat du teint.',
+      es: 'Partner beauty centrado en rituales de preparación, acabados backstage y mantenimiento del cutis.',
+      it: 'Partner beauty focalizzato su rituali di preparazione, finishing backstage e incarnato.',
+    },
+  },
+  {
+    mark: 'VA',
+    name: 'Valmont Audio',
+    tier: 'Tier III',
+    description: {
+      en: 'Sound and live ambience collaborator for event atmospheres and cultural activations.',
+      fr: 'Partenaire son et ambiance live pour les atmosphères événementielles et activations culturelles.',
+      es: 'Colaborador de sonido y ambiente live para atmósferas de eventos y activaciones culturales.',
+      it: 'Collaboratore sound e live ambience per atmosfere evento e attivazioni culturali.',
+    },
+  },
+  {
+    mark: 'MR',
+    name: 'Maison Rive',
+    tier: 'Tier I',
+    description: {
+      en: 'Luxury interiors and hosting house backing client receptions and private appointments.',
+      fr: 'Maison d’intérieurs et d’accueil luxe soutenant réceptions clients et rendez-vous privés.',
+      es: 'Casa de interiores y hosting de lujo para recepciones de clientes y citas privadas.',
+      it: 'Casa di interni e hosting di lusso per ricezioni clienti e appuntamenti privati.',
+    },
+  },
+  {
+    mark: 'EP',
+    name: 'Épure Print',
+    tier: 'Tier II',
+    description: {
+      en: 'Editorial print partner producing lookbooks, campaign leave-behinds and media kits.',
+      fr: 'Partenaire print éditorial produisant lookbooks, supports de campagne et media kits.',
+      es: 'Partner print editorial para lookbooks, soportes de campaña y media kits.',
+      it: 'Partner print editoriale per lookbook, materiali campagna e media kit.',
+    },
+  },
 ]
 
 const pressItems = [
@@ -801,6 +878,81 @@ const pressItems = [
       it: 'Un contesto misurato per annunci, dichiarazioni della founder e sessioni Q&A.',
     },
     photo: peoplePhotos.press3,
+  },
+  {
+    title: {
+      en: 'Founder interview room',
+      fr: 'Salon d’interview fondatrice',
+      es: 'Sala de entrevista de la fundadora',
+      it: 'Sala interviste founder',
+    },
+    summary: {
+      en: 'A refined setup for founder conversations, recorded statements and strategic media briefs.',
+      fr: 'Un cadre raffiné pour entretiens fondatrice, prises de parole enregistrées et briefs média.',
+      es: 'Un entorno refinado para entrevistas de fundadora, declaraciones grabadas y briefs de prensa.',
+      it: 'Un set raffinato per interviste founder, dichiarazioni registrate e brief media.',
+    },
+    photo: peoplePhotos.press1,
+  },
+  {
+    title: {
+      en: 'Backstage note service',
+      fr: 'Service de notes backstage',
+      es: 'Servicio de notas backstage',
+      it: 'Servizio note backstage',
+    },
+    summary: {
+      en: 'Curated backstage notes, talent context and verified credits for attending journalists.',
+      fr: 'Notes backstage, contexte talent et crédits vérifiés pour les journalistes invités.',
+      es: 'Notas backstage, contexto del talento y créditos verificados para periodistas invitados.',
+      it: 'Note backstage, contesto talent e crediti verificati per i giornalisti invitati.',
+    },
+    photo: peoplePhotos.press2,
+  },
+  {
+    title: {
+      en: 'Media image vault',
+      fr: 'Vault images média',
+      es: 'Vault de imágenes de prensa',
+      it: 'Vault immagini media',
+    },
+    summary: {
+      en: 'Approved imagery, captions and usage-ready selections for press and partner outlets.',
+      fr: 'Imagerie approuvée, légendes et sélections prêtes à l’usage pour la presse.',
+      es: 'Imágenes aprobadas, captions y selecciones listas para uso editorial y partner.',
+      it: 'Immagini approvate, caption e selezioni pronte all’uso per stampa e partner.',
+    },
+    photo: peoplePhotos.press3,
+  },
+  {
+    title: {
+      en: 'Partner publication desk',
+      fr: 'Desk publications partenaires',
+      es: 'Desk de publicaciones partner',
+      it: 'Desk pubblicazioni partner',
+    },
+    summary: {
+      en: 'A response desk for publication requests, scheduling and market-facing talking points.',
+      fr: 'Un desk de réponse pour demandes de publication, planning et éléments de langage marché.',
+      es: 'Un desk de respuesta para solicitudes editoriales, agenda y talking points de mercado.',
+      it: 'Un desk di risposta per richieste editoriali, planning e talking points di mercato.',
+    },
+    photo: peoplePhotos.press1,
+  },
+  {
+    title: {
+      en: 'Post-event recap suite',
+      fr: 'Suite récap post-événement',
+      es: 'Suite de recap post-evento',
+      it: 'Suite recap post-evento',
+    },
+    summary: {
+      en: 'Quick-turn recaps, image selects and recap notes prepared for immediate editorial use.',
+      fr: 'Récaps rapides, sélections d’images et notes préparées pour un usage éditorial immédiat.',
+      es: 'Recaps rápidos, selección de imágenes y notas listas para uso editorial inmediato.',
+      it: 'Recap rapidi, selezioni immagini e note pronte per uso editoriale immediato.',
+    },
+    photo: peoplePhotos.press2,
   },
 ]
 
@@ -1727,6 +1879,47 @@ function renderGalleryCTA(langCopy, sectionKey, totalCount) {
   `
 }
 
+function isMobileFormFactor() {
+  return state.formFactor === 'mobile'
+}
+
+function renderEventTile(event, lang, { mobileLabelOnly = false } = {}) {
+  return `
+    <article class="image-card event-card">
+      <img src="${event.photo}" alt="${event.location[lang]}" loading="lazy" decoding="async">
+      <div class="overlay-panel ${mobileLabelOnly ? 'overlay-panel--label-only' : ''}">
+        <span>${event.title[lang]}</span>
+        ${mobileLabelOnly ? '' : `<h3>${event.location[lang]}</h3><p>${event.summary[lang]}</p>`}
+      </div>
+    </article>`
+}
+
+function renderPeopleTile(item, key, lang) {
+  const mobileLabelOnly = isMobileFormFactor()
+
+  return `
+    <article class="image-card portrait-card portrait-card--compact">
+      <img src="${item.photo}" alt="${item.name}" loading="lazy" decoding="async">
+      <div class="overlay-panel ${mobileLabelOnly ? 'overlay-panel--label-only' : ''}">
+        <span>${item.name}</span>
+        ${mobileLabelOnly ? '' : `<p>${item[key][lang]}</p>`}
+      </div>
+    </article>`
+}
+
+function renderBlogCard(article, lang, queryTerms, { compact = false } = {}) {
+  return `
+    <article class="blog-card glass-card ${compact ? 'blog-card--compact' : ''}">
+      <img src="${article.image}" alt="${article.title[lang]}" loading="lazy" decoding="async">
+      <div class="blog-card__body ${compact ? 'blog-card__body--compact' : ''}">
+        <span>${article.category[lang]}</span>
+        <h3>${highlightText(article.title[lang], queryTerms)}</h3>
+        ${compact ? '' : `<p>${highlightText(article.excerpt[lang], queryTerms)}</p>`}
+        <button type="button" class="button button-secondary" data-article-id="${article.id}">${copy[state.lang].readArticle}</button>
+      </div>
+    </article>`
+}
+
 function renderGridWithOptionalExpansion({ sectionKey, items, collapsedCount, renderItem, langCopy, gridClass }) {
   const expanded = Boolean(state.expandedSections[sectionKey])
   const hasOverflow = items.length > collapsedCount
@@ -1775,6 +1968,8 @@ function renderNav(langCopy) {
 }
 
 function renderHero(lang, langCopy) {
+  const featuredEventCount = isMobileFormFactor() ? 2 : 4
+
   return `
     <section id="home" class="hero-shell reveal">
       <div class="hero-stage">
@@ -1788,35 +1983,16 @@ function renderHero(lang, langCopy) {
             <a class="button button-secondary" href="#events">${langCopy.heroSecondary}</a>
           </div>
         </div>
-        <div class="hero-featured">
-          ${events
-            .slice(0, 4)
-            .map(
-              (event, index) => `
-                <article class="hero-card" style="animation-delay:${index * 90}ms">
-                  <img src="${event.photo}" alt="${event.location[lang]}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${index === 0 ? 'high' : 'auto'}">
-                  <div class="hero-card__caption">
-                    <p>${event.title[lang]}</p>
-                    <h3>${event.city[lang]}</h3>
-                    <span>${event.location[lang]}</span>
-                  </div>
-                </article>`,
-            )
-            .join('')}
-        </div>
-      </div>
-      <div class="marquee-band">
-        <span class="band-title">${langCopy.marqueeLabel}</span>
-        <div class="marquee-track">
-          ${events
-            .map(
-              (event) => `
-                <a class="rail-card" href="#events">
-                  <img src="${event.photo}" alt="${event.city[lang]}" loading="lazy" decoding="async">
-                  <span>${event.city[lang]} · ${monthLabel(lang, event.month)}</span>
-                </a>`,
-            )
-            .join('')}
+        <div class="hero-featured-shell">
+          <span class="band-title">${langCopy.marqueeLabel}</span>
+          ${renderGridWithOptionalExpansion({
+            sectionKey: 'home-events',
+            items: events,
+            collapsedCount: featuredEventCount,
+            langCopy,
+            gridClass: 'hero-featured hero-featured--events',
+            renderItem: (event) => renderEventTile(event, lang, { mobileLabelOnly: isMobileFormFactor() }),
+          })}
         </div>
       </div>
     </section>
@@ -1855,6 +2031,8 @@ function renderAbout(langCopy) {
 }
 
 function renderEvents(lang, langCopy) {
+  const featuredEventCount = isMobileFormFactor() ? 2 : 4
+
   return `
     <section id="events" class="section reveal">
       <div class="section-heading">
@@ -1864,8 +2042,8 @@ function renderEvents(lang, langCopy) {
           <p>${langCopy.eventsIntro}</p>
         </div>
       </div>
-      <div class="events-layout">
-        <aside class="calendar-card glass-card">
+      <div class="events-layout events-layout--stacked">
+        <aside class="calendar-card glass-card event-overview-card">
           <h3>${langCopy.calendarTitle}</h3>
           <div class="calendar-list">
             ${events
@@ -1887,18 +2065,10 @@ function renderEvents(lang, langCopy) {
         ${renderGridWithOptionalExpansion({
           sectionKey: 'events',
           items: events,
-          collapsedCount: 4,
+          collapsedCount: featuredEventCount,
           langCopy,
-          gridClass: 'event-grid',
-          renderItem: (event) => `
-                <article class="image-card event-card">
-                  <img src="${event.photo}" alt="${event.location[lang]}" loading="lazy" decoding="async">
-                  <div class="overlay-panel">
-                    <span>${event.title[lang]}</span>
-                    <h3>${event.location[lang]}</h3>
-                    <p>${event.summary[lang]}</p>
-                  </div>
-                </article>`,
+          gridClass: 'event-grid event-grid--mirrored',
+          renderItem: (event) => renderEventTile(event, lang, { mobileLabelOnly: isMobileFormFactor() }),
         })}
       </div>
     </section>
@@ -1921,14 +2091,7 @@ function renderDirectorySection(id, number, title, intro, items, key, lang, lang
         collapsedCount: 6,
         langCopy,
         gridClass: 'directory-grid',
-        renderItem: (item) => `
-              <article class="image-card portrait-card portrait-card--compact">
-                <img src="${item.photo}" alt="${item.name}" loading="lazy" decoding="async">
-                <div class="overlay-panel">
-                  <span>${item.name}</span>
-                  <p>${item[key][lang]}</p>
-                </div>
-              </article>`,
+        renderItem: (item) => renderPeopleTile(item, key, lang),
       })}
     </section>
   `
@@ -1947,9 +2110,9 @@ function renderPartners(lang, langCopy) {
       ${renderGridWithOptionalExpansion({
         sectionKey: 'partners',
         items: partners,
-        collapsedCount: 3,
+        collapsedCount: isMobileFormFactor() ? 2 : 4,
         langCopy,
-        gridClass: 'partner-grid',
+        gridClass: 'partner-grid partner-grid--paired',
         renderItem: (partner) => `
               <article class="partner-card glass-card">
                 <div class="partner-mark">${partner.mark}</div>
@@ -2005,15 +2168,15 @@ function renderPress(lang, langCopy) {
       ${renderGridWithOptionalExpansion({
         sectionKey: 'press',
         items: pressItems,
-        collapsedCount: 3,
+        collapsedCount: isMobileFormFactor() ? 2 : 4,
         langCopy,
-        gridClass: 'press-grid press-grid--single-row',
+        gridClass: 'press-grid press-grid--paired',
         renderItem: (item) => `
               <article class="image-card landscape-card landscape-card--press">
                 <img src="${item.photo}" alt="${item.title[lang]}">
-                <div class="overlay-panel">
+                <div class="overlay-panel ${isMobileFormFactor() ? 'overlay-panel--label-only' : ''}">
                   <span>${item.title[lang]}</span>
-                  <p>${item.summary[lang]}</p>
+                  ${isMobileFormFactor() ? '' : `<p>${item.summary[lang]}</p>`}
                 </div>
               </article>`,
       })}
@@ -2087,6 +2250,10 @@ function renderBlog(lang, langCopy) {
   const { categoryTags, filteredArticles } = buildBlogFilterModel(lang)
   const queryTerms = getBlogQueryTerms()
   const hasActiveBlogFilters = state.blogTag !== 'all' || state.blogQuery.trim().length > 0
+  const mobileMode = isMobileFormFactor()
+  const initialBlogItems = mobileMode ? filteredArticles.slice(0, 5) : filteredArticles
+  const overflowBlogItems = mobileMode ? filteredArticles.slice(5) : []
+  const expandedBlog = Boolean(state.expandedSections.blog)
 
   return `
     <section id="blog" class="section reveal">
@@ -2122,23 +2289,30 @@ function renderBlog(lang, langCopy) {
           }
         </div>
       </div>
-      ${renderGridWithOptionalExpansion({
-        sectionKey: 'blog',
-        items: filteredArticles,
-        collapsedCount: 6,
-        langCopy,
-        gridClass: 'blog-grid',
-        renderItem: (article) => `
-              <article class="blog-card glass-card">
-                <img src="${article.image}" alt="${article.title[lang]}" loading="lazy" decoding="async">
-                <div class="blog-card__body">
-                  <span>${article.category[lang]}</span>
-                  <h3>${highlightText(article.title[lang], queryTerms)}</h3>
-                  <p>${highlightText(article.excerpt[lang], queryTerms)}</p>
-                  <button type="button" class="button button-secondary" data-article-id="${article.id}">${langCopy.readArticle}</button>
-                </div>
-              </article>`,
-      })}
+      ${
+        mobileMode
+          ? `
+              <div class="blog-grid blog-grid--mobile-list">
+                ${initialBlogItems.map((article) => renderBlogCard(article, lang, queryTerms)).join('')}
+              </div>
+              ${
+                overflowBlogItems.length
+                  ? `
+                      ${expandedBlog ? `<div class="blog-grid blog-grid--compact-mobile">${overflowBlogItems.map((article) => renderBlogCard(article, lang, queryTerms, { compact: true })).join('')}</div>` : ''}
+                      ${renderGalleryCTA(langCopy, 'blog', filteredArticles.length)}
+                    `
+                  : ''
+              }
+            `
+          : renderGridWithOptionalExpansion({
+              sectionKey: 'blog',
+              items: filteredArticles,
+              collapsedCount: 6,
+              langCopy,
+              gridClass: 'blog-grid',
+              renderItem: (article) => renderBlogCard(article, lang, queryTerms),
+            })
+      }
       ${filteredArticles.length === 0 ? `<p class="blog-empty glass-card">${langCopy.blogNoResults}</p>` : ''}
     </section>
   `
