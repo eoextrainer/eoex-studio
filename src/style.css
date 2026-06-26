@@ -1184,12 +1184,23 @@ body[data-form-factor='mobile'] .lang-switch {
 body[data-form-factor='mobile'] .hero-stage,
 body[data-form-factor='mobile'] .about-grid,
 body[data-form-factor='mobile'] .events-layout,
+body[data-form-factor='mobile'] .events-layout--split,
 body[data-form-factor='mobile'] .press-layout,
 body[data-form-factor='mobile'] .service-grid,
 body[data-form-factor='mobile'] .directory-grid,
 body[data-form-factor='mobile'] .booking-shell,
 body[data-form-factor='mobile'] .booking-times {
   grid-template-columns: 1fr;
+}
+
+body[data-form-factor='mobile'] .events-layout--split > :first-child {
+  grid-column: auto;
+}
+
+body[data-form-factor='mobile'] .event-overview-card {
+  width: 100%;
+  justify-self: stretch;
+  margin-top: 6px;
 }
 
 body[data-form-factor='mobile'] .hero-featured,
