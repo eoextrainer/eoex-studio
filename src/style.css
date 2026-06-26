@@ -1057,6 +1057,148 @@ blockquote {
   animation: reveal-up 720ms ease both;
 }
 
+body[data-form-factor='desktop'] .nav-toggle {
+  display: none;
+}
+
+body[data-form-factor='desktop'] .site-nav {
+  display: flex;
+}
+
+body[data-form-factor='mobile'] .page-shell {
+  width: min(100vw - 12px, 100%);
+  padding: 10px 0 42px;
+}
+
+body[data-form-factor='mobile'] .site-header {
+  top: 8px;
+  gap: 12px;
+  grid-template-columns: 1fr auto;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+body[data-form-factor='mobile'] .brand-caption {
+  display: none;
+}
+
+body[data-form-factor='mobile'] .nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body[data-form-factor='mobile'] .site-nav {
+  display: none;
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+body[data-form-factor='mobile'] .site-nav.is-open {
+  display: flex;
+}
+
+body[data-form-factor='mobile'] .nav-link {
+  padding: 8px 12px;
+  font-size: 0.68rem;
+}
+
+body[data-form-factor='mobile'] .lang-switch {
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+}
+
+body[data-form-factor='mobile'] .hero-stage,
+body[data-form-factor='mobile'] .hero-featured,
+body[data-form-factor='mobile'] .about-grid,
+body[data-form-factor='mobile'] .events-layout,
+body[data-form-factor='mobile'] .press-layout,
+body[data-form-factor='mobile'] .service-grid,
+body[data-form-factor='mobile'] .event-grid,
+body[data-form-factor='mobile'] .directory-grid,
+body[data-form-factor='mobile'] .partner-grid,
+body[data-form-factor='mobile'] .magazine-grid,
+body[data-form-factor='mobile'] .press-grid,
+body[data-form-factor='mobile'] .blog-grid,
+body[data-form-factor='mobile'] .booking-shell,
+body[data-form-factor='mobile'] .booking-times {
+  grid-template-columns: 1fr;
+}
+
+body[data-form-factor='mobile'] .hero-copy,
+body[data-form-factor='mobile'] .statement-card,
+body[data-form-factor='mobile'] .calendar-card,
+body[data-form-factor='mobile'] .service-card,
+body[data-form-factor='mobile'] .partner-card,
+body[data-form-factor='mobile'] .press-kit-card,
+body[data-form-factor='mobile'] .booking-shell,
+body[data-form-factor='mobile'] .article-modal__body,
+body[data-form-factor='mobile'] .blog-card__body {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+body[data-form-factor='mobile'] .hero-copy {
+  min-height: auto;
+  padding-top: 78px;
+}
+
+body[data-form-factor='mobile'] .hero-copy h1 {
+  max-width: 18ch;
+  font-size: clamp(1.9rem, 9vw, 2.6rem);
+}
+
+body[data-form-factor='mobile'] .hero-card,
+body[data-form-factor='mobile'] .event-card,
+body[data-form-factor='mobile'] .portrait-card,
+body[data-form-factor='mobile'] .landscape-card {
+  min-height: 240px;
+}
+
+body[data-form-factor='mobile'] .section {
+  margin-top: 18px;
+  padding: 20px 0 8px;
+}
+
+body[data-form-factor='mobile'] .section-heading {
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+body[data-form-factor='mobile'] .booking-days {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(64px, 1fr);
+  overflow-x: auto;
+  margin: 14px 0;
+  padding-bottom: 6px;
+}
+
+body[data-form-factor='mobile'] .day-pill {
+  min-height: 72px;
+  border-radius: 16px;
+}
+
+body[data-form-factor='mobile'] .blog-card {
+  grid-template-rows: 220px auto;
+}
+
+body[data-form-factor='mobile'] .blog-controls {
+  padding: 12px;
+}
+
+body[data-form-factor='mobile'] .article-modal {
+  width: min(96vw, 96vw);
+  max-height: 90vh;
+  border-radius: 24px;
+}
+
+body[data-form-factor='mobile'] .article-modal img {
+  height: 200px;
+}
+
 @keyframes reveal-up {
   from {
     opacity: 0;

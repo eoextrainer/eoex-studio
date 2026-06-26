@@ -1052,6 +1052,7 @@ const articles = [
 
 const state = {
   lang: 'en',
+  formFactor: 'desktop',
   mobileNavOpen: false,
   activeArticle: null,
   expandedSections: {},
@@ -1063,6 +1064,38 @@ const state = {
 }
 
 let blogSearchDebounceTimer = null
+let formFactorDebounceTimer = null
+
+function detectFormFactor() {
+  const isNarrowViewport = window.matchMedia('(max-width: 920px)').matches
+  const isPortraitTouchDevice = window.matchMedia('(pointer: coarse) and (orientation: portrait)').matches
+  return isNarrowViewport || isPortraitTouchDevice ? 'mobile' : 'desktop'
+}
+
+function applyFormFactorToDocument() {
+  document.body.dataset.formFactor = state.formFactor
+  document.documentElement.dataset.formFactor = state.formFactor
+}
+
+function syncFormFactor({ rerender = false } = {}) {
+  const nextFormFactor = detectFormFactor()
+  if (state.formFactor === nextFormFactor) {
+    applyFormFactorToDocument()
+    return
+  }
+
+  state.formFactor = nextFormFactor
+  if (state.formFactor === 'desktop' && state.mobileNavOpen) {
+    state.mobileNavOpen = false
+  }
+
+  if (rerender) {
+    render()
+    return
+  }
+
+  applyFormFactorToDocument()
+}
 
 const bookingDays = Array.from({ length: 10 }, (_, index) => {
   const date = new Date(Date.UTC(2026, 5, 26 + index))
@@ -2157,7 +2190,7 @@ function render() {
   document.title = `EOEX Studio · ${langCopy.heroQuote}`
 
   app.innerHTML = `
-    <div class="page-shell">
+    <div class="page-shell ${state.formFactor === 'mobile' ? 'is-mobile' : 'is-desktop'}">
       ${renderNav(langCopy)}
       <main>
         ${renderHero(state.lang, langCopy)}
@@ -2178,6 +2211,7 @@ function render() {
     </div>
   `
 
+  applyFormFactorToDocument()
   bindEvents()
 }
 
@@ -2295,5 +2329,26 @@ function bindEvents() {
     render()
   })
 }
+
+syncFormFactor()
+window.addEventListener('resize', () => {
+  if (formFactorDebounceTimer) {
+    clearTimeout(formFactorDebounceTimer)
+  }
+
+  formFactorDebounceTimer = setTimeout(() => {
+    syncFormFactor({ rerender: true })
+  }, 140)
+})
+
+window.addEventListener('orientationchange', () => {
+  if (formFactorDebounceTimer) {
+    clearTimeout(formFactorDebounceTimer)
+  }
+
+  formFactorDebounceTimer = setTimeout(() => {
+    syncFormFactor({ rerender: true })
+  }, 180)
+})
 
 render()
