@@ -2481,7 +2481,7 @@ function renderDirectorySection(id, number, title, intro, items, key, lang, lang
       ${renderGridWithOptionalExpansion({
         sectionKey: id,
         items,
-        collapsedCount: 6,
+        collapsedCount: isMobileFormFactor() ? 6 : 12,
         langCopy,
         gridClass: 'directory-grid',
         renderItem: (item) => renderPeopleTile(item, key, lang),
