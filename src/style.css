@@ -530,6 +530,15 @@ blockquote {
   grid-template-columns: 1fr;
 }
 
+.events-layout--split {
+  grid-template-columns: minmax(0, 1.28fr) minmax(280px, 0.72fr);
+  align-items: start;
+}
+
+.events-layout--split > :first-child {
+  min-width: 0;
+}
+
 .statement-card,
 .calendar-card,
 .press-kit-card,
@@ -589,16 +598,27 @@ blockquote {
   margin-bottom: 18px;
 }
 
+.event-overview-card {
+  justify-self: end;
+  width: min(100%, 420px);
+  padding: 20px;
+}
+
+.event-overview-card h3 {
+  font-size: clamp(1.55rem, 2vw, 1.8rem);
+  margin-bottom: 12px;
+}
+
 .calendar-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .calendar-row {
   display: grid;
   grid-template-columns: 54px 1fr;
   gap: 2px 14px;
-  padding: 14px;
+  padding: 11px 12px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.42);
 }
@@ -608,9 +628,9 @@ blockquote {
 }
 
 .past-events-card {
-  margin-top: 16px;
-  padding: 18px;
-  border-radius: 22px;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 18px;
   background: linear-gradient(135deg, rgba(33, 24, 19, 0.9), rgba(123, 95, 73, 0.8));
   color: #fdf7f0;
 }
@@ -1202,6 +1222,11 @@ body[data-form-factor='mobile'] .hero-copy {
   min-height: auto;
   padding-top: 54px;
   gap: 12px;
+}
+
+body[data-form-factor='mobile'] .event-overview-card {
+  width: 100%;
+  padding: 16px;
 }
 
 body[data-form-factor='mobile'] .hero-story-grid {

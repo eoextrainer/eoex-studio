@@ -2451,7 +2451,15 @@ function renderEvents(lang, langCopy) {
           <p>${langCopy.eventsIntro}</p>
         </div>
       </div>
-      <div class="events-layout events-layout--stacked">
+      <div class="events-layout events-layout--split">
+        ${renderGridWithOptionalExpansion({
+          sectionKey: 'events',
+          items: events,
+          collapsedCount: featuredEventCount,
+          langCopy,
+          gridClass: 'event-grid event-grid--mirrored',
+          renderItem: (event) => renderEventTile(event, lang, { mobileLabelOnly: isMobileFormFactor() }),
+        })}
         <aside class="calendar-card glass-card event-overview-card">
           <h3>${langCopy.calendarTitle}</h3>
           <div class="calendar-list">
@@ -2471,14 +2479,6 @@ function renderEvents(lang, langCopy) {
             <p>${langCopy.pastEvents}</p>
           </div>
         </aside>
-        ${renderGridWithOptionalExpansion({
-          sectionKey: 'events',
-          items: events,
-          collapsedCount: featuredEventCount,
-          langCopy,
-          gridClass: 'event-grid event-grid--mirrored',
-          renderItem: (event) => renderEventTile(event, lang, { mobileLabelOnly: isMobileFormFactor() }),
-        })}
       </div>
     </section>
   `
