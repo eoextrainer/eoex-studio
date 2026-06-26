@@ -2383,12 +2383,9 @@ function renderHero(lang, langCopy) {
             <div class="hero-story-copy">
               <h1>${langCopy.heroTitle}</h1>
               <p class="hero-intro">${langCopy.heroIntro}</p>
+              <blockquote>${langCopy.heroQuote}</blockquote>
             </div>
             <div class="hero-video-tile">
-              <div class="hero-video-tile__header">
-                <span class="eyebrow">EOEX Studio Film</span>
-                <p>Runway atmosphere selected from the LVMH / Louis Vuitton universe.</p>
-              </div>
               <div class="hero-video-frame">
                 <iframe
                   src="https://www.youtube-nocookie.com/embed/dj1r3gpwNGY?autoplay=1&mute=1&loop=1&playlist=dj1r3gpwNGY&controls=1&rel=0&modestbranding=1&playsinline=1"
@@ -2401,7 +2398,6 @@ function renderHero(lang, langCopy) {
               </div>
             </div>
           </div>
-          <blockquote>${langCopy.heroQuote}</blockquote>
           <div class="hero-actions">
             <a class="button button-primary" href="#contact">${langCopy.heroPrimary}</a>
             <a class="button button-secondary" href="#events">${langCopy.heroSecondary}</a>
