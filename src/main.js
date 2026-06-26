@@ -2374,8 +2374,6 @@ function renderNav(langCopy) {
 }
 
 function renderHero(lang, langCopy) {
-  const featuredEventCount = isMobileFormFactor() ? 2 : 4
-
   return `
     <section id="home" class="hero-shell reveal">
       <div class="hero-stage">
@@ -2388,17 +2386,6 @@ function renderHero(lang, langCopy) {
             <a class="button button-primary" href="#contact">${langCopy.heroPrimary}</a>
             <a class="button button-secondary" href="#events">${langCopy.heroSecondary}</a>
           </div>
-        </div>
-        <div class="hero-featured-shell">
-          <span class="band-title">${langCopy.marqueeLabel}</span>
-          ${renderGridWithOptionalExpansion({
-            sectionKey: 'home-events',
-            items: events,
-            collapsedCount: featuredEventCount,
-            langCopy,
-            gridClass: 'hero-featured hero-featured--events',
-            renderItem: (event) => renderEventTile(event, lang, { mobileLabelOnly: isMobileFormFactor() }),
-          })}
         </div>
       </div>
     </section>
