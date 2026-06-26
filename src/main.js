@@ -1584,6 +1584,49 @@ function buildTopicBridgeParagraph(topic, title, index) {
   }
 }
 
+function buildTopicMisconceptionParagraph(topic, index) {
+  const topicLabel = topic.toLowerCase()
+
+  return {
+    en: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.en.misconceptions}:</strong> ${formatTopicTitle(topic)} is often romanticized as something a model either naturally has or does not have. In reality, ${topicLabel} becomes reliable only when it is trained through preparation, shared language and repeatable decision-making under pressure.`,
+        `<strong>${longReadSectionLabels.en.misconceptions}:</strong> One common mistake is to reduce ${topicLabel} to charisma or instinct. High-level teams know that the real difference comes from structure: timing, cue recognition, listening quality and the discipline to stay readable when the room gets fast.`,
+        `<strong>${longReadSectionLabels.en.misconceptions}:</strong> The industry often speaks about ${topicLabel} as if it were purely aesthetic. But on demanding sets, it is operational as much as visual, affecting pace, confidence, approvals and how much trust the client places in the talent.`,
+        `<strong>${longReadSectionLabels.en.misconceptions}:</strong> Many talents assume ${topicLabel} improves automatically with exposure. What actually improves careers is deliberate practice, clearer interpretation of direction and the maturity to make strong choices without overperforming them.`,
+      ],
+      index,
+    ),
+    fr: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> ${formatTopicTitle(topic)} est souvent présenté comme une qualité innée que l’on possède ou non. En réalité, ${topicLabel} ne devient fiable que lorsqu’il est entraîné par la préparation, un langage partagé et des décisions répétables sous pression.`,
+        `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> Une erreur fréquente consiste à réduire ${topicLabel} au charisme ou à l’instinct. Les équipes de haut niveau savent que la différence vient surtout de la structure: le timing, la lecture des signaux, la qualité d’écoute et la capacité à rester lisible quand tout s’accélère.`,
+        `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> Le secteur parle souvent de ${topicLabel} comme d’un sujet purement esthétique. Sur les plateaux exigeants, il est autant opérationnel que visuel et influence le rythme, la confiance, les validations et le degré de sécurité ressenti par le client.`,
+        `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> Beaucoup de talents pensent que ${topicLabel} progresse automatiquement avec l’expérience. Ce qui fait réellement évoluer une carrière, c’est la pratique délibérée, l’interprétation plus juste de la direction et la maturité de faire des choix forts sans les surjouer.`,
+      ],
+      index,
+    ),
+    es: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.es.misconceptions}:</strong> ${formatTopicTitle(topic)} suele romantizarse como una capacidad natural que una modelo tiene o no tiene. En realidad, ${topicLabel} solo se vuelve fiable cuando se entrena con preparación, lenguaje compartido y decisiones repetibles bajo presión.`,
+        `<strong>${longReadSectionLabels.es.misconceptions}:</strong> Un error común es reducir ${topicLabel} a carisma o intuición. Los equipos sólidos saben que la diferencia real viene de la estructura: timing, lectura de señales, calidad de escucha y disciplina para seguir siendo legible cuando el ritmo se acelera.`,
+        `<strong>${longReadSectionLabels.es.misconceptions}:</strong> La industria suele tratar ${topicLabel} como si fuera algo puramente estético. En sets exigentes también es una cuestión operativa, porque afecta el ritmo, la confianza, las aprobaciones y el nivel de seguridad que siente el cliente.`,
+        `<strong>${longReadSectionLabels.es.misconceptions}:</strong> Muchas personas creen que ${topicLabel} mejora solo con acumular experiencia. Lo que realmente cambia una carrera es la práctica deliberada, una mejor lectura de dirección y la madurez para tomar decisiones fuertes sin sobreactuarlas.`,
+      ],
+      index,
+    ),
+    it: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.it.misconceptions}:</strong> ${formatTopicTitle(topic)} viene spesso romanticizzato come una qualità naturale che un talento possiede oppure no. In realtà, ${topicLabel} diventa affidabile solo quando viene allenato con preparazione, linguaggio condiviso e decisioni ripetibili sotto pressione.`,
+        `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Un errore comune è ridurre ${topicLabel} a carisma o intuito. I team migliori sanno che la vera differenza nasce dalla struttura: timing, lettura dei segnali, qualità dell’ascolto e disciplina nel restare leggibili quando il ritmo accelera.`,
+        `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Il settore parla spesso di ${topicLabel} come di qualcosa di puramente estetico. Nei set più esigenti è anche un fatto operativo, perché influenza ritmo, fiducia, approvazioni e il livello di sicurezza percepito dal cliente.`,
+        `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Molti talenti pensano che ${topicLabel} migliori automaticamente con l’esperienza. Ciò che cambia davvero una carriera è la pratica intenzionale, una lettura più precisa della direzione e la maturità di compiere scelte forti senza enfatizzarle troppo.`,
+      ],
+      index,
+    ),
+  }
+}
+
 function buildTopicConclusionParagraph(title, topic, index) {
   const topicLabel = topic.toLowerCase()
 
@@ -1664,6 +1707,43 @@ function buildLegacyBridgeParagraph(article, index) {
   }
 }
 
+function buildLegacyMisconceptionParagraph(article, index) {
+  return {
+    en: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.en.misconceptions}:</strong> ${article.title.en} is often flattened into a personality issue, as if some people simply “have it” and others do not. In premium campaigns, the difference is usually structural: preparation quality, clarity of direction and whether the talent can stay precise when the pressure becomes visible.`,
+        `<strong>${longReadSectionLabels.en.misconceptions}:</strong> A frequent misunderstanding is to treat this topic as soft advice rather than a commercial performance system. In reality, it affects approvals, team confidence, pace on set and whether a client experiences the talent as dependable or draining.`,
+        `<strong>${longReadSectionLabels.en.misconceptions}:</strong> Teams sometimes assume this area will correct itself with more exposure. What actually changes outcomes is deliberate coaching, stronger language around expectations and a model who knows how to respond without becoming stiff, defensive or vague.`,
+      ],
+      index,
+    ),
+    fr: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> ${article.title.fr} est souvent réduit à une affaire de personnalité, comme si certains talents “l’avaient” naturellement et d’autres non. Dans les campagnes premium, la différence vient surtout de la structure: qualité de préparation, clarté de direction et capacité à rester précis quand la pression devient réelle.`,
+        `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> Une confusion fréquente consiste à traiter ce sujet comme un conseil vague plutôt que comme un système de performance commerciale. En réalité, il influence les validations, la confiance de l’équipe, le rythme de plateau et le ressenti client face au talent.`,
+        `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> Les équipes pensent parfois que ce point se réglera seul avec davantage d’exposition. Ce qui change vraiment les résultats, c’est un accompagnement délibéré, un langage d’attentes plus net et un talent capable de répondre sans se raidir, se défendre ou se dissoudre.`,
+      ],
+      index,
+    ),
+    es: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.es.misconceptions}:</strong> ${article.title.es} suele reducirse a una cuestión de personalidad, como si algunas personas simplemente “lo tuvieran” y otras no. En campañas premium, la diferencia suele ser estructural: calidad de preparación, claridad de dirección y capacidad de seguir siendo preciso cuando la presión se vuelve visible.`,
+        `<strong>${longReadSectionLabels.es.misconceptions}:</strong> Un malentendido frecuente es tratar este tema como consejo blando y no como sistema de rendimiento comercial. En realidad afecta aprobaciones, confianza del equipo, ritmo de set y la sensación de fiabilidad que recibe el cliente.`,
+        `<strong>${longReadSectionLabels.es.misconceptions}:</strong> A veces los equipos creen que esta área se corregirá sola con más exposición. Lo que realmente cambia los resultados es el entrenamiento deliberado, un lenguaje más claro sobre expectativas y un talento capaz de responder sin ponerse rígido, defensivo o ambiguo.`,
+      ],
+      index,
+    ),
+    it: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.it.misconceptions}:</strong> ${article.title.it} viene spesso ridotto a un fatto di personalità, come se alcuni talenti semplicemente “lo avessero” e altri no. Nelle campagne premium la differenza è quasi sempre strutturale: qualità della preparazione, chiarezza della direzione e capacità di restare precisi quando la pressione diventa evidente.`,
+        `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Un fraintendimento ricorrente è trattare questo tema come consiglio generico invece che come sistema di performance commerciale. In realtà influenza approvazioni, fiducia del team, ritmo di set e il modo in cui il cliente percepisce l’affidabilità del talento.`,
+        `<strong>${longReadSectionLabels.it.misconceptions}:</strong> A volte i team pensano che quest’area si corregga da sola con maggiore esposizione. Ciò che cambia davvero i risultati è un training deliberato, un linguaggio più chiaro sulle aspettative e un talento capace di reagire senza irrigidirsi, difendersi o restare vago.`,
+      ],
+      index,
+    ),
+  }
+}
+
 function buildLegacyConclusionParagraph(article, index) {
   return {
     en: pickVariant(
@@ -1705,6 +1785,7 @@ function buildTopicArticle(topic, index) {
   const title = formatTopicTitle(topic)
   const cluster = detectTopicCluster(topic)
   const keywords = buildTopicKeywords(topic).join(', ')
+  const misconceptionParagraph = buildTopicMisconceptionParagraph(topic, index)
   const bridgeParagraph = buildTopicBridgeParagraph(topic, title, index)
   const conclusionParagraph = buildTopicConclusionParagraph(title, topic, index)
 
@@ -1765,7 +1846,7 @@ function buildTopicArticle(topic, index) {
         `<strong>${longReadSectionLabels.en.definition}:</strong> ${title} defines how a model converts direction into repeatable, camera-legible choices without losing elegance or commercial clarity. ${enAngle}`,
         `<strong>${longReadSectionLabels.en.applications}:</strong> In runway, editorial, beauty, fit, e-commerce and campaign film sets, ${topic} supports pacing, team synchronization and cleaner approvals from creative and client stakeholders.`,
         `<strong>${longReadSectionLabels.en.keywords}:</strong> <strong>${keywords}</strong>.`,
-        `<strong>${longReadSectionLabels.en.misconceptions}:</strong> The market often frames ${topic} as pure instinct. In practice, teams that book consistently train cue recognition, timing discipline, and communication hierarchy.`,
+        misconceptionParagraph.en,
         `<strong>${longReadSectionLabels.en.pitfalls}:</strong> Misreading this topic creates costly reshoots for end clients, avoidable tension for agents, weaker placement credibility for academies, and confidence erosion for talent under live direction.`,
         bridgeParagraph.en,
         `<strong>${longReadSectionLabels.en.benefits}:</strong> Better first-take accuracy, stronger creative trust, reduced correction rounds, improved conversion from casting to booking, and durable portfolio quality with measurable repeatability.`,
@@ -1775,7 +1856,7 @@ function buildTopicArticle(topic, index) {
         `<strong>${longReadSectionLabels.fr.definition}:</strong> ${title} décrit la manière dont un talent transforme une direction créative en choix lisibles caméra, constants et compatibles avec l’exigence commerciale. ${frAngle}`,
         `<strong>${longReadSectionLabels.fr.applications}:</strong> En runway, éditorial, beauté, fit, e-commerce et film de campagne, ${topic} fluidifie le rythme de production, la coordination des équipes et la validation client.`,
         `<strong>${longReadSectionLabels.fr.keywords}:</strong> <strong>${keywords}</strong>.`,
-        `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> Le marché présente souvent ${topic} comme une question de talent naturel. Les équipes performantes travaillent surtout la lecture des signaux, la précision temporelle et la qualité d’écoute.`,
+        misconceptionParagraph.fr,
         `<strong>${longReadSectionLabels.fr.pitfalls}:</strong> Une mauvaise compréhension entraîne des reshoots pour le client final, une pression réputationnelle pour l’agent, une crédibilité affaiblie pour l’académie et une perte de confiance chez le talent.`,
         bridgeParagraph.fr,
         `<strong>${longReadSectionLabels.fr.benefits}:</strong> Plus de justesse dès la première prise, plus de confiance créative, moins de corrections, plus de conversions casting-booking et une valeur de book durable.`,
@@ -1785,7 +1866,7 @@ function buildTopicArticle(topic, index) {
         `<strong>${longReadSectionLabels.es.definition}:</strong> ${title} explica cómo el talento convierte dirección en decisiones repetibles, legibles para cámara y útiles para objetivo comercial. ${esAngle}`,
         `<strong>${longReadSectionLabels.es.applications}:</strong> En runway, editorial, beauty, fit, e-commerce y campañas audiovisuales, ${topic} mejora ritmo de ejecución, coordinación interequipos y consistencia de entregables.`,
         `<strong>${longReadSectionLabels.es.keywords}:</strong> <strong>${keywords}</strong>.`,
-        `<strong>${longReadSectionLabels.es.misconceptions}:</strong> Muchas veces ${topic} se confunde con intuición artística sin método. Los equipos que sostienen resultados entrenan señales, tempos, jerarquía de decisiones y lenguaje de set.`,
+        misconceptionParagraph.es,
         `<strong>${longReadSectionLabels.es.pitfalls}:</strong> La mala lectura de este tema produce reshoots costosos para cliente final, fricción para agentes, menor credibilidad académica y fatiga psicológica para el talento en producción real.`,
         bridgeParagraph.es,
         `<strong>${longReadSectionLabels.es.benefits}:</strong> Más precisión en primera toma, menos rondas de corrección, más confianza de dirección creativa, mejor tasa de booking y crecimiento de portfolio con consistencia medible.`,
@@ -1795,7 +1876,7 @@ function buildTopicArticle(topic, index) {
         `<strong>${longReadSectionLabels.it.definition}:</strong> ${title} indica come il talento traduce la direzione creativa in scelte ripetibili, leggibili in camera e coerenti con l’obiettivo commerciale. ${itAngle}`,
         `<strong>${longReadSectionLabels.it.applications}:</strong> In runway, editoriale, beauty, fit, e-commerce e campagne video, ${topic} rafforza ritmo operativo, coordinamento tra reparti e qualità dei deliverable.`,
         `<strong>${longReadSectionLabels.it.keywords}:</strong> <strong>${keywords}</strong>.`,
-        `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Spesso ${topic} viene ridotto a sensibilità personale. I team ad alta affidabilità allenano invece segnali, tempistiche, gerarchie decisionali e linguaggio condiviso di set.`,
+        misconceptionParagraph.it,
         `<strong>${longReadSectionLabels.it.pitfalls}:</strong> Se mal gestito, genera reshoot costosi per il cliente finale, attrito reputazionale per gli agenti, minore autorevolezza per l’academy e calo di sicurezza per il talento.`,
         bridgeParagraph.it,
         `<strong>${longReadSectionLabels.it.benefits}:</strong> Più accuratezza al primo take, meno correzioni, maggiore fiducia creativa, migliore conversione casting-booking e portfolio più solido nel medio periodo.`,
@@ -1859,6 +1940,7 @@ const legacyArticleSourceNotes = {
 function enrichLegacyArticles(existingArticles) {
   return existingArticles.map((article, index) => {
     const firstParagraph = article.body.en[0] || ''
+    const misconceptionParagraph = buildLegacyMisconceptionParagraph(article, index)
     const bridgeParagraph = buildLegacyBridgeParagraph(article, index)
     const conclusionParagraph = buildLegacyConclusionParagraph(article, index)
 
@@ -1868,28 +1950,28 @@ function enrichLegacyArticles(existingArticles) {
         en: [
           `<strong>${longReadSectionLabels.en.definition}:</strong> ${firstParagraph}`,
           `<strong>${longReadSectionLabels.en.applications}:</strong> ${article.title.en} This is applied in casting, set pacing, client communication and post-shoot editing decisions where consistency must survive production pressure.`,
-          `<strong>${longReadSectionLabels.en.misconceptions}:</strong> Teams often treat this as an individual personality trait; in high-value campaigns it is a managed system with language, timing and accountability structures.`,
+          misconceptionParagraph.en,
           bridgeParagraph.en,
           conclusionParagraph.en,
         ],
         fr: [
           `<strong>${longReadSectionLabels.fr.definition}:</strong> ${article.body.fr[0] || ''}`,
           `<strong>${longReadSectionLabels.fr.applications}:</strong> ${article.title.fr} Cette logique s’applique au casting, au rythme plateau, à la relation client et à la sélection finale des images.`,
-          `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> On la réduit souvent à une qualité personnelle; dans les campagnes à enjeux, c’est un système piloté avec méthode, langage commun et critères d’évaluation.`,
+          misconceptionParagraph.fr,
           bridgeParagraph.fr,
           conclusionParagraph.fr,
         ],
         es: [
           `<strong>${longReadSectionLabels.es.definition}:</strong> ${article.body.es[0] || ''}`,
           `<strong>${longReadSectionLabels.es.applications}:</strong> ${article.title.es} Esta lógica se aplica en casting, ritmo de set, comunicación con cliente y curaduría final del material.`,
-          `<strong>${longReadSectionLabels.es.misconceptions}:</strong> Suele interpretarse como rasgo individual; en campañas exigentes es un sistema entrenado con lenguaje compartido y criterios verificables.`,
+          misconceptionParagraph.es,
           bridgeParagraph.es,
           conclusionParagraph.es,
         ],
         it: [
           `<strong>${longReadSectionLabels.it.definition}:</strong> ${article.body.it[0] || ''}`,
           `<strong>${longReadSectionLabels.it.applications}:</strong> ${article.title.it} Questo approccio impatta casting, ritmo di set, comunicazione cliente e selezione finale degli asset.`,
-          `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Viene spesso letto come tratto personale; nelle campagne ad alto valore è un sistema allenato con linguaggio condiviso e criteri oggettivi.`,
+          misconceptionParagraph.it,
           bridgeParagraph.it,
           conclusionParagraph.it,
         ],
