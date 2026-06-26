@@ -1206,13 +1206,13 @@ body[data-form-factor='mobile'] .event-overview-card {
 body[data-form-factor='mobile'] .hero-featured,
 body[data-form-factor='mobile'] .event-grid,
 body[data-form-factor='mobile'] .directory-grid,
-body[data-form-factor='mobile'] .magazine-grid,
-body[data-form-factor='mobile'] .blog-grid {
+body[data-form-factor='mobile'] .magazine-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 body[data-form-factor='mobile'] .partner-grid,
 body[data-form-factor='mobile'] .press-grid,
+body[data-form-factor='mobile'] .blog-grid,
 body[data-form-factor='mobile'] .blog-grid--mobile-list {
   grid-template-columns: 1fr;
 }
@@ -1484,11 +1484,15 @@ body[data-form-factor='mobile'] .article-modal img {
   .event-grid,
   .magazine-grid,
   .booking-times,
-  .blog-grid,
   .directory-grid,
   .press-grid,
   .partner-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .blog-grid,
+  .blog-grid--mobile-list {
+    grid-template-columns: 1fr;
   }
 
   .hero-copy h1 {
