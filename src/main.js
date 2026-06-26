@@ -2386,6 +2386,22 @@ function renderHero(lang, langCopy) {
             <a class="button button-primary" href="#contact">${langCopy.heroPrimary}</a>
             <a class="button button-secondary" href="#events">${langCopy.heroSecondary}</a>
           </div>
+          <div class="hero-video-tile">
+            <div class="hero-video-tile__header">
+              <span class="eyebrow">EOEX Studio Film</span>
+              <p>Runway atmosphere selected from the LVMH / Louis Vuitton universe.</p>
+            </div>
+            <div class="hero-video-frame">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/dj1r3gpwNGY?rel=0&modestbranding=1&playsinline=1"
+                title="EOEX Studio runway reference"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
         </div>
       </div>
     </section>
