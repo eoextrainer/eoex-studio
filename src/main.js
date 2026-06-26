@@ -2539,7 +2539,6 @@ function renderMagazine(lang, langCopy) {
                 <img src="${issue.image}" alt="${issue.title}" loading="lazy" decoding="async">
                 <div class="overlay-panel overlay-panel--cover">
                   <span>${langCopy.issueLabel} ${issue.issue}</span>
-                  <h3>${issue.title}</h3>
                   <p>${issue.monthYear}</p>
                 </div>
               </article>`,
