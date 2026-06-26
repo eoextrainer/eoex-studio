@@ -2706,7 +2706,7 @@ function renderBlog(lang, langCopy) {
               ${
                 overflowBlogItems.length
                   ? `
-                      ${expandedBlog ? `<div class="blog-grid blog-grid--compact-mobile">${overflowBlogItems.map((article) => renderBlogCard(article, lang, queryTerms, { compact: true })).join('')}</div>` : ''}
+                      ${expandedBlog ? `<div class="blog-grid blog-grid--mobile-list">${overflowBlogItems.map((article) => renderBlogCard(article, lang, queryTerms)).join('')}</div>` : ''}
                       ${renderGalleryCTA(langCopy, 'blog', filteredArticles.length)}
                     `
                   : ''

@@ -1008,8 +1008,8 @@ blockquote {
   grid-template-columns: 1fr;
 }
 
-.blog-grid--compact-mobile {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.blog-grid--mobile-list + .gallery-cta-shell,
+.blog-grid--mobile-list {
   margin-top: 16px;
 }
 
@@ -1337,20 +1337,6 @@ body[data-form-factor='mobile'] .blog-card {
 
 body[data-form-factor='mobile'] .blog-controls {
   padding: 12px;
-}
-
-body[data-form-factor='mobile'] .blog-grid--compact-mobile .blog-card {
-  grid-template-rows: 112px auto;
-}
-
-body[data-form-factor='mobile'] .blog-grid--compact-mobile .blog-card__body {
-  padding: 12px;
-}
-
-body[data-form-factor='mobile'] .blog-grid--compact-mobile .button {
-  min-height: 38px;
-  padding: 0 12px;
-  font-size: 0.72rem;
 }
 
 body[data-form-factor='mobile'] .overlay-panel {
