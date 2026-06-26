@@ -1541,10 +1541,172 @@ function buildTopicSourceNotes(topic, cluster) {
   return notes.slice(0, 4)
 }
 
+function buildTopicBridgeParagraph(topic, title, index) {
+  const topicLabel = topic.toLowerCase()
+
+  return {
+    en: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.en.bridge}:</strong> EOEX approaches ${topicLabel} as a human coaching conversation before it becomes a performance drill. We decode the brief with the model, translate vague creative language into precise actions, rehearse under real timing pressure, and then refine the result until the talent can deliver ${title} with calm authority instead of guesswork.`,
+        `<strong>${longReadSectionLabels.en.bridge}:</strong> EOEX closes the ${topicLabel} gap by making preparation feel personal rather than mechanical: the talent learns what to look for, what to ask, what to simplify, and how to stay emotionally present while still meeting client precision. That combination is what turns a promising profile into someone teams trust on expensive days.`,
+        `<strong>${longReadSectionLabels.en.bridge}:</strong> With EOEX, ${topicLabel} is trained through repetition, language and emotional intelligence. We run practical simulations, challenge weak habits, build a vocabulary the model can actually use on set, and coach the talent to respond with elegance even when direction changes quickly or confidence starts to wobble.`,
+        `<strong>${longReadSectionLabels.en.bridge}:</strong> EOEX treats ${topicLabel} as a bridge between who the talent already is and who the market needs them to become. That means one part technical structure, one part confidence building, and one part honest editorial feedback until the model no longer performs the idea of professionalism but actually embodies it.`,
+      ],
+      index,
+    ),
+    fr: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.fr.bridge}:</strong> EOEX travaille ${topicLabel} d’abord comme un échange humain avant d’en faire un automatisme de performance. Nous décodons le brief avec le talent, transformons les consignes floues en actions concrètes, répétons sous vraie pression de temps puis affinons jusqu’à ce que ${title} devienne une réponse maîtrisée, pas un pari.`,
+        `<strong>${longReadSectionLabels.fr.bridge}:</strong> EOEX comble l’écart autour de ${topicLabel} en rendant la préparation personnelle et intelligible. Le mannequin apprend quoi observer, quoi demander, quoi simplifier et comment rester émotionnellement présent tout en respectant la précision client. C’est cette combinaison qui inspire la confiance sur les journées à fort enjeu.`,
+        `<strong>${longReadSectionLabels.fr.bridge}:</strong> Chez EOEX, ${topicLabel} se construit par répétition, langage et intelligence relationnelle. Nous simulons le plateau, corrigeons les automatismes fragiles, donnons un vocabulaire réellement utilisable sur le set et accompagnons le talent pour qu’il reste élégant même quand la direction change vite.`,
+        `<strong>${longReadSectionLabels.fr.bridge}:</strong> EOEX traite ${topicLabel} comme un pont entre l’identité actuelle du talent et le niveau de fiabilité exigé par le marché. Il faut donc de la structure, de la confiance et un retour éditorial honnête jusqu’à ce que le professionnalisme ne soit plus joué mais incarné.`,
+      ],
+      index,
+    ),
+    es: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.es.bridge}:</strong> EOEX trabaja ${topicLabel} primero como conversación humana y después como disciplina de ejecución. Leemos el brief con el talento, convertimos dirección abstracta en acciones concretas, ensayamos con presión real de tiempo y afinamos hasta que ${title} salga con serenidad y criterio, no por improvisación.`,
+        `<strong>${longReadSectionLabels.es.bridge}:</strong> EOEX cierra la brecha de ${topicLabel} haciendo que la preparación sea personal y útil. La modelo aprende qué detectar, qué preguntar, qué simplificar y cómo mantenerse emocionalmente presente mientras responde con precisión comercial. Esa mezcla es la que genera confianza en los equipos más exigentes.`,
+        `<strong>${longReadSectionLabels.es.bridge}:</strong> En EOEX, ${topicLabel} se entrena con repetición, lenguaje compartido e inteligencia emocional. Simulamos el set, desmontamos hábitos débiles, construimos vocabulario operativo y acompañamos al talento para que conserve elegancia incluso cuando la dirección cambia de golpe.`,
+        `<strong>${longReadSectionLabels.es.bridge}:</strong> EOEX entiende ${topicLabel} como un puente entre lo que el talento es hoy y lo que el mercado necesita ver de forma consistente. Eso exige estructura, confianza y feedback editorial honesto hasta que el profesionalismo deje de actuar y empiece a sentirse natural.`,
+      ],
+      index,
+    ),
+    it: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.it.bridge}:</strong> EOEX affronta ${topicLabel} prima come dialogo umano e poi come disciplina di esecuzione. Leggiamo il brief con il talento, traduciamo indicazioni astratte in azioni precise, proviamo sotto vera pressione temporale e rifiniamo finché ${title} non emerge con lucidità e controllo, non per caso.`,
+        `<strong>${longReadSectionLabels.it.bridge}:</strong> EOEX colma il divario su ${topicLabel} rendendo la preparazione personale e realmente utile. Il modello impara cosa osservare, cosa chiedere, cosa semplificare e come restare emotivamente presente mentre mantiene precisione commerciale. È questo che fa nascere fiducia nei team migliori.`,
+        `<strong>${longReadSectionLabels.it.bridge}:</strong> In EOEX, ${topicLabel} si costruisce con ripetizione, linguaggio condiviso e intelligenza emotiva. Simuliamo il set, correggiamo automatismi fragili, costruiamo vocabolario operativo e accompagniamo il talento perché resti elegante anche quando la direzione cambia rapidamente.`,
+        `<strong>${longReadSectionLabels.it.bridge}:</strong> EOEX considera ${topicLabel} un ponte tra ciò che il talento è oggi e ciò che il mercato ha bisogno di vedere con continuità. Servono quindi struttura, fiducia e feedback editoriale sincero finché la professionalità non viene più interpretata ma incarnata davvero.`,
+      ],
+      index,
+    ),
+  }
+}
+
+function buildTopicConclusionParagraph(title, topic, index) {
+  const topicLabel = topic.toLowerCase()
+
+  return {
+    en: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.en.conclusion}:</strong> ${title} becomes compelling when it stops looking like effort and starts feeling like truth. The talents who last are the ones who make ${topicLabel} readable, graceful and emotionally believable under pressure, and that is exactly the kind of credibility EOEX is built to develop.`,
+        `<strong>${longReadSectionLabels.en.conclusion}:</strong> In the end, ${topicLabel} is not about performing perfection. It is about becoming so prepared that elegance survives pressure, personality survives direction, and the client leaves feeling they were in the hands of someone fully ready for the room.`,
+        `<strong>${longReadSectionLabels.en.conclusion}:</strong> The most memorable talent is rarely the loudest; it is the one who makes complex direction feel effortless. ${title} matters because it gives a model that rare ability to stay magnetic, useful and trustworthy in the same moment.`,
+        `<strong>${longReadSectionLabels.en.conclusion}:</strong> ${title} should ultimately leave the viewer with the feeling that nothing had to be forced. When EOEX trains ${topicLabel} well, the result is not just stronger imagery, but a model who can carry both artistic atmosphere and commercial responsibility with real poise.`,
+      ],
+      index,
+    ),
+    fr: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.fr.conclusion}:</strong> ${title} devient captivant lorsque l’effort cesse d’être visible et que la justesse semble naturelle. Les talents qui durent sont ceux qui rendent ${topicLabel} lisible, élégant et émotionnellement crédible sous pression, et c’est précisément ce qu’EOEX cherche à construire.`,
+        `<strong>${longReadSectionLabels.fr.conclusion}:</strong> Au fond, ${topicLabel} ne consiste pas à jouer la perfection. Il s’agit d’être suffisamment préparé pour que l’élégance résiste à la pression, que la personnalité survive à la direction et que le client sente immédiatement qu’il peut faire confiance.`,
+        `<strong>${longReadSectionLabels.fr.conclusion}:</strong> Les talents les plus mémorables ne sont pas forcément les plus démonstratifs, mais ceux qui rendent une direction complexe presque évidente. ${title} compte parce qu’il donne cette capacité rare d’être à la fois magnétique, utile et fiable.`,
+        `<strong>${longReadSectionLabels.fr.conclusion}:</strong> ${title} devrait laisser une impression de fluidité totale, comme si rien n’avait été forcé. Lorsqu’EOEX forme bien ${topicLabel}, le résultat dépasse l’image forte: il révèle un talent capable de porter en même temps atmosphère créative et responsabilité commerciale.`,
+      ],
+      index,
+    ),
+    es: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.es.conclusion}:</strong> ${title} se vuelve verdaderamente atractivo cuando el esfuerzo deja de notarse y la verdad visual toma el control. El talento que dura es el que vuelve ${topicLabel} legible, elegante y emocionalmente creíble bajo presión, y esa es exactamente la credibilidad que EOEX desarrolla.`,
+        `<strong>${longReadSectionLabels.es.conclusion}:</strong> Al final, ${topicLabel} no trata de actuar perfección. Trata de estar tan preparado que la elegancia sobreviva a la presión, la personalidad sobreviva a la dirección y el cliente perciba que está frente a alguien realmente listo.`,
+        `<strong>${longReadSectionLabels.es.conclusion}:</strong> El talento más memorable rara vez es el más ruidoso; suele ser el que hace parecer simple una dirección compleja. ${title} importa porque entrega esa habilidad poco común de ser magnético, útil y confiable al mismo tiempo.`,
+        `<strong>${longReadSectionLabels.es.conclusion}:</strong> ${title} debería dejar la sensación de que nada fue forzado. Cuando EOEX entrena bien ${topicLabel}, el resultado no es solo una imagen más fuerte, sino un talento capaz de sostener atmósfera creativa y responsabilidad comercial con verdadera presencia.`,
+      ],
+      index,
+    ),
+    it: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.it.conclusion}:</strong> ${title} diventa davvero coinvolgente quando lo sforzo smette di vedersi e resta solo la verità dell’immagine. I talenti che durano sono quelli che rendono ${topicLabel} leggibile, elegante e credibile anche sotto pressione, ed è proprio questa affidabilità che EOEX costruisce.`,
+        `<strong>${longReadSectionLabels.it.conclusion}:</strong> In fondo, ${topicLabel} non significa interpretare la perfezione. Significa essere così preparati che l’eleganza resista alla pressione, la personalità resista alla direzione e il cliente senta di avere davanti qualcuno davvero pronto.`,
+        `<strong>${longReadSectionLabels.it.conclusion}:</strong> Il talento più memorabile raramente è quello più rumoroso; è quello che rende naturale una direzione complessa. ${title} conta perché offre questa capacità rara di essere magnetico, utile e affidabile nello stesso istante.`,
+        `<strong>${longReadSectionLabels.it.conclusion}:</strong> ${title} dovrebbe lasciare la sensazione che nulla sia stato forzato. Quando EOEX allena bene ${topicLabel}, il risultato non è solo un’immagine più forte, ma un talento capace di sostenere insieme atmosfera creativa e responsabilità commerciale con autentico portamento.`,
+      ],
+      index,
+    ),
+  }
+}
+
+function buildLegacyBridgeParagraph(article, index) {
+  return {
+    en: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.en.bridge}:</strong> EOEX works on ${article.category.en.toLowerCase()} questions by starting with the person, not the template. We identify what this specific model or client situation is struggling with, rehearse a better response in realistic conditions, and keep refining until confidence stops feeling borrowed and starts feeling earned.`,
+        `<strong>${longReadSectionLabels.en.bridge}:</strong> The EOEX difference is that we never leave ${article.category.en.toLowerCase()} insight at the level of advice. We turn it into language, rehearsal, review rituals and concrete behavioural shifts, so the talent can feel the improvement in the body instead of only understanding it intellectually.`,
+        `<strong>${longReadSectionLabels.en.bridge}:</strong> EOEX closes this gap by combining strategic clarity with emotional steadiness. We train the skill itself, but we also train how to stay composed while using it in front of clients, cameras and fast-moving teams where self-doubt can easily interfere.`,
+      ],
+      index,
+    ),
+    fr: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.fr.bridge}:</strong> EOEX aborde ces sujets de ${article.category.fr.toLowerCase()} en partant de la personne réelle, pas d’un modèle abstrait. Nous identifions le point de friction concret, répétons une réponse plus juste dans des conditions crédibles puis affinons jusqu’à ce que la confiance soit réellement intégrée.`,
+        `<strong>${longReadSectionLabels.fr.bridge}:</strong> La différence EOEX est de ne jamais laisser une idée utile au stade du conseil général. Nous la transformons en langage, en répétition, en rituels de revue et en gestes précis, pour que le talent ressente l’amélioration dans l’exécution elle-même.`,
+        `<strong>${longReadSectionLabels.fr.bridge}:</strong> EOEX comble cet écart en associant clarté stratégique et stabilité émotionnelle. Nous entraînons la compétence, mais aussi la capacité à rester composé lorsqu’il faut l’utiliser devant un client, une caméra ou une équipe en mouvement.`,
+      ],
+      index,
+    ),
+    es: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.es.bridge}:</strong> EOEX trabaja estos temas de ${article.category.es.toLowerCase()} partiendo de la persona real y no de una fórmula abstracta. Detectamos la fricción concreta, ensayamos una respuesta más sólida en condiciones creíbles y afinamos hasta que la confianza deje de sentirse prestada.`,
+        `<strong>${longReadSectionLabels.es.bridge}:</strong> La diferencia de EOEX es que no deja ninguna idea útil en el nivel del consejo. La convertimos en lenguaje, práctica, rituales de revisión y cambios de comportamiento para que el talento sienta la mejora en el cuerpo y no solo en la cabeza.`,
+        `<strong>${longReadSectionLabels.es.bridge}:</strong> EOEX cierra esta brecha combinando claridad estratégica con estabilidad emocional. Entrenamos la habilidad, pero también la capacidad de conservar compostura al usarla frente a clientes, cámaras y equipos donde la duda puede sabotear el resultado.`,
+      ],
+      index,
+    ),
+    it: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.it.bridge}:</strong> EOEX affronta questi temi di ${article.category.it.toLowerCase()} partendo dalla persona reale, non da un modello astratto. Individuiamo il punto di attrito concreto, proviamo una risposta più solida in condizioni credibili e rifiniamo finché la fiducia non smette di sembrare presa in prestito.`,
+        `<strong>${longReadSectionLabels.it.bridge}:</strong> La differenza EOEX è che nessuna intuizione utile resta al livello del semplice consiglio. La trasformiamo in linguaggio, pratica, rituali di revisione e cambiamenti comportamentali, così il talento percepisce il miglioramento nell’esecuzione stessa.`,
+        `<strong>${longReadSectionLabels.it.bridge}:</strong> EOEX colma questo gap unendo chiarezza strategica e stabilità emotiva. Alleniamo la skill, ma anche la capacità di restare composti mentre la si usa davanti a clienti, camere e team veloci dove il dubbio può sabotare il risultato.`,
+      ],
+      index,
+    ),
+  }
+}
+
+function buildLegacyConclusionParagraph(article, index) {
+  return {
+    en: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.en.conclusion}:</strong> ${article.title.en} matters because careers are rarely changed by one dramatic moment; they are changed by repeatable, high-quality decisions. EOEX exists to make those decisions feel more grounded, more elegant and far less lonely for the talent making them.`,
+        `<strong>${longReadSectionLabels.en.conclusion}:</strong> What stays with clients is not only beauty or presence, but the feeling that the talent understood the moment. That is why this topic matters, and why EOEX keeps returning to it with patience, rigour and an unusually human standard of preparation.`,
+        `<strong>${longReadSectionLabels.en.conclusion}:</strong> The deeper value of this topic is confidence without performance theatre. When EOEX trains it well, the result is a model who does not simply look ready, but feels steady, readable and genuinely persuasive in the room.`,
+      ],
+      index,
+    ),
+    fr: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.fr.conclusion}:</strong> ${article.title.fr} compte parce qu’une carrière se transforme rarement par un seul moment spectaculaire. Elle se construit par des décisions répétables et de qualité, et EOEX existe pour rendre ces décisions plus lucides, plus élégantes et moins solitaires pour le talent qui les prend.`,
+        `<strong>${longReadSectionLabels.fr.conclusion}:</strong> Ce que les clients retiennent n’est pas seulement la beauté ou la présence, mais le sentiment que le talent a compris le moment. C’est pourquoi ce sujet reste central, et pourquoi EOEX y revient avec patience, rigueur et une exigence profondément humaine.`,
+        `<strong>${longReadSectionLabels.fr.conclusion}:</strong> La vraie valeur de ce sujet, c’est une confiance sans théâtre. Lorsqu’EOEX le travaille bien, le résultat n’est pas seulement un mannequin qui semble prêt, mais un talent stable, lisible et réellement convaincant dans la pièce.`,
+      ],
+      index,
+    ),
+    es: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.es.conclusion}:</strong> ${article.title.es} importa porque una carrera rara vez cambia por un solo momento espectacular. Cambia por decisiones repetibles y de calidad, y EOEX existe para que esas decisiones se sientan más claras, más elegantes y mucho menos solas para quien debe tomarlas.`,
+        `<strong>${longReadSectionLabels.es.conclusion}:</strong> Lo que recuerdan los clientes no es solo belleza o presencia, sino la sensación de que el talento entendió el momento. Por eso este tema es central y por eso EOEX vuelve a él con paciencia, rigor y una preparación profundamente humana.`,
+        `<strong>${longReadSectionLabels.es.conclusion}:</strong> El valor más profundo de este tema es una confianza sin teatralidad. Cuando EOEX lo entrena bien, el resultado no es solo un talento que parece listo, sino alguien estable, legible y genuinamente convincente en la sala.`,
+      ],
+      index,
+    ),
+    it: pickVariant(
+      [
+        `<strong>${longReadSectionLabels.it.conclusion}:</strong> ${article.title.it} conta perché una carriera raramente cambia per un solo momento spettacolare. Cambia attraverso decisioni ripetibili e di qualità, ed EOEX esiste per rendere quelle decisioni più lucide, più eleganti e meno solitarie per il talento che deve prenderle.`,
+        `<strong>${longReadSectionLabels.it.conclusion}:</strong> Ciò che resta ai clienti non è solo bellezza o presenza, ma la sensazione che il talento abbia capito davvero il momento. Per questo il tema resta centrale, ed è per questo che EOEX ci torna con pazienza, rigore e uno standard di preparazione profondamente umano.`,
+        `<strong>${longReadSectionLabels.it.conclusion}:</strong> Il valore più profondo di questo tema è una fiducia senza teatralità. Quando EOEX lo allena bene, il risultato non è solo un talento che sembra pronto, ma una persona stabile, leggibile e autenticamente convincente nella stanza.`,
+      ],
+      index,
+    ),
+  }
+}
+
 function buildTopicArticle(topic, index) {
   const title = formatTopicTitle(topic)
   const cluster = detectTopicCluster(topic)
   const keywords = buildTopicKeywords(topic).join(', ')
+  const bridgeParagraph = buildTopicBridgeParagraph(topic, title, index)
+  const conclusionParagraph = buildTopicConclusionParagraph(title, topic, index)
 
   const enAngle = pickVariant(
     [
@@ -1605,9 +1767,9 @@ function buildTopicArticle(topic, index) {
         `<strong>${longReadSectionLabels.en.keywords}:</strong> <strong>${keywords}</strong>.`,
         `<strong>${longReadSectionLabels.en.misconceptions}:</strong> The market often frames ${topic} as pure instinct. In practice, teams that book consistently train cue recognition, timing discipline, and communication hierarchy.`,
         `<strong>${longReadSectionLabels.en.pitfalls}:</strong> Misreading this topic creates costly reshoots for end clients, avoidable tension for agents, weaker placement credibility for academies, and confidence erosion for talent under live direction.`,
-        `<strong>${longReadSectionLabels.en.bridge}:</strong> EOEX turns ${topic} into drills: pre-brief annotation, set simulation, role-specific vocabulary, feedback loop architecture and post-shoot debrief scoring to close the performance gap.`,
+        bridgeParagraph.en,
         `<strong>${longReadSectionLabels.en.benefits}:</strong> Better first-take accuracy, stronger creative trust, reduced correction rounds, improved conversion from casting to booking, and durable portfolio quality with measurable repeatability.`,
-        `<strong>${longReadSectionLabels.en.conclusion}:</strong> ${title} should be treated as infrastructure, not ornament. It protects artistic intent while securing commercial reliability across the full campaign chain.`,
+        conclusionParagraph.en,
       ],
       fr: [
         `<strong>${longReadSectionLabels.fr.definition}:</strong> ${title} décrit la manière dont un talent transforme une direction créative en choix lisibles caméra, constants et compatibles avec l’exigence commerciale. ${frAngle}`,
@@ -1615,9 +1777,9 @@ function buildTopicArticle(topic, index) {
         `<strong>${longReadSectionLabels.fr.keywords}:</strong> <strong>${keywords}</strong>.`,
         `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> Le marché présente souvent ${topic} comme une question de talent naturel. Les équipes performantes travaillent surtout la lecture des signaux, la précision temporelle et la qualité d’écoute.`,
         `<strong>${longReadSectionLabels.fr.pitfalls}:</strong> Une mauvaise compréhension entraîne des reshoots pour le client final, une pression réputationnelle pour l’agent, une crédibilité affaiblie pour l’académie et une perte de confiance chez le talent.`,
-        `<strong>${longReadSectionLabels.fr.bridge}:</strong> EOEX operationalise ${topic} via annotation de brief, simulations plateau, lexique métier partagé, boucles de feedback et scorecards post-shoot pour ancrer la progression.`,
+        bridgeParagraph.fr,
         `<strong>${longReadSectionLabels.fr.benefits}:</strong> Plus de justesse dès la première prise, plus de confiance créative, moins de corrections, plus de conversions casting-booking et une valeur de book durable.`,
-        `<strong>${longReadSectionLabels.fr.conclusion}:</strong> ${title} n’est pas un supplément esthétique: c’est une infrastructure de performance qui sécurise à la fois la vision créative et le résultat business.`,
+        conclusionParagraph.fr,
       ],
       es: [
         `<strong>${longReadSectionLabels.es.definition}:</strong> ${title} explica cómo el talento convierte dirección en decisiones repetibles, legibles para cámara y útiles para objetivo comercial. ${esAngle}`,
@@ -1625,9 +1787,9 @@ function buildTopicArticle(topic, index) {
         `<strong>${longReadSectionLabels.es.keywords}:</strong> <strong>${keywords}</strong>.`,
         `<strong>${longReadSectionLabels.es.misconceptions}:</strong> Muchas veces ${topic} se confunde con intuición artística sin método. Los equipos que sostienen resultados entrenan señales, tempos, jerarquía de decisiones y lenguaje de set.`,
         `<strong>${longReadSectionLabels.es.pitfalls}:</strong> La mala lectura de este tema produce reshoots costosos para cliente final, fricción para agentes, menor credibilidad académica y fatiga psicológica para el talento en producción real.`,
-        `<strong>${longReadSectionLabels.es.bridge}:</strong> EOEX traduce ${topic} en protocolo: lectura técnica del brief, simulación por rol, vocabulario operacional, ciclos de feedback y debrief con indicadores accionables.`,
+        bridgeParagraph.es,
         `<strong>${longReadSectionLabels.es.benefits}:</strong> Más precisión en primera toma, menos rondas de corrección, más confianza de dirección creativa, mejor tasa de booking y crecimiento de portfolio con consistencia medible.`,
-        `<strong>${longReadSectionLabels.es.conclusion}:</strong> ${title} no es adorno de discurso; es arquitectura de rendimiento para proteger valor creativo y rendimiento comercial a largo plazo.`,
+        conclusionParagraph.es,
       ],
       it: [
         `<strong>${longReadSectionLabels.it.definition}:</strong> ${title} indica come il talento traduce la direzione creativa in scelte ripetibili, leggibili in camera e coerenti con l’obiettivo commerciale. ${itAngle}`,
@@ -1635,9 +1797,9 @@ function buildTopicArticle(topic, index) {
         `<strong>${longReadSectionLabels.it.keywords}:</strong> <strong>${keywords}</strong>.`,
         `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Spesso ${topic} viene ridotto a sensibilità personale. I team ad alta affidabilità allenano invece segnali, tempistiche, gerarchie decisionali e linguaggio condiviso di set.`,
         `<strong>${longReadSectionLabels.it.pitfalls}:</strong> Se mal gestito, genera reshoot costosi per il cliente finale, attrito reputazionale per gli agenti, minore autorevolezza per l’academy e calo di sicurezza per il talento.`,
-        `<strong>${longReadSectionLabels.it.bridge}:</strong> EOEX rende ${topic} operativo con analisi del brief, simulazioni per reparto, vocabolario tecnico, feedback loop e debrief con metriche per correggere rapidamente il gap.`,
+        bridgeParagraph.it,
         `<strong>${longReadSectionLabels.it.benefits}:</strong> Più accuratezza al primo take, meno correzioni, maggiore fiducia creativa, migliore conversione casting-booking e portfolio più solido nel medio periodo.`,
-        `<strong>${longReadSectionLabels.it.conclusion}:</strong> ${title} va trattato come infrastruttura professionale: protegge qualità artistica e affidabilità commerciale lungo l’intera catena di campagna.`,
+        conclusionParagraph.it,
       ],
     },
     sourceNotes: buildTopicSourceNotes(topic, cluster),
@@ -1697,6 +1859,8 @@ const legacyArticleSourceNotes = {
 function enrichLegacyArticles(existingArticles) {
   return existingArticles.map((article, index) => {
     const firstParagraph = article.body.en[0] || ''
+    const bridgeParagraph = buildLegacyBridgeParagraph(article, index)
+    const conclusionParagraph = buildLegacyConclusionParagraph(article, index)
 
     return {
       ...article,
@@ -1705,29 +1869,29 @@ function enrichLegacyArticles(existingArticles) {
           `<strong>${longReadSectionLabels.en.definition}:</strong> ${firstParagraph}`,
           `<strong>${longReadSectionLabels.en.applications}:</strong> ${article.title.en} This is applied in casting, set pacing, client communication and post-shoot editing decisions where consistency must survive production pressure.`,
           `<strong>${longReadSectionLabels.en.misconceptions}:</strong> Teams often treat this as an individual personality trait; in high-value campaigns it is a managed system with language, timing and accountability structures.`,
-          `<strong>${longReadSectionLabels.en.bridge}:</strong> EOEX trains this through brief diagnostics, practical rehearsal, role-defined communication and measurable review criteria after each execution cycle.`,
-          `<strong>${longReadSectionLabels.en.conclusion}:</strong> The strongest talent outcomes appear when creative identity and operational discipline are developed together, not sequentially.`,
+          bridgeParagraph.en,
+          conclusionParagraph.en,
         ],
         fr: [
           `<strong>${longReadSectionLabels.fr.definition}:</strong> ${article.body.fr[0] || ''}`,
           `<strong>${longReadSectionLabels.fr.applications}:</strong> ${article.title.fr} Cette logique s’applique au casting, au rythme plateau, à la relation client et à la sélection finale des images.`,
           `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> On la réduit souvent à une qualité personnelle; dans les campagnes à enjeux, c’est un système piloté avec méthode, langage commun et critères d’évaluation.`,
-          `<strong>${longReadSectionLabels.fr.bridge}:</strong> EOEX l’ancre via diagnostic de brief, répétition active, protocole de communication par rôle et revue de performance mesurable.`,
-          `<strong>${longReadSectionLabels.fr.conclusion}:</strong> Les trajectoires les plus solides naissent quand identité créative et rigueur opérationnelle progressent simultanément.`,
+          bridgeParagraph.fr,
+          conclusionParagraph.fr,
         ],
         es: [
           `<strong>${longReadSectionLabels.es.definition}:</strong> ${article.body.es[0] || ''}`,
           `<strong>${longReadSectionLabels.es.applications}:</strong> ${article.title.es} Esta lógica se aplica en casting, ritmo de set, comunicación con cliente y curaduría final del material.`,
           `<strong>${longReadSectionLabels.es.misconceptions}:</strong> Suele interpretarse como rasgo individual; en campañas exigentes es un sistema entrenado con lenguaje compartido y criterios verificables.`,
-          `<strong>${longReadSectionLabels.es.bridge}:</strong> EOEX lo aterriza con lectura técnica de brief, práctica dirigida, protocolo por roles y revisión de desempeño basada en evidencia.`,
-          `<strong>${longReadSectionLabels.es.conclusion}:</strong> Los mejores resultados aparecen cuando identidad creativa y disciplina operativa se construyen en paralelo.`,
+          bridgeParagraph.es,
+          conclusionParagraph.es,
         ],
         it: [
           `<strong>${longReadSectionLabels.it.definition}:</strong> ${article.body.it[0] || ''}`,
           `<strong>${longReadSectionLabels.it.applications}:</strong> ${article.title.it} Questo approccio impatta casting, ritmo di set, comunicazione cliente e selezione finale degli asset.`,
           `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Viene spesso letto come tratto personale; nelle campagne ad alto valore è un sistema allenato con linguaggio condiviso e criteri oggettivi.`,
-          `<strong>${longReadSectionLabels.it.bridge}:</strong> EOEX lo rende operativo con analisi del brief, prove strutturate, protocollo per ruoli e revisione performance misurabile.`,
-          `<strong>${longReadSectionLabels.it.conclusion}:</strong> I risultati più solidi emergono quando identità creativa e disciplina operativa crescono insieme.`,
+          bridgeParagraph.it,
+          conclusionParagraph.it,
         ],
       },
       sourceNotes: legacyArticleSourceNotes[article.id] || [
