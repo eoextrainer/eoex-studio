@@ -1252,36 +1252,83 @@ body[data-form-factor='mobile'] .section-heading h2 {
 body[data-form-factor='mobile'] .booking-days {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(64px, 1fr);
+  grid-auto-columns: minmax(56px, 1fr);
   overflow-x: auto;
-  margin: 14px 0;
-  padding-bottom: 6px;
+  margin: 10px 0;
+  padding-bottom: 4px;
 }
 
 body[data-form-factor='mobile'] .day-pill {
-  min-height: 72px;
-  border-radius: 16px;
+  min-height: 62px;
+  padding: 10px 6px;
+  border-radius: 14px;
+}
+
+body[data-form-factor='mobile'] .day-pill span {
+  font-size: 0.66rem;
+}
+
+body[data-form-factor='mobile'] .day-pill strong {
+  font-size: 0.9rem;
 }
 
 body[data-form-factor='mobile'] .booking-shell {
-  gap: 14px;
-  padding: 16px;
-  border-radius: 22px;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 20px;
+}
+
+body[data-form-factor='mobile'] .booking-panel {
+  display: grid;
+  gap: 8px;
+}
+
+body[data-form-factor='mobile'] .booking-month {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+}
+
+body[data-form-factor='mobile'] .booking-times {
+  gap: 8px;
+}
+
+body[data-form-factor='mobile'] .time-pill {
+  min-height: 42px;
+  border-radius: 14px;
+  font-size: 0.82rem;
 }
 
 body[data-form-factor='mobile'] .booking-form {
-  gap: 10px;
+  gap: 8px;
+}
+
+body[data-form-factor='mobile'] .booking-form label {
+  gap: 6px;
+}
+
+body[data-form-factor='mobile'] .booking-form label span {
+  font-size: 0.72rem;
+  line-height: 1.4;
 }
 
 body[data-form-factor='mobile'] .booking-form select,
 body[data-form-factor='mobile'] .booking-form input,
 body[data-form-factor='mobile'] .booking-form textarea {
-  padding: 12px 14px;
-  border-radius: 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 0.88rem;
 }
 
 body[data-form-factor='mobile'] .booking-form textarea {
-  min-height: 88px;
+  min-height: 74px;
+}
+
+body[data-form-factor='mobile'] .booking-form .button-full {
+  min-height: 42px;
+}
+
+body[data-form-factor='mobile'] .form-status {
+  font-size: 0.78rem;
 }
 
 body[data-form-factor='mobile'] .blog-card {
