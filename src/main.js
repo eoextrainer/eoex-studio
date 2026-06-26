@@ -2393,7 +2393,7 @@ function renderHero(lang, langCopy) {
             </div>
             <div class="hero-video-frame">
               <iframe
-                src="https://www.youtube-nocookie.com/embed/dj1r3gpwNGY?rel=0&modestbranding=1&playsinline=1"
+                src="https://www.youtube-nocookie.com/embed/dj1r3gpwNGY?autoplay=1&mute=1&loop=1&playlist=dj1r3gpwNGY&controls=1&rel=0&modestbranding=1&playsinline=1"
                 title="EOEX Studio runway reference"
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
@@ -2547,7 +2547,7 @@ function renderMagazine(lang, langCopy) {
       ${renderGridWithOptionalExpansion({
         sectionKey: 'magazine',
         items: getMagazineIssues(lang),
-        collapsedCount: 6,
+        collapsedCount: 8,
         langCopy,
         gridClass: 'magazine-grid magazine-grid--covers',
         renderItem: (issue) => `

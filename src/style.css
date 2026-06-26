@@ -315,6 +315,8 @@ blockquote {
   position: relative;
   z-index: 1;
   display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+  align-items: center;
   gap: 12px;
   margin-top: 8px;
   padding: 14px;
@@ -332,7 +334,7 @@ blockquote {
 .hero-video-tile__header p {
   color: var(--text-soft);
   line-height: 1.5;
-  max-width: 46ch;
+  max-width: 26ch;
 }
 
 .hero-video-frame {
@@ -1196,11 +1198,20 @@ body[data-form-factor='mobile'] .hero-copy {
 }
 
 body[data-form-factor='mobile'] .hero-video-tile {
+  grid-template-columns: 1fr;
+}
+
+body[data-form-factor='mobile'] .hero-video-tile {
   padding: 10px;
   border-radius: 18px;
 }
 
+body[data-form-factor='mobile'] .hero-video-tile .eyebrow {
+  font-size: 0.62rem;
+}
+
 body[data-form-factor='mobile'] .hero-video-tile__header p {
+  max-width: none;
   font-size: 0.84rem;
 }
 
