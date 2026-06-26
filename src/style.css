@@ -531,11 +531,12 @@ blockquote {
 }
 
 .events-layout--split {
-  grid-template-columns: minmax(0, 1.28fr) minmax(280px, 0.72fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
 }
 
 .events-layout--split > :first-child {
+  grid-column: span 2;
   min-width: 0;
 }
 
@@ -599,8 +600,8 @@ blockquote {
 }
 
 .event-overview-card {
-  justify-self: end;
-  width: min(100%, 420px);
+  justify-self: stretch;
+  width: 100%;
   padding: 20px;
 }
 
