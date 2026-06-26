@@ -1,0 +1,2299 @@
+import './style.css'
+
+const app = document.querySelector('#app')
+
+const optimizedMagazineCoverModules = import.meta.glob('./assets/mag-covers-optimized/*.webp', {
+  eager: true,
+  import: 'default',
+})
+
+const localeMap = {
+  en: 'en-GB',
+  fr: 'fr-FR',
+  es: 'es-ES',
+  it: 'it-IT',
+}
+
+const languages = ['en', 'fr', 'es', 'it']
+
+const languageOptions = {
+  en: { flag: '🇬🇧', label: 'EN' },
+  fr: { flag: '🇫🇷', label: 'FR' },
+  es: { flag: '🇪🇸', label: 'ES' },
+  it: { flag: '🇮🇹', label: 'IT' },
+}
+
+const eventPhotos = {
+  paris: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
+  mulhouse: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80',
+  cannes: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80',
+  marais: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80',
+  rome: 'https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1200&q=80',
+  milan: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80',
+}
+
+const peoplePhotos = {
+  designer1: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80',
+  designer2: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80',
+  designer3: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80',
+  designer4: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80',
+  designer5: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=900&q=80',
+  designer6: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80',
+  designer7: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80',
+  designer8: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80',
+  designer9: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=900&q=80',
+  designer10: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80',
+  designer11: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80',
+  designer12: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80',
+  talent1: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80',
+  talent2: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80',
+  talent3: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80',
+  talent4: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80',
+  talent5: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80',
+  talent6: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=900&q=80',
+  talent7: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80',
+  talent8: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80',
+  talent9: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80',
+  talent10: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80',
+  talent11: 'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=900&q=80',
+  talent12: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80',
+  press1: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
+  press2: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80',
+  press3: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=900&q=80',
+  blog1: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80',
+  blog2: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80',
+  blog3: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+  blog4: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80',
+  blog5: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
+  blog6: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80',
+  blog7: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80',
+  blog8: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=1200&q=80',
+  blog9: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80',
+}
+
+const copy = {
+  en: {
+    languageLabel: 'Language',
+    nav: ['Home', 'About', 'Events', 'Designers', 'Talents', 'Partners', 'Magazine', 'Press', 'Contact', 'Blog'],
+    heroEyebrow: 'EOEX Studio',
+    heroTitle: 'Where talent is prepared with elegance, rigour and commercial intelligence.',
+    heroIntro:
+      'EOEX is a fashion talent management and modelling academy built to educate, guide and position models for durable careers while becoming a trusted adviser to brands, agencies and campaign teams.',
+    heroQuote: 'To be a bridge between clients and talents.',
+    heroPrimary: 'Book a private consultation',
+    heroSecondary: 'Explore the 2026 calendar',
+    marqueeLabel: 'Featured destinations',
+    aboutTitle: 'About · Services',
+    aboutLead:
+      'We teach the realities of modelling beyond the runway: contracts, wellbeing, image strategy, set etiquette, personal branding and the business decisions that shape a long-term career.',
+    aboutBody:
+      'EOEX supports aspiring and seasoned models with academy training, management guidance and client preparation. We also study the commercial objectives of every client we support so that casting, styling and campaign direction remain aligned from the first briefing to the final image.',
+    serviceCards: [
+      {
+        title: 'Academy',
+        text: 'Editorial, commercial, beauty and digital modelling education with physical, mental and business preparation.',
+      },
+      {
+        title: 'Career Management',
+        text: 'Contract literacy, negotiation guidance, portfolio planning and decision support for sustainable growth.',
+      },
+      {
+        title: 'Client Advisory',
+        text: 'A curated bridge between brands and talents, shaped around campaign goals, casting precision and creative confidence.',
+      },
+    ],
+    eventsTitle: 'Events',
+    eventsIntro: 'A calendar of fashion weeks, cultural moments and client-facing activations curated for visibility and brand alignment.',
+    calendarTitle: '2026 calendar overview',
+    pastEvents: 'Past events media gallery opens soon.',
+    designersTitle: 'Designers',
+    designersIntro: 'A studio-facing directory of creative voices presented in a tighter 3x4 gallery for faster luxury browsing.',
+    talentsTitle: 'Talents',
+    talentsIntro: 'A curated EOEX roster shaped for runway, beauty, e-commerce, hospitality and campaign performance.',
+    partnersTitle: 'Sponsors & Partners',
+    partnersIntro: 'Partnership tiers designed for maisons, beauty houses, hospitality brands and cultural sponsors.',
+    magazineTitle: 'Magazine',
+    magazineIntro: 'A monthly EOEX publication shelf illustrated with your local DUNEX cover archive.',
+    pressTitle: 'Press / Media',
+    pressIntro: 'Coverage, interviews and media kit materials presented in a clean three-tile media strip.',
+    contactTitle: 'Contact · Book Now',
+    contactIntro: 'Reserve a consultation slot for talent intake, campaign planning or academy discovery.',
+    bookingRoleLabel: 'Booking type',
+    bookingRoles: ['Model talent', 'Brand / client', 'Designer', 'Press / media'],
+    bookingName: 'Full name',
+    bookingEmail: 'Email address',
+    bookingNotes: 'What would you like to discuss?',
+    bookingButton: 'Confirm booking request',
+    bookingSuccess: 'Consultation request staged. EOEX will confirm by email.',
+    blogTitle: 'Blog / News',
+    blogIntro: 'SEO-driven editorial designed to educate talent and reassure commercial partners.',
+    blogSearchLabel: 'Search articles',
+    blogSearchPlaceholder: 'Search by topic, keyword, or angle',
+    blogAllTags: 'All tags',
+    blogClearFilters: 'Clear',
+    blogNoResults: 'No articles match this search yet. Try another keyword or tag.',
+    readArticle: 'Read story',
+    showMore: 'Show full gallery',
+    showLess: 'Show less',
+    galleryItems: 'items',
+    issueLabel: 'Issue',
+    close: 'Close',
+    footer: 'EOEX Studio · Fashion talent management, academy and client advisory.',
+  },
+  fr: {
+    languageLabel: 'Langue',
+    nav: ['Accueil', 'À propos', 'Événements', 'Designers', 'Talents', 'Partenaires', 'Magazine', 'Presse', 'Contact', 'Blog'],
+    heroEyebrow: 'EOEX Studio',
+    heroTitle: 'Là où le talent se prépare avec élégance, rigueur et intelligence commerciale.',
+    heroIntro:
+      'EOEX est une académie et structure de management de talents mode pensée pour former, orienter et positionner les mannequins sur des carrières durables tout en conseillant les marques et équipes de campagne.',
+    heroQuote: 'Être un pont entre les clients et les talents.',
+    heroPrimary: 'Réserver une consultation privée',
+    heroSecondary: 'Explorer le calendrier 2026',
+    marqueeLabel: 'Destinations en lumière',
+    aboutTitle: 'À propos · Services',
+    aboutLead:
+      'Nous enseignons les réalités du mannequinat au-delà du podium : contrats, bien-être, stratégie d’image, comportement sur plateau, personal branding et décisions d’affaires.',
+    aboutBody:
+      'EOEX accompagne les profils émergents et confirmés grâce à la formation, au management de carrière et à la préparation client. Nous étudions aussi les objectifs commerciaux de chaque client afin d’aligner casting, stylisme et direction de campagne dès le premier brief.',
+    serviceCards: [
+      {
+        title: 'Académie',
+        text: 'Formation éditoriale, commerciale, beauté et digitale avec préparation physique, mentale et business.',
+      },
+      {
+        title: 'Management de carrière',
+        text: 'Lecture des contrats, accompagnement à la négociation, planification du book et arbitrages de carrière.',
+      },
+      {
+        title: 'Conseil client',
+        text: 'Un lien exigeant entre marques et talents, structuré autour des objectifs de campagne et de la justesse du casting.',
+      },
+    ],
+    eventsTitle: 'Événements',
+    eventsIntro: 'Un calendrier de fashion weeks, temps culturels et activations pensées pour la visibilité et l’alignement des marques.',
+    calendarTitle: 'Vue d’ensemble 2026',
+    pastEvents: 'La galerie des événements passés arrive bientôt.',
+    designersTitle: 'Designers',
+    designersIntro: 'Un répertoire studio présenté dans une galerie 3x4 plus fine et plus élégante.',
+    talentsTitle: 'Talents',
+    talentsIntro: 'Un roster EOEX pensé pour le runway, la beauté, l’e-commerce, l’hospitality et les campagnes.',
+    partnersTitle: 'Sponsors & Partenaires',
+    partnersIntro: 'Des niveaux de partenariat pensés pour maisons, beauté, hôtellerie et sponsors culturels.',
+    magazineTitle: 'Magazine',
+    magazineIntro: 'Une étagère éditoriale EOEX illustrée par votre archive locale de couvertures DUNEX.',
+    pressTitle: 'Presse / Média',
+    pressIntro: 'Couverture, interviews et kit média réunis dans une bande de trois cartes premium.',
+    contactTitle: 'Contact · Réserver',
+    contactIntro: 'Réservez un créneau pour un entretien talent, une planification de campagne ou une découverte de l’académie.',
+    bookingRoleLabel: 'Type de réservation',
+    bookingRoles: ['Talent mannequin', 'Marque / client', 'Designer', 'Presse / média'],
+    bookingName: 'Nom complet',
+    bookingEmail: 'Adresse email',
+    bookingNotes: 'Quel sujet souhaitez-vous aborder ?',
+    bookingButton: 'Confirmer la demande',
+    bookingSuccess: 'Demande enregistrée. EOEX confirmera par email.',
+    blogTitle: 'Blog / Actualités',
+    blogIntro: 'Un éditorial SEO pensé pour former les talents et rassurer les partenaires commerciaux.',
+    blogSearchLabel: 'Rechercher des articles',
+    blogSearchPlaceholder: 'Rechercher par sujet, mot-clé ou angle',
+    blogAllTags: 'Tous les tags',
+    blogClearFilters: 'Effacer',
+    blogNoResults: 'Aucun article ne correspond à cette recherche. Essayez un autre mot-clé ou tag.',
+    readArticle: 'Lire l’article',
+    showMore: 'Voir la galerie complète',
+    showLess: 'Réduire',
+    galleryItems: 'éléments',
+    issueLabel: 'Numéro',
+    close: 'Fermer',
+    footer: 'EOEX Studio · Management de talents mode, académie et conseil client.',
+  },
+  es: {
+    languageLabel: 'Idioma',
+    nav: ['Inicio', 'Nosotros', 'Eventos', 'Diseñadores', 'Talentos', 'Partners', 'Magazine', 'Prensa', 'Contacto', 'Blog'],
+    heroEyebrow: 'EOEX Studio',
+    heroTitle: 'Donde el talento se prepara con elegancia, rigor e inteligencia comercial.',
+    heroIntro:
+      'EOEX es una academia y estructura de management de talento de moda creada para educar, orientar y posicionar modelos en carreras duraderas mientras asesora a marcas, agencias y equipos de campaña.',
+    heroQuote: 'Ser un puente entre clientes y talentos.',
+    heroPrimary: 'Reservar una consulta privada',
+    heroSecondary: 'Explorar el calendario 2026',
+    marqueeLabel: 'Destinos destacados',
+    aboutTitle: 'Acerca · Servicios',
+    aboutLead:
+      'Enseñamos la realidad del modelaje más allá de la pasarela: contratos, bienestar, estrategia de imagen, etiqueta en set, marca personal y decisiones de negocio.',
+    aboutBody:
+      'EOEX acompaña a modelos emergentes y consolidados con formación, guía de carrera y preparación para clientes. También estudiamos los objetivos comerciales de cada cliente para alinear casting, estilismo y dirección creativa desde el briefing inicial.',
+    serviceCards: [
+      {
+        title: 'Academia',
+        text: 'Educación editorial, comercial, beauty y digital con preparación física, mental y empresarial.',
+      },
+      {
+        title: 'Gestión de carrera',
+        text: 'Lectura de contratos, apoyo en negociación, planificación del book y decisiones para un crecimiento sostenible.',
+      },
+      {
+        title: 'Asesoría a clientes',
+        text: 'Un puente curado entre marcas y talentos, guiado por objetivos de campaña, casting preciso y dirección creativa.',
+      },
+    ],
+    eventsTitle: 'Eventos',
+    eventsIntro: 'Un calendario de fashion weeks, momentos culturales y activaciones pensadas para visibilidad y alineación comercial.',
+    calendarTitle: 'Resumen del calendario 2026',
+    pastEvents: 'La galería de eventos anteriores llegará pronto.',
+    designersTitle: 'Diseñadores',
+    designersIntro: 'Un directorio creativo presentado en una galería 3x4 más pequeña y elegante.',
+    talentsTitle: 'Talentos',
+    talentsIntro: 'Un roster EOEX curado para runway, beauty, e-commerce, hospitality y campañas comerciales.',
+    partnersTitle: 'Sponsors & Partners',
+    partnersIntro: 'Niveles de colaboración pensados para maisons, belleza, hospitality y patrocinadores culturales.',
+    magazineTitle: 'Magazine',
+    magazineIntro: 'Un archivo editorial EOEX ilustrado con vuestra colección local de portadas DUNEX.',
+    pressTitle: 'Prensa / Media',
+    pressIntro: 'Cobertura, entrevistas y materiales de prensa reunidos en una franja limpia de tres tarjetas.',
+    contactTitle: 'Contacto · Reservar',
+    contactIntro: 'Reserva una cita para admisión de talento, planificación de campaña o descubrimiento de la academia.',
+    bookingRoleLabel: 'Tipo de reserva',
+    bookingRoles: ['Talento modelo', 'Marca / cliente', 'Diseñador', 'Prensa / media'],
+    bookingName: 'Nombre completo',
+    bookingEmail: 'Correo electrónico',
+    bookingNotes: '¿Qué te gustaría tratar?',
+    bookingButton: 'Confirmar solicitud',
+    bookingSuccess: 'Solicitud registrada. EOEX confirmará por correo.',
+    blogTitle: 'Blog / Noticias',
+    blogIntro: 'Editorial SEO creado para educar talento y dar confianza a socios comerciales.',
+    blogSearchLabel: 'Buscar artículos',
+    blogSearchPlaceholder: 'Buscar por tema, palabra clave o enfoque',
+    blogAllTags: 'Todas las etiquetas',
+    blogClearFilters: 'Limpiar',
+    blogNoResults: 'Ningún artículo coincide con esta búsqueda. Prueba con otra palabra clave o etiqueta.',
+    readArticle: 'Leer artículo',
+    showMore: 'Ver galería completa',
+    showLess: 'Mostrar menos',
+    galleryItems: 'elementos',
+    issueLabel: 'Edición',
+    close: 'Cerrar',
+    footer: 'EOEX Studio · Management de talento de moda, academia y asesoría a clientes.',
+  },
+  it: {
+    languageLabel: 'Lingua',
+    nav: ['Home', 'Chi siamo', 'Eventi', 'Designer', 'Talenti', 'Partner', 'Magazine', 'Press', 'Contatti', 'Blog'],
+    heroEyebrow: 'EOEX Studio',
+    heroTitle: 'Dove il talento si prepara con eleganza, rigore e intelligenza commerciale.',
+    heroIntro:
+      'EOEX è una academy e struttura di talent management moda nata per formare, guidare e posizionare i modelli in carriere solide, diventando al tempo stesso consulente fidato per brand, agenzie e team di campagna.',
+    heroQuote: 'Essere un ponte tra clienti e talenti.',
+    heroPrimary: 'Prenota una consulenza privata',
+    heroSecondary: 'Esplora il calendario 2026',
+    marqueeLabel: 'Destinazioni in evidenza',
+    aboutTitle: 'Chi siamo · Servizi',
+    aboutLead:
+      'Insegniamo la realtà del modelling oltre la passerella: contratti, benessere, strategia d’immagine, etichetta sul set, personal branding e scelte di business.',
+    aboutBody:
+      'EOEX affianca talenti emergenti e affermati con academy training, career management e preparazione cliente. Studiamo anche gli obiettivi commerciali di ogni brand per allineare casting, styling e direzione creativa dal primo brief all’immagine finale.',
+    serviceCards: [
+      {
+        title: 'Academy',
+        text: 'Formazione editoriale, commerciale, beauty e digitale con preparazione fisica, mentale e professionale.',
+      },
+      {
+        title: 'Career management',
+        text: 'Lettura dei contratti, supporto alla negoziazione, pianificazione del book e scelte per una crescita duratura.',
+      },
+      {
+        title: 'Client advisory',
+        text: 'Un ponte selettivo tra brand e talenti, costruito su obiettivi di campagna, precisione nel casting e fiducia creativa.',
+      },
+    ],
+    eventsTitle: 'Eventi',
+    eventsIntro: 'Un calendario di fashion week, appuntamenti culturali e attivazioni pensate per visibilità e allineamento commerciale.',
+    calendarTitle: 'Panoramica calendario 2026',
+    pastEvents: 'La gallery degli eventi passati arriverà presto.',
+    designersTitle: 'Designer',
+    designersIntro: 'Una directory creativa presentata in una galleria 3x4 più compatta ed elegante.',
+    talentsTitle: 'Talenti',
+    talentsIntro: 'Un roster EOEX curato per runway, beauty, e-commerce, hospitality e campagne commerciali.',
+    partnersTitle: 'Sponsor & Partner',
+    partnersIntro: 'Livelli di partnership pensati per maison, beauty, hospitality e sponsor culturali.',
+    magazineTitle: 'Magazine',
+    magazineIntro: 'Un archivio editoriale EOEX illustrato con la vostra selezione locale di cover DUNEX.',
+    pressTitle: 'Press / Media',
+    pressIntro: 'Coverage, interviste e materiali press raccolti in una fascia pulita di tre card.',
+    contactTitle: 'Contatti · Prenota',
+    contactIntro: 'Prenota uno slot per talent intake, pianificazione campagna o scoperta dell’academy.',
+    bookingRoleLabel: 'Tipo di prenotazione',
+    bookingRoles: ['Talento modella/o', 'Brand / cliente', 'Designer', 'Press / media'],
+    bookingName: 'Nome completo',
+    bookingEmail: 'Indirizzo email',
+    bookingNotes: 'Di cosa vorresti parlare?',
+    bookingButton: 'Conferma richiesta',
+    bookingSuccess: 'Richiesta registrata. EOEX confermerà via email.',
+    blogTitle: 'Blog / News',
+    blogIntro: 'Contenuti SEO pensati per educare i talenti e rassicurare i partner commerciali.',
+    blogSearchLabel: 'Cerca articoli',
+    blogSearchPlaceholder: 'Cerca per tema, parola chiave o angolo editoriale',
+    blogAllTags: 'Tutti i tag',
+    blogClearFilters: 'Pulisci',
+    blogNoResults: 'Nessun articolo corrisponde a questa ricerca. Prova con un’altra parola chiave o tag.',
+    readArticle: 'Leggi articolo',
+    showMore: 'Mostra galleria completa',
+    showLess: 'Mostra meno',
+    galleryItems: 'elementi',
+    issueLabel: 'Numero',
+    close: 'Chiudi',
+    footer: 'EOEX Studio · Talent management moda, academy e consulenza clienti.',
+  },
+}
+
+const events = [
+  {
+    key: 'pfw',
+    city: { en: 'Paris', fr: 'Paris', es: 'París', it: 'Parigi' },
+    title: { en: 'PFW Jan 2026', fr: 'PFW Jan 2026', es: 'PFW Ene 2026', it: 'PFW Gen 2026' },
+    location: {
+      en: 'Paris Fashion Week',
+      fr: 'Paris Fashion Week',
+      es: 'Paris Fashion Week',
+      it: 'Paris Fashion Week',
+    },
+    summary: {
+      en: 'Editorial casting week anchored around couture discipline, high-visibility appointments and image strategy for luxury houses.',
+      fr: 'Semaine de castings éditoriaux centrée sur la discipline couture, la visibilité et la stratégie d’image pour les maisons de luxe.',
+      es: 'Semana de castings editoriales centrada en disciplina couture, visibilidad y estrategia de imagen para maisons de lujo.',
+      it: 'Settimana di casting editoriali focalizzata su disciplina couture, visibilità e strategia d’immagine per maison di lusso.',
+    },
+    photo: eventPhotos.paris,
+    month: 0,
+    dayLabel: '18–26',
+  },
+  {
+    key: 'mfw-april',
+    city: { en: 'Mulhouse', fr: 'Mulhouse', es: 'Mulhouse', it: 'Mulhouse' },
+    title: { en: 'MFW Apr 2026', fr: 'MFW Avr 2026', es: 'MFW Abr 2026', it: 'MFW Apr 2026' },
+    location: {
+      en: 'Mulhouse Fashion Week',
+      fr: 'Mulhouse Fashion Week',
+      es: 'Mulhouse Fashion Week',
+      it: 'Mulhouse Fashion Week',
+    },
+    summary: {
+      en: 'A regional fashion forum built for emerging labels, showroom introductions and commercial image production.',
+      fr: 'Un forum mode régional pensé pour les jeunes labels, les présentations showroom et la production d’images commerciales.',
+      es: 'Un foro de moda regional pensado para marcas emergentes, presentaciones de showroom y producción de imagen comercial.',
+      it: 'Un forum moda regionale pensato per label emergenti, introduzioni showroom e produzione di immagini commerciali.',
+    },
+    photo: eventPhotos.mulhouse,
+    month: 3,
+    dayLabel: '11–13',
+  },
+  {
+    key: 'cannes',
+    city: { en: 'Cannes', fr: 'Cannes', es: 'Cannes', it: 'Cannes' },
+    title: { en: 'Cannes May 2026', fr: 'Cannes Mai 2026', es: 'Cannes May 2026', it: 'Cannes Mag 2026' },
+    location: {
+      en: 'Cannes Music Festival',
+      fr: 'Festival de Musique de Cannes',
+      es: 'Festival de Música de Cannes',
+      it: 'Festival Musicale di Cannes',
+    },
+    summary: {
+      en: 'A Riviera-facing activation mixing live performance, celebrity dressing and luxury hospitality partnerships.',
+      fr: 'Une activation tournée vers la Riviera mêlant performance live, habillage célébrité et partenariats hôteliers haut de gamme.',
+      es: 'Una activación con mirada a la Riviera que mezcla performance en vivo, vestuario celebrity y alianzas hospitality de lujo.',
+      it: 'Un’attivazione affacciata sulla Riviera che unisce live performance, celebrity dressing e hospitality di lusso.',
+    },
+    photo: eventPhotos.cannes,
+    month: 4,
+    dayLabel: '20–23',
+  },
+  {
+    key: 'emmaus',
+    city: { en: 'Paris', fr: 'Paris', es: 'París', it: 'Parigi' },
+    title: { en: 'Emmaus June 2026', fr: 'Emmaüs Juin 2026', es: 'Emmaus Jun 2026', it: 'Emmaus Giu 2026' },
+    location: {
+      en: '10 Year Label Emmaus Anniversary',
+      fr: '10 ans Label Emmaüs',
+      es: '10 años Label Emmaus',
+      it: '10 anni Label Emmaus',
+    },
+    summary: {
+      en: 'A Marais district cultural anniversary with values-led storytelling, circular fashion dialogue and community casting.',
+      fr: 'Un anniversaire culturel dans le Marais autour du récit engagé, de la mode circulaire et d’un casting communautaire.',
+      es: 'Un aniversario cultural en Le Marais centrado en storytelling con valores, moda circular y casting comunitario.',
+      it: 'Un anniversario culturale nel Marais dedicato a storytelling valoriale, moda circolare e casting di comunità.',
+    },
+    photo: eventPhotos.marais,
+    month: 5,
+    dayLabel: '14',
+  },
+  {
+    key: 'rome',
+    city: { en: 'Rome', fr: 'Rome', es: 'Roma', it: 'Roma' },
+    title: { en: 'Rome July 2026', fr: 'Rome Juil 2026', es: 'Roma Jul 2026', it: 'Roma Lug 2026' },
+    location: {
+      en: 'Rome Fashion Week · Palazzo Brancaccio',
+      fr: 'Rome Fashion Week · Palazzo Brancaccio',
+      es: 'Rome Fashion Week · Palazzo Brancaccio',
+      it: 'Rome Fashion Week · Palazzo Brancaccio',
+    },
+    summary: {
+      en: 'A palazzo setting dedicated to luxury presentation, couture rehearsal and brand hospitality with executive polish.',
+      fr: 'Un cadre palatial dédié à la présentation luxe, aux répétitions couture et à l’hospitalité de marque.',
+      es: 'Un entorno palaciego dedicado a presentación de lujo, ensayo couture y hospitalidad de marca.',
+      it: 'Un contesto di palazzo dedicato a presentazione luxury, prove couture e hospitality di brand.',
+    },
+    photo: eventPhotos.rome,
+    month: 6,
+    dayLabel: '09–12',
+  },
+  {
+    key: 'milan',
+    city: { en: 'Milan', fr: 'Milan', es: 'Milán', it: 'Milano' },
+    title: {
+      en: 'Milan September 2026',
+      fr: 'Milan Sept 2026',
+      es: 'Milán Sept 2026',
+      it: 'Milano Sett 2026',
+    },
+    location: {
+      en: 'Milan Fashion Week',
+      fr: 'Milan Fashion Week',
+      es: 'Milan Fashion Week',
+      it: 'Milan Fashion Week',
+    },
+    summary: {
+      en: 'The season’s commercial crescendo, focused on showroom appointments, campaign meetings and international visibility.',
+      fr: 'Le crescendo commercial de la saison, orienté showroom, rendez-vous campagne et visibilité internationale.',
+      es: 'El gran crescendo comercial de la temporada, enfocado en showroom appointments, reuniones de campaña y visibilidad internacional.',
+      it: 'Il crescendo commerciale della stagione, centrato su showroom appointment, meeting campagna e visibilità internazionale.',
+    },
+    photo: eventPhotos.milan,
+    month: 8,
+    dayLabel: '22–28',
+  },
+]
+
+const designers = [
+  {
+    name: 'Olivier Saint-Clair',
+    specialty: {
+      en: 'Avant-garde tailoring for campaign theatre and sharp editorial movement.',
+      fr: 'Tailoring avant-gardiste pour un théâtre de campagne et un mouvement éditorial net.',
+      es: 'Sastrería avant-garde para teatralidad de campaña y movimiento editorial preciso.',
+      it: 'Tailoring avant-garde per teatralità di campagna e movimento editoriale netto.',
+    },
+    photo: peoplePhotos.designer1,
+  },
+  {
+    name: 'Camille Verenne',
+    specialty: {
+      en: 'Minimal chic built around fluid drape, quiet luxury and architectural line.',
+      fr: 'Un chic minimal autour du drapé fluide, du quiet luxury et de la ligne architecturée.',
+      es: 'Minimal chic construido sobre caída fluida, quiet luxury y línea arquitectónica.',
+      it: 'Minimal chic costruito su drappeggio fluido, quiet luxury e linea architettonica.',
+    },
+    photo: peoplePhotos.designer2,
+  },
+  {
+    name: 'Luca Morel',
+    specialty: {
+      en: 'Haute couture finishing with cinematic silhouettes for red carpet and luxury editorial.',
+      fr: 'Une finition haute couture et des silhouettes cinématographiques pour tapis rouge et éditorial luxe.',
+      es: 'Acabado haute couture y siluetas cinematográficas para red carpet y editorial de lujo.',
+      it: 'Finiture haute couture e silhouette cinematografiche per red carpet ed editoriale luxury.',
+    },
+    photo: peoplePhotos.designer3,
+  },
+  {
+    name: 'Amina Laurent',
+    specialty: {
+      en: 'Luxury resort capsules designed around fluid motion and destination glamour.',
+      fr: 'Capsules resort luxe pensées autour du mouvement fluide et d’un glamour destination.',
+      es: 'Cápsulas resort de lujo pensadas alrededor del movimiento fluido y el glamour de destino.',
+      it: 'Capsule resort di lusso pensate attorno a movimento fluido e glamour destination.',
+    },
+    photo: peoplePhotos.designer4,
+  },
+  {
+    name: 'Mateo Varela',
+    specialty: {
+      en: 'Commercial eveningwear with precision tailoring for gala and red-carpet clients.',
+      fr: 'Eveningwear commercial au tailoring précis pour galas et clients tapis rouge.',
+      es: 'Eveningwear comercial con sastrería precisa para galas y clientes de alfombra roja.',
+      it: 'Eveningwear commerciale con tailoring preciso per gala e clienti red carpet.',
+    },
+    photo: peoplePhotos.designer5,
+  },
+  {
+    name: 'Noemie Caron',
+    specialty: {
+      en: 'Beauty-led collections where clean skin, profile control and close-up confidence matter.',
+      fr: 'Collections orientées beauté où peau nette, profil maîtrisé et confiance en close-up comptent.',
+      es: 'Colecciones enfocadas en beauty donde importan piel limpia, control de perfil y confianza en close-up.',
+      it: 'Collezioni beauty-led dove contano pelle pulita, controllo del profilo e sicurezza in close-up.',
+    },
+    photo: peoplePhotos.designer6,
+  },
+  {
+    name: 'Hugo Bellamy',
+    specialty: {
+      en: 'Sharp menswear-inspired structure translated into womenswear editorial statements.',
+      fr: 'Structure inspirée du menswear traduite en déclarations éditoriales féminines.',
+      es: 'Estructura inspirada en menswear traducida a declaraciones editoriales femeninas.',
+      it: 'Struttura ispirata al menswear tradotta in statement editoriali femminili.',
+    },
+    photo: peoplePhotos.designer7,
+  },
+  {
+    name: 'Elena Rosi',
+    specialty: {
+      en: 'Italian occasionwear built for movement, poise and premium event visibility.',
+      fr: 'Occasionwear italien construit pour le mouvement, l’allure et la visibilité premium.',
+      es: 'Occasionwear italiano creado para movimiento, aplomo y visibilidad premium.',
+      it: 'Occasionwear italiano costruito per movimento, portamento e visibilità premium.',
+    },
+    photo: peoplePhotos.designer8,
+  },
+  {
+    name: 'Julien Sorel',
+    specialty: {
+      en: 'Minimalist tailoring with disciplined silhouettes for campaign clarity and retail elegance.',
+      fr: 'Tailoring minimaliste et silhouettes disciplinées pour clarté de campagne et élégance retail.',
+      es: 'Sastrería minimalista y siluetas disciplinadas para claridad de campaña y elegancia retail.',
+      it: 'Tailoring minimalista e silhouette disciplinate per chiarezza di campagna ed eleganza retail.',
+    },
+    photo: peoplePhotos.designer9,
+  },
+  {
+    name: 'Celia Moreau',
+    specialty: {
+      en: 'Editorial knitwear and textural layering developed for luxury storytelling.',
+      fr: 'Maille éditoriale et superpositions texturées développées pour le storytelling luxe.',
+      es: 'Punto editorial y capas texturadas desarrolladas para storytelling de lujo.',
+      it: 'Maglieria editoriale e layering materico sviluppati per storytelling luxury.',
+    },
+    photo: peoplePhotos.designer10,
+  },
+  {
+    name: 'Rafael Duran',
+    specialty: {
+      en: 'Bold commercial colour and silhouette play for digital launches and event capsules.',
+      fr: 'Couleur commerciale affirmée et jeu de silhouettes pour lancements digitaux et capsules événementielles.',
+      es: 'Color comercial audaz y juego de siluetas para lanzamientos digitales y cápsulas de evento.',
+      it: 'Colore commerciale deciso e gioco di silhouette per lanci digitali e capsule evento.',
+    },
+    photo: peoplePhotos.designer11,
+  },
+  {
+    name: 'Sabine Valette',
+    specialty: {
+      en: 'Quietly opulent tailoring supporting luxury image systems across editorial and client wardrobes.',
+      fr: 'Tailoring discrètement opulent soutenant les systèmes d’image luxe entre éditorial et vestiaire client.',
+      es: 'Sastrería discretamente opulenta que sostiene sistemas de imagen de lujo entre editorial y cliente.',
+      it: 'Tailoring discretamente opulento che sostiene sistemi d’immagine luxury tra editoriale e cliente.',
+    },
+    photo: peoplePhotos.designer12,
+  },
+]
+
+const talents = [
+  {
+    name: 'Lea Morrow',
+    profile: {
+      en: 'Editorial runway presence with controlled movement and strong couture posture.',
+      fr: 'Présence éditoriale runway avec mouvement maîtrisé et posture couture affirmée.',
+      es: 'Presencia editorial de runway con movimiento controlado y fuerte postura couture.',
+      it: 'Presenza editoriale runway con movimento controllato e forte postura couture.',
+    },
+    photo: peoplePhotos.talent1,
+  },
+  {
+    name: 'Adrian Vale',
+    profile: {
+      en: 'Commercial and beauty talent suited for premium skincare and fragrance campaigns.',
+      fr: 'Talent commercial et beauté adapté aux campagnes skincare et parfum premium.',
+      es: 'Talento comercial y beauty apto para campañas premium de skincare y fragancia.',
+      it: 'Talento commerciale e beauty adatto a campagne premium skincare e fragranze.',
+    },
+    photo: peoplePhotos.talent2,
+  },
+  {
+    name: 'Mina Soler',
+    profile: {
+      en: 'Client-friendly talent for e-commerce, showroom work and polished brand content.',
+      fr: 'Profil client-friendly pour e-commerce, showroom et contenus de marque soignés.',
+      es: 'Talento cercano al cliente para e-commerce, showroom y branded content pulido.',
+      it: 'Profilo client-friendly per e-commerce, showroom e branded content curato.',
+    },
+    photo: peoplePhotos.talent3,
+  },
+  {
+    name: 'Chiara Dune',
+    profile: {
+      en: 'Luxury event specialist with poised red-carpet energy and refined camera awareness.',
+      fr: 'Spécialiste événement luxe avec énergie tapis rouge et conscience caméra raffinée.',
+      es: 'Especialista en eventos de lujo con energía de alfombra roja y refinada conciencia de cámara.',
+      it: 'Specialista eventi luxury con energia red carpet e raffinata consapevolezza camera.',
+    },
+    photo: peoplePhotos.talent4,
+  },
+  {
+    name: 'Samuel Crest',
+    profile: {
+      en: 'Precision menswear profile with discipline for fittings, tailoring and luxury retail shoots.',
+      fr: 'Profil menswear précis, discipliné pour fittings, tailoring et shootings retail luxe.',
+      es: 'Perfil menswear preciso con disciplina para fittings, tailoring y shoots retail de lujo.',
+      it: 'Profilo menswear preciso con disciplina per fitting, tailoring e shooting retail luxury.',
+    },
+    photo: peoplePhotos.talent5,
+  },
+  {
+    name: 'Nora Elian',
+    profile: {
+      en: 'Beauty close-up specialist delivering softness, precision and premium skincare expression.',
+      fr: 'Spécialiste close-up beauté offrant douceur, précision et expression skincare premium.',
+      es: 'Especialista beauty close-up con suavidad, precisión y expresión premium skincare.',
+      it: 'Specialista beauty close-up che offre morbidezza, precisione ed espressione premium skincare.',
+    },
+    photo: peoplePhotos.talent6,
+  },
+  {
+    name: 'Yasmin Cole',
+    profile: {
+      en: 'Destination and resort campaign talent with calm authority and fluid movement.',
+      fr: 'Talent de campagne destination et resort avec autorité calme et mouvement fluide.',
+      es: 'Talento para campañas destination y resort con autoridad serena y movimiento fluido.',
+      it: 'Talento per campagne destination e resort con autorevolezza calma e movimento fluido.',
+    },
+    photo: peoplePhotos.talent7,
+  },
+  {
+    name: 'Theo Armand',
+    profile: {
+      en: 'Runway-to-editorial versatility with polished walk discipline and confident stillness.',
+      fr: 'Polyvalence runway-editorial avec discipline de marche et immobilité assurée.',
+      es: 'Versatilidad runway-editorial con disciplina de pasarela e inmovilidad segura.',
+      it: 'Versatilità runway-editorial con disciplina di camminata e immobilità sicura.',
+    },
+    photo: peoplePhotos.talent8,
+  },
+  {
+    name: 'Amara Saint',
+    profile: {
+      en: 'Luxury portrait and jewellery profile suited to high-touch client direction.',
+      fr: 'Profil portrait luxe et joaillerie adapté aux directions client haute précision.',
+      es: 'Perfil de retrato de lujo y joyería apto para dirección de cliente high-touch.',
+      it: 'Profilo ritratto luxury e jewellery adatto a direzioni cliente high-touch.',
+    },
+    photo: peoplePhotos.talent9,
+  },
+  {
+    name: 'Luca Mirel',
+    profile: {
+      en: 'Athletic editorial presence ideal for movement-led campaigns and premium sport-fashion.',
+      fr: 'Présence éditoriale athlétique idéale pour campagnes mouvement et sport-fashion premium.',
+      es: 'Presencia editorial atlética ideal para campañas de movimiento y sport-fashion premium.',
+      it: 'Presenza editoriale atletica ideale per campagne movimento e sport-fashion premium.',
+    },
+    photo: peoplePhotos.talent10,
+  },
+  {
+    name: 'Selene Hart',
+    profile: {
+      en: 'Elegant commercial talent with strong smile work and luxury hospitality ease.',
+      fr: 'Talent commercial élégant avec beau sourire et aisance hospitality luxe.',
+      es: 'Talento comercial elegante con fuerte trabajo de sonrisa y soltura hospitality de lujo.',
+      it: 'Talento commerciale elegante con forte sorriso e naturalezza hospitality luxury.',
+    },
+    photo: peoplePhotos.talent11,
+  },
+  {
+    name: 'Julian Crest',
+    profile: {
+      en: 'Refined profile for tailoring, watches, private client presentations and premium retail.',
+      fr: 'Profil raffiné pour tailoring, horlogerie, présentations privées et retail premium.',
+      es: 'Perfil refinado para tailoring, relojería, presentaciones privadas y retail premium.',
+      it: 'Profilo raffinato per tailoring, orologeria, presentazioni private e retail premium.',
+    },
+    photo: peoplePhotos.talent12,
+  },
+]
+
+const partners = [
+  {
+    mark: 'MA',
+    name: 'Maison Aureline',
+    tier: 'Tier I',
+    description: {
+      en: 'Luxury fashion house backing flagship runway and editorial partnerships.',
+      fr: 'Maison de luxe soutenant les partenariats runway et éditoriaux premium.',
+      es: 'Maison de lujo que impulsa alianzas premium de runway y editorial.',
+      it: 'Maison di lusso che sostiene partnership premium runway ed editoriali.',
+    },
+  },
+  {
+    mark: 'VL',
+    name: 'Velour Labs',
+    tier: 'Tier II',
+    description: {
+      en: 'Beauty and skincare collaborator focused on backstage care and camera-ready complexion.',
+      fr: 'Partenaire beauté et skincare dédié au soin backstage et au teint caméra-ready.',
+      es: 'Colaborador beauty y skincare enfocado en cuidado backstage y complexion camera-ready.',
+      it: 'Partner beauty e skincare focalizzato su backstage care e incarnato camera-ready.',
+    },
+  },
+  {
+    mark: 'CH',
+    name: 'Crest House',
+    tier: 'Tier III',
+    description: {
+      en: 'Hospitality partner supporting private fittings, client dinners and executive hosting.',
+      fr: 'Partenaire hospitality pour fittings privés, dîners clients et accueil exécutif.',
+      es: 'Partner hospitality para fittings privados, cenas con clientes y hosting ejecutivo.',
+      it: 'Partner hospitality per fitting privati, cene clienti e hosting executive.',
+    },
+  },
+]
+
+const pressItems = [
+  {
+    title: {
+      en: 'Editorial press lounge',
+      fr: 'Salon presse éditorial',
+      es: 'Lounge editorial de prensa',
+      it: 'Lounge editoriale stampa',
+    },
+    summary: {
+      en: 'Feature interviews, market commentary and academy insight presented for international editors.',
+      fr: 'Interviews, analyses marché et éclairages académie pensés pour les rédactions internationales.',
+      es: 'Entrevistas, análisis de mercado e insight academy presentados para editores internacionales.',
+      it: 'Interviste, market commentary e insight academy presentati per editori internazionali.',
+    },
+    photo: peoplePhotos.press1,
+  },
+  {
+    title: {
+      en: 'Campaign media desk',
+      fr: 'Desk média campagne',
+      es: 'Desk de medios de campaña',
+      it: 'Desk media campagna',
+    },
+    summary: {
+      en: 'Behind-the-scenes access, lookbooks and verified campaign material for partner publications.',
+      fr: 'Accès coulisses, lookbooks et éléments de campagne validés pour les médias partenaires.',
+      es: 'Acceso behind-the-scenes, lookbooks y material de campaña validado para publicaciones partner.',
+      it: 'Accesso backstage, lookbook e materiali di campagna verificati per le testate partner.',
+    },
+    photo: peoplePhotos.press2,
+  },
+  {
+    title: {
+      en: 'Press conference suite',
+      fr: 'Suite conférence presse',
+      es: 'Suite de conferencia de prensa',
+      it: 'Suite conferenza stampa',
+    },
+    summary: {
+      en: 'A calm setting for announcements, founder statements and stakeholder Q&A sessions.',
+      fr: 'Un cadre apaisé pour annonces, prises de parole fondatrice et sessions de questions-réponses.',
+      es: 'Un entorno sereno para anuncios, declaraciones de la fundadora y sesiones de preguntas.',
+      it: 'Un contesto misurato per annunci, dichiarazioni della founder e sessioni Q&A.',
+    },
+    photo: peoplePhotos.press3,
+  },
+]
+
+const articles = [
+  {
+    id: 'contracts',
+    image: peoplePhotos.blog1,
+    category: { en: 'Career', fr: 'Carrière', es: 'Carrera', it: 'Carriera' },
+    title: {
+      en: 'Five contract clauses every model should understand before signing.',
+      fr: 'Cinq clauses de contrat que chaque mannequin doit comprendre avant de signer.',
+      es: 'Cinco cláusulas contractuales que toda modelo debe entender antes de firmar.',
+      it: 'Cinque clausole contrattuali che ogni modella o modello dovrebbe capire prima di firmare.',
+    },
+    excerpt: {
+      en: 'A practical guide to exclusivity, image rights, expenses, renewal windows and usage extensions.',
+      fr: 'Un guide pratique sur l’exclusivité, les droits à l’image, les frais, les renouvellements et les extensions d’usage.',
+      es: 'Una guía práctica sobre exclusividad, derechos de imagen, gastos, renovaciones y extensiones de uso.',
+      it: 'Una guida pratica su esclusività, diritti d’immagine, spese, rinnovi ed estensioni d’uso.',
+    },
+    body: {
+      en: [
+        'Many models are introduced to contracts only when the pressure to sign is already high. EOEX teaches talent to slow the process down, identify the operating clauses and understand which points affect long-term earnings and freedom of movement.',
+        'We focus on five recurring points: exclusivity scope, image usage duration, travel and housing deductions, renewal triggers and territory extensions. Each clause may appear standard, yet each one changes the commercial value of a booking.',
+      ],
+      fr: [
+        'Beaucoup de mannequins découvrent les contrats lorsque la pression de signer est déjà forte. EOEX apprend à ralentir le processus, identifier les clauses structurantes et comprendre ce qui affecte les revenus et la liberté de mouvement sur le long terme.',
+        'Nous insistons sur cinq points récurrents : le périmètre d’exclusivité, la durée des droits à l’image, les déductions de voyage et logement, les déclencheurs de renouvellement et les extensions territoriales.',
+      ],
+      es: [
+        'Muchas modelos conocen los contratos cuando la presión para firmar ya es alta. EOEX enseña a frenar el proceso, identificar las cláusulas operativas y entender qué puntos afectan ingresos y libertad de movimiento a largo plazo.',
+        'Nos centramos en cinco puntos recurrentes: alcance de exclusividad, duración del uso de imagen, deducciones de viaje y alojamiento, disparadores de renovación y extensiones territoriales.',
+      ],
+      it: [
+        'Molti talenti incontrano i contratti quando la pressione a firmare è già elevata. EOEX insegna a rallentare il processo, individuare le clausole decisive e capire quali punti incidono su guadagni e libertà di movimento nel lungo periodo.',
+        'Ci concentriamo su cinque aspetti ricorrenti: perimetro di esclusiva, durata dei diritti d’immagine, detrazioni di viaggio e alloggio, trigger di rinnovo ed estensioni territoriali.',
+      ],
+    },
+  },
+  {
+    id: 'mental-prep',
+    image: peoplePhotos.blog2,
+    category: { en: 'Wellbeing', fr: 'Bien-être', es: 'Bienestar', it: 'Benessere' },
+    title: {
+      en: 'Mental preparation for fashion week starts long before castings open.',
+      fr: 'La préparation mentale pour la fashion week commence bien avant l’ouverture des castings.',
+      es: 'La preparación mental para fashion week empieza mucho antes de que abran los castings.',
+      it: 'La preparazione mentale per la fashion week comincia molto prima dell’apertura dei casting.',
+    },
+    excerpt: {
+      en: 'How calm routines, rehearsal discipline and recovery planning improve presence on set.',
+      fr: 'Comment les routines calmes, la discipline de répétition et la récupération améliorent la présence sur le set.',
+      es: 'Cómo las rutinas calmadas, la disciplina de ensayo y la recuperación mejoran la presencia en set.',
+      it: 'Come routine calme, disciplina di prova e recupero migliorano la presenza sul set.',
+    },
+    body: {
+      en: [
+        'Fashion week rewards presentation under pressure. The visible work begins on the runway or in front of the camera, but the invisible work protects stamina, precision and confidence across long days.',
+        'EOEX prepares talents with rehearsal calendars, breathwork, posture resets and realistic recovery windows so consistency replaces adrenaline spikes.',
+      ],
+      fr: [
+        'La fashion week récompense la capacité à se présenter avec justesse sous pression. Le travail visible commence sur le podium ou devant la caméra, mais le travail invisible protège l’endurance, la précision et la confiance sur la durée.',
+        'EOEX prépare les talents avec calendriers de répétition, respiration, resets posturaux et fenêtres de récupération réalistes afin que la constance remplace les pics d’adrénaline.',
+      ],
+      es: [
+        'La fashion week premia la capacidad de presentarse con precisión bajo presión. El trabajo visible empieza en la pasarela o frente a la cámara, pero el trabajo invisible protege resistencia, precisión y confianza durante jornadas largas.',
+        'EOEX prepara a sus talentos con calendarios de ensayo, respiración, resets posturales y ventanas realistas de recuperación para que la constancia sustituya a los picos de adrenalina.',
+      ],
+      it: [
+        'La fashion week premia la capacità di presentarsi con precisione sotto pressione. Il lavoro visibile comincia in passerella o davanti alla camera, ma quello invisibile protegge resistenza, precisione e sicurezza durante giornate lunghe.',
+        'EOEX prepara i talenti con calendari prova, breathwork, reset posturali e finestre di recupero realistiche affinché la costanza sostituisca i picchi di adrenalina.',
+      ],
+    },
+  },
+  {
+    id: 'portfolio',
+    image: peoplePhotos.blog3,
+    category: { en: 'Portfolio', fr: 'Portfolio', es: 'Portfolio', it: 'Portfolio' },
+    title: {
+      en: 'Build a book that speaks to luxury clients, not only to social media.',
+      fr: 'Construire un book qui parle aux clients luxe, pas seulement aux réseaux sociaux.',
+      es: 'Construir un book que hable a clientes de lujo, no solo a redes sociales.',
+      it: 'Costruire un book che parli ai clienti luxury, non solo ai social media.',
+    },
+    excerpt: {
+      en: 'Why sequencing, image variety and client relevance matter more than volume.',
+      fr: 'Pourquoi la séquence, la variété d’images et la pertinence client comptent plus que le volume.',
+      es: 'Por qué la secuencia, la variedad de imagen y la relevancia para el cliente importan más que el volumen.',
+      it: 'Perché sequenza, varietà immagini e rilevanza per il cliente contano più del volume.',
+    },
+    body: {
+      en: [
+        'A strong portfolio is not a gallery of every image a model has ever made. It is an argument about casting potential, brand fit and versatility.',
+        'EOEX edits books with intention so the sequence answers the client before the client asks.',
+      ],
+      fr: [
+        'Un book solide n’est pas une galerie de toutes les images produites par un mannequin. C’est une démonstration de potentiel de casting, d’affinité de marque et de polyvalence.',
+        'EOEX édite les books avec intention afin que la séquence réponde au client avant même sa question.',
+      ],
+      es: [
+        'Un portfolio sólido no es una galería de todas las imágenes que una modelo ha hecho. Es un argumento sobre potencial de casting, afinidad con la marca y versatilidad.',
+        'EOEX edita books con intención para que la secuencia responda al cliente antes de que pregunte.',
+      ],
+      it: [
+        'Un portfolio forte non è una galleria di tutte le immagini prodotte da un talento. È un argomento su potenziale di casting, brand fit e versatilità.',
+        'EOEX costruisce i book con intenzione affinché la sequenza risponda al cliente prima che il cliente chieda.',
+      ],
+    },
+  },
+  {
+    id: 'casting-room',
+    image: peoplePhotos.blog4,
+    category: { en: 'Casting', fr: 'Casting', es: 'Casting', it: 'Casting' },
+    title: {
+      en: 'What clients read in the first ten seconds of a casting room entrance.',
+      fr: 'Ce que les clients lisent dans les dix premières secondes d’une entrée en casting.',
+      es: 'Lo que los clientes leen en los primeros diez segundos de una entrada a casting.',
+      it: 'Cosa leggono i clienti nei primi dieci secondi di un ingresso in casting.',
+    },
+    excerpt: {
+      en: 'Presence, posture, listening and pace signal professionalism before a single word is spoken.',
+      fr: 'Présence, posture, écoute et rythme signalent le professionnalisme avant même un mot.',
+      es: 'Presencia, postura, escucha y ritmo señalan profesionalismo antes de hablar.',
+      it: 'Presenza, postura, ascolto e ritmo segnalano professionalità prima ancora di parlare.',
+    },
+    body: {
+      en: ['EOEX trains first impressions as part of commercial performance, not theatre. Precision under observation is a bookable skill.'],
+      fr: ['EOEX travaille la première impression comme une performance commerciale, pas comme un simple effet de scène. La précision sous observation est une compétence monétisable.'],
+      es: ['EOEX entrena la primera impresión como parte del rendimiento comercial, no como teatro. La precisión bajo observación es una habilidad reservable.'],
+      it: ['EOEX allena la prima impressione come parte della performance commerciale, non come teatro. La precisione sotto osservazione è una skill prenotabile.'],
+    },
+  },
+  {
+    id: 'wellbeing-routine',
+    image: peoplePhotos.blog5,
+    category: { en: 'Routine', fr: 'Routine', es: 'Rutina', it: 'Routine' },
+    title: {
+      en: 'The pre-shoot routine that protects skin, energy and decision-making on long production days.',
+      fr: 'La routine pré-shoot qui protège la peau, l’énergie et la lucidité sur les longues journées de production.',
+      es: 'La rutina pre-shoot que protege piel, energía y claridad mental en jornadas largas.',
+      it: 'La routine pre-shoot che protegge pelle, energia e lucidità nelle lunghe giornate di produzione.',
+    },
+    excerpt: {
+      en: 'The smallest preparation habits often create the biggest difference in consistency.',
+      fr: 'Les plus petites habitudes de préparation créent souvent la plus grande différence de constance.',
+      es: 'Los hábitos de preparación más pequeños suelen crear la mayor diferencia en consistencia.',
+      it: 'Le abitudini di preparazione più piccole creano spesso la maggiore differenza in costanza.',
+    },
+    body: {
+      en: ['EOEX frames preparation through sleep, water, meal timing, simple skincare and mental reset cues that support calm performance across call times and set changes.'],
+      fr: ['EOEX cadre la préparation autour du sommeil, de l’eau, du timing des repas, d’une skincare simple et de repères mentaux pour soutenir une performance calme tout au long de la journée.'],
+      es: ['EOEX estructura la preparación en torno a sueño, agua, timing de comidas, skincare simple y señales mentales que sostienen una performance calma.'],
+      it: ['EOEX struttura la preparazione attorno a sonno, acqua, timing dei pasti, skincare semplice e segnali mentali che sostengono una performance calma.'],
+    },
+  },
+  {
+    id: 'client-briefs',
+    image: peoplePhotos.blog6,
+    category: { en: 'Clients', fr: 'Clients', es: 'Clientes', it: 'Clienti' },
+    title: {
+      en: 'How EOEX interprets client briefs before recommending talent for a campaign.',
+      fr: 'Comment EOEX interprète les briefs clients avant de recommander un talent pour une campagne.',
+      es: 'Cómo EOEX interpreta los briefs de cliente antes de recomendar talento para una campaña.',
+      it: 'Come EOEX interpreta i brief cliente prima di raccomandare talenti per una campagna.',
+    },
+    excerpt: {
+      en: 'The best casting decisions come from reading business goals as carefully as moodboards.',
+      fr: 'Les meilleurs castings naissent d’une lecture des objectifs business aussi attentive que celle des moodboards.',
+      es: 'Las mejores decisiones de casting nacen de leer los objetivos de negocio tan bien como los moodboards.',
+      it: 'Le migliori decisioni di casting nascono dal leggere gli obiettivi di business con la stessa cura dei moodboard.',
+    },
+    body: {
+      en: ['EOEX studies risk tolerance, pace of execution, target audience and emotional brand language before any portfolio is sent.'],
+      fr: ['EOEX étudie niveau de risque, rythme d’exécution, audience cible et langage émotionnel de marque avant tout envoi de portfolio.'],
+      es: ['EOEX estudia tolerancia al riesgo, ritmo de ejecución, audiencia objetivo y lenguaje emocional de marca antes de enviar cualquier portfolio.'],
+      it: ['EOEX studia tolleranza al rischio, ritmo di esecuzione, target audience e linguaggio emotivo del brand prima di inviare qualsiasi portfolio.'],
+    },
+  },
+  {
+    id: 'mother-agency',
+    image: peoplePhotos.blog7,
+    category: { en: 'Agencies', fr: 'Agences', es: 'Agencias', it: 'Agenzie' },
+    title: {
+      en: 'Mother agency, direct booking or freelance structure: which path suits which stage?',
+      fr: 'Mother agency, booking direct ou structure freelance : quelle voie pour quelle étape ?',
+      es: 'Mother agency, booking directo o estructura freelance: ¿qué camino conviene en cada etapa?',
+      it: 'Mother agency, direct booking o struttura freelance: quale strada per quale fase?',
+    },
+    excerpt: {
+      en: 'Different representation structures create different kinds of leverage and risk.',
+      fr: 'Les différentes structures de représentation créent des leviers et des risques distincts.',
+      es: 'Las distintas estructuras de representación crean palancas y riesgos diferentes.',
+      it: 'Le diverse strutture di rappresentanza creano leve e rischi differenti.',
+    },
+    body: {
+      en: ['EOEX helps talents assess whether they need development, direct access, flexibility or a hybrid approach before entering binding agreements.'],
+      fr: ['EOEX aide les talents à évaluer s’ils ont besoin de développement, d’accès direct, de flexibilité ou d’un modèle hybride avant de signer.'],
+      es: ['EOEX ayuda a evaluar si el talento necesita desarrollo, acceso directo, flexibilidad o un enfoque híbrido antes de firmar acuerdos vinculantes.'],
+      it: ['EOEX aiuta i talenti a valutare se servano sviluppo, accesso diretto, flessibilità o un approccio ibrido prima di firmare accordi vincolanti.'],
+    },
+  },
+  {
+    id: 'set-etiquette',
+    image: peoplePhotos.blog8,
+    category: { en: 'Set Etiquette', fr: 'Codes plateau', es: 'Etiqueta en set', it: 'Etichetta set' },
+    title: {
+      en: 'Set etiquette that makes photographers, stylists and production teams want to rebook talent.',
+      fr: 'Les codes plateau qui donnent aux photographes, stylistes et productions envie de rebooker un talent.',
+      es: 'La etiqueta en set que hace que fotógrafos, stylists y producción quieran volver a reservar talento.',
+      it: 'L’etichetta sul set che fa venire a fotografi, stylist e produzione voglia di richiamare un talento.',
+    },
+    excerpt: {
+      en: 'Quiet professionalism often leaves a stronger memory than exaggerated performance.',
+      fr: 'Le professionnalisme discret laisse souvent un souvenir plus fort qu’une performance forcée.',
+      es: 'El profesionalismo silencioso suele dejar un recuerdo más fuerte que una performance exagerada.',
+      it: 'La professionalità silenziosa lascia spesso un ricordo più forte di una performance esagerata.',
+    },
+    body: {
+      en: ['Rebooking rarely depends on looks alone. Punctuality, listening, garment respect, energy management and tone all affect how safe and efficient a team feels around talent.'],
+      fr: ['Le rebooking dépend rarement du seul physique. Ponctualité, écoute, respect du vêtement, gestion d’énergie et ton de communication influencent le sentiment de sécurité de l’équipe.'],
+      es: ['El rebooking rara vez depende solo del físico. Puntualidad, escucha, respeto por la prenda, gestión de energía y tono de comunicación afectan la sensación de seguridad del equipo.'],
+      it: ['Il rebooking raramente dipende solo dall’aspetto. Puntualità, ascolto, rispetto del capo, gestione dell’energia e tono della comunicazione influenzano la sensazione di sicurezza del team.'],
+    },
+  },
+  {
+    id: 'brand-positioning',
+    image: peoplePhotos.blog9,
+    category: { en: 'Branding', fr: 'Branding', es: 'Branding', it: 'Branding' },
+    title: {
+      en: 'Personal brand positioning for models who want longevity instead of short-lived visibility.',
+      fr: 'Le positionnement personnel pour les mannequins qui veulent la longévité plutôt qu’une visibilité éphémère.',
+      es: 'Posicionamiento personal para modelos que quieren longevidad y no solo visibilidad pasajera.',
+      it: 'Posizionamento personale per modelli che vogliono longevità invece di visibilità effimera.',
+    },
+    excerpt: {
+      en: 'Consistency, editing and self-understanding create stronger value than constant exposure.',
+      fr: 'La constance, l’édition et la connaissance de soi créent plus de valeur qu’une exposition permanente.',
+      es: 'La consistencia, la edición y el autoconocimiento crean más valor que la exposición constante.',
+      it: 'Costanza, editing e comprensione di sé creano più valore dell’esposizione continua.',
+    },
+    body: {
+      en: ['EOEX builds positioning around coherence, image discipline and market fit so each appearance strengthens the larger story.'],
+      fr: ['EOEX construit le positionnement autour de la cohérence, de la discipline d’image et du bon marché afin que chaque apparition renforce le récit global.'],
+      es: ['EOEX construye el posicionamiento alrededor de coherencia, disciplina de imagen y ajuste al mercado para que cada aparición fortalezca la historia global.'],
+      it: ['EOEX costruisce il posizionamento attorno a coerenza, disciplina d’immagine e market fit così che ogni apparizione rafforzi il racconto complessivo.'],
+    },
+  },
+]
+
+const state = {
+  lang: 'en',
+  mobileNavOpen: false,
+  activeArticle: null,
+  expandedSections: {},
+  blogQuery: '',
+  blogTag: 'all',
+  selectedDay: 1,
+  selectedTime: '14:30',
+  statusMessage: '',
+}
+
+let blogSearchDebounceTimer = null
+
+const bookingDays = Array.from({ length: 10 }, (_, index) => {
+  const date = new Date(Date.UTC(2026, 5, 26 + index))
+  return {
+    key: date.toISOString().slice(0, 10),
+    dayNumber: date.getUTCDate(),
+    weekday: date.toLocaleDateString('en-GB', { weekday: 'short', timeZone: 'UTC' }),
+  }
+})
+
+const bookingTimes = ['09:00', '10:30', '12:00', '14:30', '16:00', '18:15']
+
+const magazineCovers = Object.entries(optimizedMagazineCoverModules)
+  .map(([path, image]) => ({
+    image,
+    name: path.split('/').pop().replace(/\.[^.]+$/, ''),
+  }))
+  .sort((left, right) => left.name.localeCompare(right.name))
+
+const englishMonths = {
+  january: 0,
+  february: 1,
+  march: 2,
+  april: 3,
+  may: 4,
+  june: 5,
+  july: 6,
+  august: 7,
+  september: 8,
+  october: 9,
+  november: 10,
+  december: 11,
+}
+
+const longReadSectionLabels = {
+  en: {
+    definition: 'Definition',
+    applications: 'Industry Applications',
+    keywords: '20 Keywords',
+    misconceptions: 'Common Misconceptions',
+    pitfalls: 'Pitfalls and Consequences',
+    bridge: 'How EOEX Bridges the Gap',
+    benefits: 'Tangible Benefits',
+    conclusion: 'Conclusion',
+    sources: 'Source Notes',
+  },
+  fr: {
+    definition: 'Définition',
+    applications: 'Applications dans l’industrie',
+    keywords: '20 Mots-clés',
+    misconceptions: 'Idées reçues',
+    pitfalls: 'Pièges et conséquences',
+    bridge: 'Comment EOEX comble l’écart',
+    benefits: 'Bénéfices tangibles',
+    conclusion: 'Conclusion',
+    sources: 'Sources',
+  },
+  es: {
+    definition: 'Definición',
+    applications: 'Aplicaciones en la industria',
+    keywords: '20 Palabras clave',
+    misconceptions: 'Ideas equivocadas comunes',
+    pitfalls: 'Riesgos y consecuencias',
+    bridge: 'Cómo EOEX cierra la brecha',
+    benefits: 'Beneficios tangibles',
+    conclusion: 'Conclusión',
+    sources: 'Fuentes',
+  },
+  it: {
+    definition: 'Definizione',
+    applications: 'Applicazioni nel settore',
+    keywords: '20 Parole chiave',
+    misconceptions: 'Fraintendimenti comuni',
+    pitfalls: 'Errori e conseguenze',
+    bridge: 'Come EOEX colma il divario',
+    benefits: 'Benefici tangibili',
+    conclusion: 'Conclusione',
+    sources: 'Fonti',
+  },
+}
+
+const topicNames = [
+  'creative brief review',
+  'moodboard interpretation',
+  'brand research',
+  'concept understanding',
+  'pose planning',
+  'expression practice',
+  'movement exploration',
+  'walking practice',
+  'posture refinement',
+  'body awareness',
+  'facial control',
+  'eye direction',
+  'hand positioning',
+  'angle awareness',
+  'profile awareness',
+  'camera awareness',
+  'lighting awareness',
+  'outfit fitting',
+  'wardrobe checks',
+  'accessory handling',
+  'hair preparation',
+  'makeup preparation',
+  'skincare routine',
+  'location preparation',
+  'set preparation',
+  'pre-shoot rehearsals',
+  'pose transitions',
+  'expression changes',
+  'movement execution',
+  'direction interpretation',
+  'photographer collaboration',
+  'photography and videography orchestration',
+  'art director collaboration',
+  'stylist collaboration',
+  'hair team collaboration',
+  'makeup team collaboration',
+  'product handling',
+  'garment presentation',
+  'prop interaction',
+  'eye-line adjustments',
+  'head positioning',
+  'hand positioning for detail shots',
+  'posture adjustments',
+  'balance control',
+  'energy consistency',
+  'character embodiment',
+  'emotion communication',
+  'storytelling through pose',
+  'lighting adaptation',
+  'multiple take consistency',
+  'quick outfit changes',
+  'receiving feedback',
+  'real-time adjustments',
+  'on-set professionalism',
+  'image review',
+  'pose evaluation',
+  'expression analysis',
+  'portfolio selection',
+  'casting preparation',
+  'audition attendance',
+  'endurance throughout shoot',
+  'portfolio updates',
+  'runway practice',
+  'commercial performance',
+  'editorial adaptation',
+  'beauty posing',
+  'lifestyle posing',
+  'product modelling',
+  'e-commerce modelling',
+  'fit modelling',
+  'brand adaptation',
+  'product presentation',
+  'pose sequencing',
+  'fitness posing',
+  'part model posing',
+]
+
+const topicCoverPool = [
+  'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1464863979621-258859e62245?auto=format&fit=crop&w=1200&q=80',
+]
+
+function formatTopicTitle(topic) {
+  return topic
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
+function slugifyTopic(topic) {
+  return topic
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
+function buildTopicKeywords(topic) {
+  const words = topic
+    .toLowerCase()
+    .replace(/[^a-z0-9 ]+/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+
+  const baseKeywords = [
+    ...words,
+    'brief',
+    'intent',
+    'composition',
+    'camera',
+    'lighting',
+    'styling',
+    'precision',
+    'timing',
+    'confidence',
+    'consistency',
+    'client-readiness',
+    'brand-fit',
+    'creative-direction',
+    'execution',
+    'feedback-loop',
+    'professionalism',
+    'adaptability',
+    'set-etiquette',
+    'quality-control',
+    'portfolio-value',
+  ]
+
+  return Array.from(new Set(baseKeywords)).slice(0, 20)
+}
+
+const referenceLibrary = {
+  modeling: 'https://en.wikipedia.org/wiki/Model_(person)',
+  creativeBrief: 'https://en.wikipedia.org/wiki/Creative_brief',
+  moodBoard: 'https://en.wikipedia.org/wiki/Mood_board',
+  fashionPhotography: 'https://en.wikipedia.org/wiki/Fashion_photography',
+  runwayCoverage: 'https://www.vogue.com/fashion-shows',
+}
+
+const topicClusterRules = [
+  {
+    key: 'pre-production',
+    test: /(brief|moodboard|research|concept|preparation|set|location|wardrobe|outfit|hair|makeup|skincare|rehearsal|checks|fitting)/,
+    category: { en: 'Pre-production', fr: 'Pré-production', es: 'Preproducción', it: 'Pre-produzione' },
+  },
+  {
+    key: 'body-language',
+    test: /(pose|expression|movement|posture|awareness|eye|hand|head|balance|energy|emotion|character|storytelling|angle|profile)/,
+    category: { en: 'Body Language', fr: 'Langage corporel', es: 'Lenguaje corporal', it: 'Linguaggio corporeo' },
+  },
+  {
+    key: 'set-collaboration',
+    test: /(collaboration|direction|feedback|adjustments|professionalism|orchestration|team)/,
+    category: { en: 'Set Collaboration', fr: 'Collaboration plateau', es: 'Colaboración en set', it: 'Collaborazione sul set' },
+  },
+  {
+    key: 'career-performance',
+    test: /(casting|audition|portfolio|runway|commercial|editorial|fitness|fit modelling|part model|product|e-commerce|adaptation|selection)/,
+    category: { en: 'Career Performance', fr: 'Performance carrière', es: 'Rendimiento profesional', it: 'Performance di carriera' },
+  },
+]
+
+function pickVariant(options, index) {
+  return options[index % options.length]
+}
+
+function detectTopicCluster(topic) {
+  const match = topicClusterRules.find((rule) => rule.test.test(topic))
+  if (match) {
+    return match
+  }
+
+  return {
+    key: 'core-performance',
+    category: { en: 'Masterclass', fr: 'Masterclass', es: 'Masterclass', it: 'Masterclass' },
+  }
+}
+
+function buildTopicSourceNotes(topic, cluster) {
+  const topicLabel = formatTopicTitle(topic)
+  const notes = [
+    { label: `Creative brief fundamentals for ${topicLabel}`, url: referenceLibrary.creativeBrief },
+    { label: `Professional model workflow context for ${topicLabel}`, url: referenceLibrary.modeling },
+  ]
+
+  if (cluster.key === 'pre-production') {
+    notes.push({ label: `Visual alignment and mood systems for ${topicLabel}`, url: referenceLibrary.moodBoard })
+  }
+
+  if (cluster.key === 'body-language' || cluster.key === 'set-collaboration') {
+    notes.push({ label: `Fashion image direction and on-set language for ${topicLabel}`, url: referenceLibrary.fashionPhotography })
+  }
+
+  if (cluster.key === 'career-performance') {
+    notes.push({ label: `Market runway and show ecosystem signals for ${topicLabel}`, url: referenceLibrary.runwayCoverage })
+  }
+
+  if (notes.length < 4) {
+    notes.push({ label: `Runway market context for ${topicLabel}`, url: referenceLibrary.runwayCoverage })
+  }
+
+  return notes.slice(0, 4)
+}
+
+function buildTopicArticle(topic, index) {
+  const title = formatTopicTitle(topic)
+  const cluster = detectTopicCluster(topic)
+  const keywords = buildTopicKeywords(topic).join(', ')
+
+  const enAngle = pickVariant(
+    [
+      'On premium sets, this topic is less a trick and more a quality-control system.',
+      'Top agencies treat this topic as a risk-management layer, not an optional stylistic flourish.',
+      'In high-pressure campaign weeks, this topic is one of the clearest predictors of rebooking.',
+    ],
+    index,
+  )
+
+  const frAngle = pickVariant(
+    [
+      'Sur les plateaux premium, ce sujet relève d’un système de contrôle qualité plus que d’un effet de style.',
+      'Les agences exigeantes le traitent comme une couche de gestion du risque, pas comme un détail décoratif.',
+      'En semaine de campagne, ce sujet devient un indicateur concret de rebooking.',
+    ],
+    index,
+  )
+
+  const esAngle = pickVariant(
+    [
+      'En producciones premium, este tema funciona como sistema de control de calidad y no como recurso estético aislado.',
+      'Las agencias sólidas lo tratan como gestión de riesgo operativo, no como adorno creativo.',
+      'En semanas de campaña con presión real, este punto anticipa la probabilidad de rebooking.',
+    ],
+    index,
+  )
+
+  const itAngle = pickVariant(
+    [
+      'Nei set premium questo tema è un sistema di controllo qualità, non un semplice effetto stilistico.',
+      'Le agenzie più strutturate lo considerano gestione del rischio operativo, non un dettaglio accessorio.',
+      'Nelle settimane di campagna ad alta pressione, questo punto anticipa la probabilità di rebooking.',
+    ],
+    index,
+  )
+
+  return {
+    id: `topic-${slugifyTopic(topic)}-${index + 1}`,
+    image: topicCoverPool[index % topicCoverPool.length],
+    category: cluster.category,
+    title: {
+      en: `${title}: an editorial intelligence dossier for fashion production teams.`,
+      fr: `${title} : dossier éditorial d’intelligence opérationnelle pour les équipes mode.`,
+      es: `${title}: dossier editorial de inteligencia operativa para equipos de moda.`,
+      it: `${title}: dossier editoriale di intelligenza operativa per team fashion.`,
+    },
+    excerpt: {
+      en: `A differentiated long-read on ${topic}, with applications, misconceptions, risk mapping and EOEX execution protocol.`,
+      fr: `Un long format différencié sur ${topic}, avec usages, idées reçues, cartographie des risques et protocole EOEX.`,
+      es: `Un long-read diferenciado sobre ${topic}, con aplicaciones, errores comunes, mapeo de riesgo y protocolo EOEX.`,
+      it: `Un long-read differenziato su ${topic}, con applicazioni, fraintendimenti, mappa dei rischi e protocollo EOEX.`,
+    },
+    body: {
+      en: [
+        `<strong>${longReadSectionLabels.en.definition}:</strong> ${title} defines how a model converts direction into repeatable, camera-legible choices without losing elegance or commercial clarity. ${enAngle}`,
+        `<strong>${longReadSectionLabels.en.applications}:</strong> In runway, editorial, beauty, fit, e-commerce and campaign film sets, ${topic} supports pacing, team synchronization and cleaner approvals from creative and client stakeholders.`,
+        `<strong>${longReadSectionLabels.en.keywords}:</strong> <strong>${keywords}</strong>.`,
+        `<strong>${longReadSectionLabels.en.misconceptions}:</strong> The market often frames ${topic} as pure instinct. In practice, teams that book consistently train cue recognition, timing discipline, and communication hierarchy.`,
+        `<strong>${longReadSectionLabels.en.pitfalls}:</strong> Misreading this topic creates costly reshoots for end clients, avoidable tension for agents, weaker placement credibility for academies, and confidence erosion for talent under live direction.`,
+        `<strong>${longReadSectionLabels.en.bridge}:</strong> EOEX turns ${topic} into drills: pre-brief annotation, set simulation, role-specific vocabulary, feedback loop architecture and post-shoot debrief scoring to close the performance gap.`,
+        `<strong>${longReadSectionLabels.en.benefits}:</strong> Better first-take accuracy, stronger creative trust, reduced correction rounds, improved conversion from casting to booking, and durable portfolio quality with measurable repeatability.`,
+        `<strong>${longReadSectionLabels.en.conclusion}:</strong> ${title} should be treated as infrastructure, not ornament. It protects artistic intent while securing commercial reliability across the full campaign chain.`,
+      ],
+      fr: [
+        `<strong>${longReadSectionLabels.fr.definition}:</strong> ${title} décrit la manière dont un talent transforme une direction créative en choix lisibles caméra, constants et compatibles avec l’exigence commerciale. ${frAngle}`,
+        `<strong>${longReadSectionLabels.fr.applications}:</strong> En runway, éditorial, beauté, fit, e-commerce et film de campagne, ${topic} fluidifie le rythme de production, la coordination des équipes et la validation client.`,
+        `<strong>${longReadSectionLabels.fr.keywords}:</strong> <strong>${keywords}</strong>.`,
+        `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> Le marché présente souvent ${topic} comme une question de talent naturel. Les équipes performantes travaillent surtout la lecture des signaux, la précision temporelle et la qualité d’écoute.`,
+        `<strong>${longReadSectionLabels.fr.pitfalls}:</strong> Une mauvaise compréhension entraîne des reshoots pour le client final, une pression réputationnelle pour l’agent, une crédibilité affaiblie pour l’académie et une perte de confiance chez le talent.`,
+        `<strong>${longReadSectionLabels.fr.bridge}:</strong> EOEX operationalise ${topic} via annotation de brief, simulations plateau, lexique métier partagé, boucles de feedback et scorecards post-shoot pour ancrer la progression.`,
+        `<strong>${longReadSectionLabels.fr.benefits}:</strong> Plus de justesse dès la première prise, plus de confiance créative, moins de corrections, plus de conversions casting-booking et une valeur de book durable.`,
+        `<strong>${longReadSectionLabels.fr.conclusion}:</strong> ${title} n’est pas un supplément esthétique: c’est une infrastructure de performance qui sécurise à la fois la vision créative et le résultat business.`,
+      ],
+      es: [
+        `<strong>${longReadSectionLabels.es.definition}:</strong> ${title} explica cómo el talento convierte dirección en decisiones repetibles, legibles para cámara y útiles para objetivo comercial. ${esAngle}`,
+        `<strong>${longReadSectionLabels.es.applications}:</strong> En runway, editorial, beauty, fit, e-commerce y campañas audiovisuales, ${topic} mejora ritmo de ejecución, coordinación interequipos y consistencia de entregables.`,
+        `<strong>${longReadSectionLabels.es.keywords}:</strong> <strong>${keywords}</strong>.`,
+        `<strong>${longReadSectionLabels.es.misconceptions}:</strong> Muchas veces ${topic} se confunde con intuición artística sin método. Los equipos que sostienen resultados entrenan señales, tempos, jerarquía de decisiones y lenguaje de set.`,
+        `<strong>${longReadSectionLabels.es.pitfalls}:</strong> La mala lectura de este tema produce reshoots costosos para cliente final, fricción para agentes, menor credibilidad académica y fatiga psicológica para el talento en producción real.`,
+        `<strong>${longReadSectionLabels.es.bridge}:</strong> EOEX traduce ${topic} en protocolo: lectura técnica del brief, simulación por rol, vocabulario operacional, ciclos de feedback y debrief con indicadores accionables.`,
+        `<strong>${longReadSectionLabels.es.benefits}:</strong> Más precisión en primera toma, menos rondas de corrección, más confianza de dirección creativa, mejor tasa de booking y crecimiento de portfolio con consistencia medible.`,
+        `<strong>${longReadSectionLabels.es.conclusion}:</strong> ${title} no es adorno de discurso; es arquitectura de rendimiento para proteger valor creativo y rendimiento comercial a largo plazo.`,
+      ],
+      it: [
+        `<strong>${longReadSectionLabels.it.definition}:</strong> ${title} indica come il talento traduce la direzione creativa in scelte ripetibili, leggibili in camera e coerenti con l’obiettivo commerciale. ${itAngle}`,
+        `<strong>${longReadSectionLabels.it.applications}:</strong> In runway, editoriale, beauty, fit, e-commerce e campagne video, ${topic} rafforza ritmo operativo, coordinamento tra reparti e qualità dei deliverable.`,
+        `<strong>${longReadSectionLabels.it.keywords}:</strong> <strong>${keywords}</strong>.`,
+        `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Spesso ${topic} viene ridotto a sensibilità personale. I team ad alta affidabilità allenano invece segnali, tempistiche, gerarchie decisionali e linguaggio condiviso di set.`,
+        `<strong>${longReadSectionLabels.it.pitfalls}:</strong> Se mal gestito, genera reshoot costosi per il cliente finale, attrito reputazionale per gli agenti, minore autorevolezza per l’academy e calo di sicurezza per il talento.`,
+        `<strong>${longReadSectionLabels.it.bridge}:</strong> EOEX rende ${topic} operativo con analisi del brief, simulazioni per reparto, vocabolario tecnico, feedback loop e debrief con metriche per correggere rapidamente il gap.`,
+        `<strong>${longReadSectionLabels.it.benefits}:</strong> Più accuratezza al primo take, meno correzioni, maggiore fiducia creativa, migliore conversione casting-booking e portfolio più solido nel medio periodo.`,
+        `<strong>${longReadSectionLabels.it.conclusion}:</strong> ${title} va trattato come infrastruttura professionale: protegge qualità artistica e affidabilità commerciale lungo l’intera catena di campagna.`,
+      ],
+    },
+    sourceNotes: buildTopicSourceNotes(topic, cluster),
+  }
+}
+
+const expandedTopicArticles = topicNames.map((topic, index) => buildTopicArticle(topic, index))
+
+const legacyArticleSourceNotes = {
+  contracts: [
+    { label: 'Creative brief agreement discipline', url: referenceLibrary.creativeBrief },
+    { label: 'Professional model contract context', url: referenceLibrary.modeling },
+    { label: 'Runway market pressure and deliverables', url: referenceLibrary.runwayCoverage },
+  ],
+  'mental-prep': [
+    { label: 'Professional model workload context', url: referenceLibrary.modeling },
+    { label: 'Runway cycle pressure and seasonal rhythm', url: referenceLibrary.runwayCoverage },
+    { label: 'Fashion production environment framing', url: referenceLibrary.fashionPhotography },
+  ],
+  portfolio: [
+    { label: 'Fashion photography composition lineage', url: referenceLibrary.fashionPhotography },
+    { label: 'Model market positioning context', url: referenceLibrary.modeling },
+    { label: 'Runway editorial benchmark references', url: referenceLibrary.runwayCoverage },
+  ],
+  'casting-room': [
+    { label: 'Model runway and casting context', url: referenceLibrary.modeling },
+    { label: 'Creative brief decision framing', url: referenceLibrary.creativeBrief },
+    { label: 'Current show ecosystem snapshots', url: referenceLibrary.runwayCoverage },
+  ],
+  'wellbeing-routine': [
+    { label: 'Professional model lifecycle notes', url: referenceLibrary.modeling },
+    { label: 'Set behavior and image pressure context', url: referenceLibrary.fashionPhotography },
+    { label: 'Runway seasonal performance cadence', url: referenceLibrary.runwayCoverage },
+  ],
+  'client-briefs': [
+    { label: 'Creative brief structural baseline', url: referenceLibrary.creativeBrief },
+    { label: 'Moodboard alignment in visual teams', url: referenceLibrary.moodBoard },
+    { label: 'Fashion campaign ecosystem references', url: referenceLibrary.runwayCoverage },
+  ],
+  'mother-agency': [
+    { label: 'Agency and representation history context', url: referenceLibrary.modeling },
+    { label: 'Creative and client brief fit logic', url: referenceLibrary.creativeBrief },
+    { label: 'Editorial and runway market shifts', url: referenceLibrary.runwayCoverage },
+  ],
+  'set-etiquette': [
+    { label: 'Model set etiquette and role clarity', url: referenceLibrary.modeling },
+    { label: 'Fashion photography team language', url: referenceLibrary.fashionPhotography },
+    { label: 'Current runway production ecosystem', url: referenceLibrary.runwayCoverage },
+  ],
+  'brand-positioning': [
+    { label: 'Creative brief message architecture', url: referenceLibrary.creativeBrief },
+    { label: 'Model brand identity context', url: referenceLibrary.modeling },
+    { label: 'Fashion image and editorial signal references', url: referenceLibrary.fashionPhotography },
+  ],
+}
+
+function enrichLegacyArticles(existingArticles) {
+  return existingArticles.map((article, index) => {
+    const firstParagraph = article.body.en[0] || ''
+
+    return {
+      ...article,
+      body: {
+        en: [
+          `<strong>${longReadSectionLabels.en.definition}:</strong> ${firstParagraph}`,
+          `<strong>${longReadSectionLabels.en.applications}:</strong> ${article.title.en} This is applied in casting, set pacing, client communication and post-shoot editing decisions where consistency must survive production pressure.`,
+          `<strong>${longReadSectionLabels.en.misconceptions}:</strong> Teams often treat this as an individual personality trait; in high-value campaigns it is a managed system with language, timing and accountability structures.`,
+          `<strong>${longReadSectionLabels.en.bridge}:</strong> EOEX trains this through brief diagnostics, practical rehearsal, role-defined communication and measurable review criteria after each execution cycle.`,
+          `<strong>${longReadSectionLabels.en.conclusion}:</strong> The strongest talent outcomes appear when creative identity and operational discipline are developed together, not sequentially.`,
+        ],
+        fr: [
+          `<strong>${longReadSectionLabels.fr.definition}:</strong> ${article.body.fr[0] || ''}`,
+          `<strong>${longReadSectionLabels.fr.applications}:</strong> ${article.title.fr} Cette logique s’applique au casting, au rythme plateau, à la relation client et à la sélection finale des images.`,
+          `<strong>${longReadSectionLabels.fr.misconceptions}:</strong> On la réduit souvent à une qualité personnelle; dans les campagnes à enjeux, c’est un système piloté avec méthode, langage commun et critères d’évaluation.`,
+          `<strong>${longReadSectionLabels.fr.bridge}:</strong> EOEX l’ancre via diagnostic de brief, répétition active, protocole de communication par rôle et revue de performance mesurable.`,
+          `<strong>${longReadSectionLabels.fr.conclusion}:</strong> Les trajectoires les plus solides naissent quand identité créative et rigueur opérationnelle progressent simultanément.`,
+        ],
+        es: [
+          `<strong>${longReadSectionLabels.es.definition}:</strong> ${article.body.es[0] || ''}`,
+          `<strong>${longReadSectionLabels.es.applications}:</strong> ${article.title.es} Esta lógica se aplica en casting, ritmo de set, comunicación con cliente y curaduría final del material.`,
+          `<strong>${longReadSectionLabels.es.misconceptions}:</strong> Suele interpretarse como rasgo individual; en campañas exigentes es un sistema entrenado con lenguaje compartido y criterios verificables.`,
+          `<strong>${longReadSectionLabels.es.bridge}:</strong> EOEX lo aterriza con lectura técnica de brief, práctica dirigida, protocolo por roles y revisión de desempeño basada en evidencia.`,
+          `<strong>${longReadSectionLabels.es.conclusion}:</strong> Los mejores resultados aparecen cuando identidad creativa y disciplina operativa se construyen en paralelo.`,
+        ],
+        it: [
+          `<strong>${longReadSectionLabels.it.definition}:</strong> ${article.body.it[0] || ''}`,
+          `<strong>${longReadSectionLabels.it.applications}:</strong> ${article.title.it} Questo approccio impatta casting, ritmo di set, comunicazione cliente e selezione finale degli asset.`,
+          `<strong>${longReadSectionLabels.it.misconceptions}:</strong> Viene spesso letto come tratto personale; nelle campagne ad alto valore è un sistema allenato con linguaggio condiviso e criteri oggettivi.`,
+          `<strong>${longReadSectionLabels.it.bridge}:</strong> EOEX lo rende operativo con analisi del brief, prove strutturate, protocollo per ruoli e revisione performance misurabile.`,
+          `<strong>${longReadSectionLabels.it.conclusion}:</strong> I risultati più solidi emergono quando identità creativa e disciplina operativa crescono insieme.`,
+        ],
+      },
+      sourceNotes: legacyArticleSourceNotes[article.id] || [
+        { label: `${formatTopicTitle(article.id.replace(/-/g, ' '))} research context`, url: referenceLibrary.modeling },
+      ],
+      editorialVariant: index,
+    }
+  })
+}
+
+const enrichedArticles = enrichLegacyArticles(articles)
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;')
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function getBlogQueryTerms() {
+  return Array.from(
+    new Set(
+      state.blogQuery
+        .trim()
+        .toLowerCase()
+        .split(/\s+/)
+        .filter((term) => term.length > 1),
+    ),
+  )
+}
+
+function highlightText(text, terms) {
+  if (!terms.length) {
+    return escapeHtml(text)
+  }
+
+  const pattern = new RegExp(`(${terms.map((term) => escapeRegExp(term)).join('|')})`, 'gi')
+  const parts = String(text).split(pattern)
+
+  return parts
+    .map((part) => {
+      if (!part) {
+        return ''
+      }
+
+      const isMatch = terms.some((term) => part.toLowerCase() === term)
+      if (isMatch) {
+        return `<mark class="blog-hit">${escapeHtml(part)}</mark>`
+      }
+
+      return escapeHtml(part)
+    })
+    .join('')
+}
+
+function buildBlogFilterModel(lang) {
+  const allArticles = [...enrichedArticles, ...expandedTopicArticles]
+  const byCategoryKey = new Map()
+
+  allArticles.forEach((article) => {
+    const key = article.category.en
+    if (!byCategoryKey.has(key)) {
+      byCategoryKey.set(key, article.category[lang])
+    }
+  })
+
+  const categoryTags = Array.from(byCategoryKey.entries())
+    .map(([key, label]) => ({ key, label }))
+    .sort((left, right) => left.label.localeCompare(right.label, localeMap[lang]))
+
+  const normalizedQuery = state.blogQuery.trim().toLowerCase()
+
+  const filteredArticles = allArticles.filter((article) => {
+    if (state.blogTag !== 'all' && article.category.en !== state.blogTag) {
+      return false
+    }
+
+    if (!normalizedQuery) {
+      return true
+    }
+
+    const searchableText = [
+      article.category[lang],
+      article.title[lang],
+      article.excerpt[lang],
+      ...article.body[lang],
+    ]
+      .join(' ')
+      .toLowerCase()
+
+    return searchableText.includes(normalizedQuery)
+  })
+
+  return {
+    categoryTags,
+    filteredArticles,
+  }
+}
+
+function monthLabel(lang, monthIndex) {
+  return new Intl.DateTimeFormat(localeMap[lang], { month: 'short' }).format(new Date(2026, monthIndex, 1))
+}
+
+function longMonthLabel(lang, monthIndex) {
+  return new Intl.DateTimeFormat(localeMap[lang], { month: 'long' }).format(new Date(2026, monthIndex, 1))
+}
+
+function getMagazineIssues(lang) {
+  return magazineCovers.map((cover, index) => {
+    const parsedDate = cover.name.match(/-\s([A-Za-z]+)\s(\d{2,4})$/)
+    const parsedMonth = parsedDate ? englishMonths[parsedDate[1].toLowerCase()] : undefined
+    const parsedYear = parsedDate ? Number(parsedDate[2].length === 2 ? `20${parsedDate[2]}` : parsedDate[2]) : undefined
+    const issueDate =
+      typeof parsedMonth === 'number' && Number.isFinite(parsedYear)
+        ? new Date(parsedYear, parsedMonth, 1)
+        : new Date(2025, 2 + index, 1)
+    const monthYear = new Intl.DateTimeFormat(localeMap[lang], {
+      month: 'long',
+      year: 'numeric',
+    }).format(issueDate)
+
+    const title = cover.name
+      .replace(/^DUNEX\s-\s/, '')
+      .replace(/\s-\s[A-Za-z]+\s\d{2,4}$/, '')
+
+    return {
+      issue: String(index + 1).padStart(2, '0'),
+      monthYear,
+      title,
+      image: cover.image,
+    }
+  })
+}
+
+function renderGalleryCTA(langCopy, sectionKey, totalCount) {
+  const expanded = Boolean(state.expandedSections[sectionKey])
+  const label = expanded ? langCopy.showLess : `${langCopy.showMore} · ${totalCount} ${langCopy.galleryItems}`
+
+  return `
+    <div class="gallery-cta-shell">
+      <button type="button" class="button button-secondary gallery-cta" data-toggle-gallery="${sectionKey}">${label}</button>
+    </div>
+  `
+}
+
+function renderGridWithOptionalExpansion({ sectionKey, items, collapsedCount, renderItem, langCopy, gridClass }) {
+  const expanded = Boolean(state.expandedSections[sectionKey])
+  const hasOverflow = items.length > collapsedCount
+  const visibleItems = hasOverflow && !expanded ? items.slice(0, collapsedCount) : items
+
+  return `
+    <div class="${gridClass}">
+      ${visibleItems.map(renderItem).join('')}
+    </div>
+    ${hasOverflow ? renderGalleryCTA(langCopy, sectionKey, items.length) : ''}
+  `
+}
+
+function renderNav(langCopy) {
+  const anchors = ['home', 'about', 'events', 'designers', 'talents', 'partners', 'magazine', 'press', 'contact', 'blog']
+
+  return `
+    <header class="site-header">
+      <div class="brand-lockup">
+        <a class="brand-mark" href="#home">EOEX <span>Studio</span></a>
+        <p class="brand-caption">Fashion talent management · academy · client advisory</p>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="${state.mobileNavOpen}" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav ${state.mobileNavOpen ? 'is-open' : ''}">
+        ${langCopy.nav.map((label, index) => `<a href="#${anchors[index]}" class="nav-link">${label}</a>`).join('')}
+      </nav>
+      <div class="lang-switch" aria-label="${langCopy.languageLabel}">
+        <label class="lang-select-shell ${state.mobileNavOpen ? 'is-open' : ''}">
+          <span class="lang-select-icon">${languageOptions[state.lang].flag}</span>
+          <select id="languageSelect" class="lang-select" aria-label="${langCopy.languageLabel}">
+            ${languages
+              .map(
+                (lang) => `
+                  <option value="${lang}" ${state.lang === lang ? 'selected' : ''}>
+                    ${languageOptions[lang].flag} ${languageOptions[lang].label}
+                  </option>`,
+              )
+              .join('')}
+          </select>
+        </label>
+      </div>
+    </header>
+  `
+}
+
+function renderHero(lang, langCopy) {
+  return `
+    <section id="home" class="hero-shell reveal">
+      <div class="hero-stage">
+        <div class="hero-copy">
+          <span class="eyebrow">${langCopy.heroEyebrow}</span>
+          <h1>${langCopy.heroTitle}</h1>
+          <p class="hero-intro">${langCopy.heroIntro}</p>
+          <blockquote>${langCopy.heroQuote}</blockquote>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">${langCopy.heroPrimary}</a>
+            <a class="button button-secondary" href="#events">${langCopy.heroSecondary}</a>
+          </div>
+        </div>
+        <div class="hero-featured">
+          ${events
+            .slice(0, 4)
+            .map(
+              (event, index) => `
+                <article class="hero-card" style="animation-delay:${index * 90}ms">
+                  <img src="${event.photo}" alt="${event.location[lang]}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${index === 0 ? 'high' : 'auto'}">
+                  <div class="hero-card__caption">
+                    <p>${event.title[lang]}</p>
+                    <h3>${event.city[lang]}</h3>
+                    <span>${event.location[lang]}</span>
+                  </div>
+                </article>`,
+            )
+            .join('')}
+        </div>
+      </div>
+      <div class="marquee-band">
+        <span class="band-title">${langCopy.marqueeLabel}</span>
+        <div class="marquee-track">
+          ${events
+            .map(
+              (event) => `
+                <a class="rail-card" href="#events">
+                  <img src="${event.photo}" alt="${event.city[lang]}" loading="lazy" decoding="async">
+                  <span>${event.city[lang]} · ${monthLabel(lang, event.month)}</span>
+                </a>`,
+            )
+            .join('')}
+        </div>
+      </div>
+    </section>
+  `
+}
+
+function renderAbout(langCopy) {
+  return `
+    <section id="about" class="section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">01</span>
+        <div>
+          <h2>${langCopy.aboutTitle}</h2>
+          <p>${langCopy.aboutLead}</p>
+        </div>
+      </div>
+      <div class="about-grid">
+        <article class="statement-card glass-card">
+          <p>${langCopy.aboutBody}</p>
+        </article>
+        ${renderGridWithOptionalExpansion({
+          sectionKey: 'services',
+          items: langCopy.serviceCards,
+          collapsedCount: 3,
+          langCopy,
+          gridClass: 'service-grid',
+          renderItem: (service) => `
+                <article class="service-card glass-card">
+                  <span class="service-index">${service.title}</span>
+                  <p>${service.text}</p>
+                </article>`,
+        })}
+      </div>
+    </section>
+  `
+}
+
+function renderEvents(lang, langCopy) {
+  return `
+    <section id="events" class="section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">02</span>
+        <div>
+          <h2>${langCopy.eventsTitle}</h2>
+          <p>${langCopy.eventsIntro}</p>
+        </div>
+      </div>
+      <div class="events-layout">
+        <aside class="calendar-card glass-card">
+          <h3>${langCopy.calendarTitle}</h3>
+          <div class="calendar-list">
+            ${events
+              .map(
+                (event) => `
+                  <div class="calendar-row">
+                    <span>${monthLabel(lang, event.month)}</span>
+                    <strong>${event.dayLabel}</strong>
+                    <p>${event.city[lang]}</p>
+                  </div>`,
+              )
+              .join('')}
+          </div>
+          <div class="past-events-card">
+            <span>Archive</span>
+            <p>${langCopy.pastEvents}</p>
+          </div>
+        </aside>
+        ${renderGridWithOptionalExpansion({
+          sectionKey: 'events',
+          items: events,
+          collapsedCount: 4,
+          langCopy,
+          gridClass: 'event-grid',
+          renderItem: (event) => `
+                <article class="image-card event-card">
+                  <img src="${event.photo}" alt="${event.location[lang]}" loading="lazy" decoding="async">
+                  <div class="overlay-panel">
+                    <span>${event.title[lang]}</span>
+                    <h3>${event.location[lang]}</h3>
+                    <p>${event.summary[lang]}</p>
+                  </div>
+                </article>`,
+        })}
+      </div>
+    </section>
+  `
+}
+
+function renderDirectorySection(id, number, title, intro, items, key, lang, langCopy) {
+  return `
+    <section id="${id}" class="section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">${number}</span>
+        <div>
+          <h2>${title}</h2>
+          <p>${intro}</p>
+        </div>
+      </div>
+      ${renderGridWithOptionalExpansion({
+        sectionKey: id,
+        items,
+        collapsedCount: 6,
+        langCopy,
+        gridClass: 'directory-grid',
+        renderItem: (item) => `
+              <article class="image-card portrait-card portrait-card--compact">
+                <img src="${item.photo}" alt="${item.name}" loading="lazy" decoding="async">
+                <div class="overlay-panel">
+                  <span>${item.name}</span>
+                  <p>${item[key][lang]}</p>
+                </div>
+              </article>`,
+      })}
+    </section>
+  `
+}
+
+function renderPartners(lang, langCopy) {
+  return `
+    <section id="partners" class="section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">05</span>
+        <div>
+          <h2>${langCopy.partnersTitle}</h2>
+          <p>${langCopy.partnersIntro}</p>
+        </div>
+      </div>
+      ${renderGridWithOptionalExpansion({
+        sectionKey: 'partners',
+        items: partners,
+        collapsedCount: 3,
+        langCopy,
+        gridClass: 'partner-grid',
+        renderItem: (partner) => `
+              <article class="partner-card glass-card">
+                <div class="partner-mark">${partner.mark}</div>
+                <span class="partner-tier">${partner.tier}</span>
+                <h3>${partner.name}</h3>
+                <p>${partner.description[lang]}</p>
+              </article>`,
+      })}
+    </section>
+  `
+}
+
+function renderMagazine(lang, langCopy) {
+  return `
+    <section id="magazine" class="section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">06</span>
+        <div>
+          <h2>${langCopy.magazineTitle}</h2>
+          <p>${langCopy.magazineIntro}</p>
+        </div>
+      </div>
+      ${renderGridWithOptionalExpansion({
+        sectionKey: 'magazine',
+        items: getMagazineIssues(lang),
+        collapsedCount: 6,
+        langCopy,
+        gridClass: 'magazine-grid magazine-grid--covers',
+        renderItem: (issue) => `
+              <article class="cover-card cover-card--image">
+                <img src="${issue.image}" alt="${issue.title}" loading="lazy" decoding="async">
+                <div class="overlay-panel overlay-panel--cover">
+                  <span>${langCopy.issueLabel} ${issue.issue}</span>
+                  <h3>${issue.title}</h3>
+                  <p>${issue.monthYear}</p>
+                </div>
+              </article>`,
+      })}
+    </section>
+  `
+}
+
+function renderPress(lang, langCopy) {
+  return `
+    <section id="press" class="section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">07</span>
+        <div>
+          <h2>${langCopy.pressTitle}</h2>
+          <p>${langCopy.pressIntro}</p>
+        </div>
+      </div>
+      ${renderGridWithOptionalExpansion({
+        sectionKey: 'press',
+        items: pressItems,
+        collapsedCount: 3,
+        langCopy,
+        gridClass: 'press-grid press-grid--single-row',
+        renderItem: (item) => `
+              <article class="image-card landscape-card landscape-card--press">
+                <img src="${item.photo}" alt="${item.title[lang]}">
+                <div class="overlay-panel">
+                  <span>${item.title[lang]}</span>
+                  <p>${item.summary[lang]}</p>
+                </div>
+              </article>`,
+      })}
+    </section>
+  `
+}
+
+function renderContact(lang, langCopy) {
+  return `
+    <section id="contact" class="section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">08</span>
+        <div>
+          <h2>${langCopy.contactTitle}</h2>
+          <p>${langCopy.contactIntro}</p>
+        </div>
+      </div>
+      <div class="booking-shell glass-card">
+        <div class="booking-panel">
+          <div class="booking-month">${longMonthLabel(lang, 5)} 2026</div>
+          <div class="booking-days">
+            ${bookingDays
+              .map(
+                (day, index) => `
+                  <button type="button" class="day-pill ${state.selectedDay === index ? 'is-selected' : ''}" data-day-index="${index}">
+                    <span>${day.weekday}</span>
+                    <strong>${day.dayNumber}</strong>
+                  </button>`,
+              )
+              .join('')}
+          </div>
+          <div class="booking-times">
+            ${bookingTimes
+              .map(
+                (time) => `
+                  <button type="button" class="time-pill ${state.selectedTime === time ? 'is-selected' : ''}" data-time="${time}">
+                    ${time}
+                  </button>`,
+              )
+              .join('')}
+          </div>
+        </div>
+        <form class="booking-form" id="bookingForm">
+          <label>
+            <span>${langCopy.bookingRoleLabel}</span>
+            <select name="role">
+              ${langCopy.bookingRoles.map((role) => `<option>${role}</option>`).join('')}
+            </select>
+          </label>
+          <label>
+            <span>${langCopy.bookingName}</span>
+            <input name="name" type="text" placeholder="${langCopy.bookingName}" required>
+          </label>
+          <label>
+            <span>${langCopy.bookingEmail}</span>
+            <input name="email" type="email" placeholder="hello@eoex.studio" required>
+          </label>
+          <label>
+            <span>${langCopy.bookingNotes}</span>
+            <textarea name="notes" rows="4" placeholder="EOEX Studio"></textarea>
+          </label>
+          <button type="submit" class="button button-primary button-full">${langCopy.bookingButton}</button>
+          <p class="form-status ${state.statusMessage ? 'is-visible' : ''}">${state.statusMessage}</p>
+        </form>
+      </div>
+    </section>
+  `
+}
+
+function renderBlog(lang, langCopy) {
+  const { categoryTags, filteredArticles } = buildBlogFilterModel(lang)
+  const queryTerms = getBlogQueryTerms()
+  const hasActiveBlogFilters = state.blogTag !== 'all' || state.blogQuery.trim().length > 0
+
+  return `
+    <section id="blog" class="section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">09</span>
+        <div>
+          <h2>${langCopy.blogTitle}</h2>
+          <p>${langCopy.blogIntro}</p>
+        </div>
+      </div>
+      <div class="blog-controls glass-card">
+        <label class="blog-search-shell" aria-label="${langCopy.blogSearchLabel}">
+          <input
+            id="blogSearch"
+            type="search"
+            class="blog-search"
+            value="${escapeHtml(state.blogQuery)}"
+            placeholder="${escapeHtml(langCopy.blogSearchPlaceholder)}"
+            aria-label="${escapeHtml(langCopy.blogSearchLabel)}"
+          >
+        </label>
+        <div class="blog-tags" role="tablist" aria-label="${langCopy.blogAllTags}">
+          <button type="button" class="blog-tag ${state.blogTag === 'all' ? 'is-active' : ''}" data-blog-tag="all">${langCopy.blogAllTags}</button>
+          ${categoryTags
+            .map(
+              (tag) => `<button type="button" class="blog-tag ${state.blogTag === tag.key ? 'is-active' : ''}" data-blog-tag="${escapeHtml(tag.key)}">${escapeHtml(tag.label)}</button>`,
+            )
+            .join('')}
+          ${
+            hasActiveBlogFilters
+              ? `<button type="button" class="blog-clear-chip" data-blog-clear="true">${langCopy.blogClearFilters}</button>`
+              : ''
+          }
+        </div>
+      </div>
+      ${renderGridWithOptionalExpansion({
+        sectionKey: 'blog',
+        items: filteredArticles,
+        collapsedCount: 6,
+        langCopy,
+        gridClass: 'blog-grid',
+        renderItem: (article) => `
+              <article class="blog-card glass-card">
+                <img src="${article.image}" alt="${article.title[lang]}" loading="lazy" decoding="async">
+                <div class="blog-card__body">
+                  <span>${article.category[lang]}</span>
+                  <h3>${highlightText(article.title[lang], queryTerms)}</h3>
+                  <p>${highlightText(article.excerpt[lang], queryTerms)}</p>
+                  <button type="button" class="button button-secondary" data-article-id="${article.id}">${langCopy.readArticle}</button>
+                </div>
+              </article>`,
+      })}
+      ${filteredArticles.length === 0 ? `<p class="blog-empty glass-card">${langCopy.blogNoResults}</p>` : ''}
+    </section>
+  `
+}
+
+function renderArticleModal(lang, langCopy) {
+  if (!state.activeArticle) {
+    return ''
+  }
+
+  const allArticles = [...enrichedArticles, ...expandedTopicArticles]
+  const article = allArticles.find((entry) => entry.id === state.activeArticle)
+  if (!article) {
+    return ''
+  }
+
+  return `
+    <div class="modal-backdrop" data-close-modal="true">
+      <article class="article-modal glass-card" role="dialog" aria-modal="true" aria-label="${article.title[lang]}">
+        <button type="button" class="modal-close" data-close-modal="true">${langCopy.close}</button>
+        <img src="${article.image}" alt="${article.title[lang]}">
+        <div class="article-modal__body">
+          <span>${article.category[lang]}</span>
+          <h3>${article.title[lang]}</h3>
+          ${article.body[lang].map((paragraph) => `<p>${paragraph}</p>`).join('')}
+          ${
+            Array.isArray(article.sourceNotes) && article.sourceNotes.length
+              ? `
+                  <section class="article-sources">
+                    <h4>${longReadSectionLabels[lang].sources}</h4>
+                    <ul>
+                      ${article.sourceNotes
+                        .map((source) => `<li><a href="${source.url}" target="_blank" rel="noreferrer">${source.label}</a></li>`)
+                        .join('')}
+                    </ul>
+                  </section>
+                `
+              : ''
+          }
+        </div>
+      </article>
+    </div>
+  `
+}
+
+function render() {
+  const langCopy = copy[state.lang]
+  document.documentElement.lang = state.lang
+  document.title = `EOEX Studio · ${langCopy.heroQuote}`
+
+  app.innerHTML = `
+    <div class="page-shell">
+      ${renderNav(langCopy)}
+      <main>
+        ${renderHero(state.lang, langCopy)}
+        ${renderAbout(langCopy)}
+        ${renderEvents(state.lang, langCopy)}
+        ${renderDirectorySection('designers', '03', langCopy.designersTitle, langCopy.designersIntro, designers, 'specialty', state.lang, langCopy)}
+        ${renderDirectorySection('talents', '04', langCopy.talentsTitle, langCopy.talentsIntro, talents, 'profile', state.lang, langCopy)}
+        ${renderPartners(state.lang, langCopy)}
+        ${renderMagazine(state.lang, langCopy)}
+        ${renderPress(state.lang, langCopy)}
+        ${renderContact(state.lang, langCopy)}
+        ${renderBlog(state.lang, langCopy)}
+      </main>
+      <footer class="site-footer">
+        <p>${langCopy.footer}</p>
+      </footer>
+      ${renderArticleModal(state.lang, langCopy)}
+    </div>
+  `
+
+  bindEvents()
+}
+
+function bindEvents() {
+  app.querySelector('.nav-toggle')?.addEventListener('click', () => {
+    state.mobileNavOpen = !state.mobileNavOpen
+    render()
+  })
+
+  app.querySelector('#languageSelect')?.addEventListener('change', (event) => {
+    state.lang = event.currentTarget.value
+    state.mobileNavOpen = false
+    state.statusMessage = ''
+    state.blogTag = 'all'
+    render()
+  })
+
+  app.querySelectorAll('.nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      state.mobileNavOpen = false
+      render()
+    })
+  })
+
+  app.querySelectorAll('[data-day-index]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.selectedDay = Number(button.dataset.dayIndex)
+      render()
+    })
+  })
+
+  app.querySelectorAll('[data-time]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.selectedTime = button.dataset.time
+      render()
+    })
+  })
+
+  app.querySelector('#bookingForm')?.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    const name = formData.get('name')
+    const email = formData.get('email')
+
+    if (!name || !email) {
+      return
+    }
+
+    state.statusMessage = copy[state.lang].bookingSuccess
+    render()
+  })
+
+  app.querySelectorAll('[data-article-id]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.activeArticle = button.dataset.articleId
+      render()
+    })
+  })
+
+  app.querySelectorAll('[data-close-modal]').forEach((element) => {
+    element.addEventListener('click', (event) => {
+      if (event.target !== element && !element.classList.contains('modal-close')) {
+        return
+      }
+
+      state.activeArticle = null
+      render()
+    })
+  })
+
+  app.querySelectorAll('[data-toggle-gallery]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const key = button.dataset.toggleGallery
+      if (!key) {
+        return
+      }
+
+      state.expandedSections[key] = !state.expandedSections[key]
+      render()
+    })
+  })
+
+  app.querySelector('#blogSearch')?.addEventListener('input', (event) => {
+    const value = event.currentTarget.value
+    if (blogSearchDebounceTimer) {
+      clearTimeout(blogSearchDebounceTimer)
+    }
+
+    blogSearchDebounceTimer = setTimeout(() => {
+      state.blogQuery = value
+      render()
+    }, 180)
+  })
+
+  app.querySelectorAll('[data-blog-tag]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const nextTag = button.dataset.blogTag
+      if (!nextTag) {
+        return
+      }
+
+      state.blogTag = nextTag
+      render()
+    })
+  })
+
+  app.querySelector('[data-blog-clear]')?.addEventListener('click', () => {
+    if (blogSearchDebounceTimer) {
+      clearTimeout(blogSearchDebounceTimer)
+      blogSearchDebounceTimer = null
+    }
+
+    state.blogQuery = ''
+    state.blogTag = 'all'
+    render()
+  })
+}
+
+render()
